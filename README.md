@@ -3,7 +3,10 @@ Project for the course "Dynamic website project".
 
 
 ## Installation
+### Up containers
 Run docker-compose.yml file with command : `sudo docker-compose up --build [-d] `
+### Define database
+Modify [.env](annuaire/.env)
 
 ## Tools & technologies
 * Docker & Docker-compose
