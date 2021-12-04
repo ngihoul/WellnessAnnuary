@@ -3,10 +3,11 @@ Project for the course "Dynamic website project".
 
 
 ## Installation
-### Up containers
+### 1. Up containers
 Run docker-compose.yml file with command : `sudo docker-compose up --build [-d] `
-### Define database
-Modify [.env](annuaire/.env)
+### 2. Define database
+Modify DATABASE_URL in [.env](annuaire/.env) file.  
+For example : `DATABASE_URL=mysql://username:password@127.0.0.1:3306/wellnessAnnuary`
 
 ## Tools & technologies
 * Docker & Docker-compose
