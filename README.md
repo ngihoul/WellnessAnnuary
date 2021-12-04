@@ -1,7 +1,6 @@
 # Wellness Annuary "Bien-Être"
 Project for the course "Dynamic website project".
 
-
 ## Installation
 ### 1. Up containers
 Run docker-compose.yml file with command : `sudo docker-compose up --build [-d] `
