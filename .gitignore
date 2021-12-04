@@ -1,0 +1,17 @@
+### Personal files ###
+/ProjetWebDynamique.odt
+
+
+### idea folder ###
+/.idea/workspace.xml
+/.idea/tasks.xml
+
+###> symfony/framework-bundle ###
+/annuaire/.env.local
+/annuaire/.env.local.php
+/annuaire/.env.*.local
+/annuaire/config/secrets/prod/prod.decrypt.private.php
+/annuaire/public/bundles/
+/annuaire/var/
+/annuaire/vendor/
+###< symfony/framework-bundle ###
