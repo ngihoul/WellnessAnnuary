@@ -4,8 +4,7 @@
 /utils/
 
 ### idea folder ###
-/.idea/workspace.xml
-/.idea/tasks.xml
+/.idea/
 
 ###> symfony/framework-bundle ###
 /annuaire/.env.local
