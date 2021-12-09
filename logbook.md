@@ -18,7 +18,14 @@
 ## 6th & 7th December 2021
 * Creation of the mobile version of the site on Figma (see [Figma](https://www.figma.com/file/vR2MYH4FAqXUhBWcgHoGt3/Untitled?node-id=0%3A1))
 
+## 9th December 2021
+* Modification of Docker environment
+* Updating README.md
+* Finalization of the mobile version prototype (phase 1)
+
 ## Next to-do
 * Create vector logos on Adobe Illustrator (see footer in Figma design)
-* Finish mobile, tablet & desktop webdesign via Figma [Phase 1 only]
-* 
+* Creating desktop webdesign via Figma (Phase 1 only)
+
+### Remarks
+* Time constraints : tablet version webdesign will not be made
