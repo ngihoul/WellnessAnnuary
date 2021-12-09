@@ -27,7 +27,8 @@ services:
      - dev
   
   www:
-    image: php:8.0-apache
+    build:
+      context: ./server
     container_name: www_annuaire
     ports:
       - "8000:80"

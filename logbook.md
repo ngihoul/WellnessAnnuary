@@ -20,4 +20,5 @@
 
 ## Next to-do
 * Create vector logos on Adobe Illustrator (see footer in Figma design)
-* Finish mobile, tablet & desktop webdesign via Figma
+* Finish mobile, tablet & desktop webdesign via Figma [Phase 1 only]
+* 
