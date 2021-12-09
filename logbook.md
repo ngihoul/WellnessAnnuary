@@ -22,6 +22,7 @@
 * Modification of Docker environment
 * Updating README.md
 * Finalization of the mobile version prototype (phase 1)
+* Starting desktop webdesign
 
 ## Next to-do
 * Create vector logos on Adobe Illustrator (see footer in Figma design)
