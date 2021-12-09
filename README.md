@@ -2,11 +2,17 @@
 Project for the course "Dynamic website project".
 
 ## Installation
-### 1. Up containers
+### 1. Clone the repository
+  `git clone https://github.com/ngihoul/wellnessAnnuary.git`
+### 2. Up containers
   Run docker-compose.yml file with command : `sudo docker-compose up --build [-d] `
-### 2. Define database
-  Modify DATABASE_URL in [/annuaire/.env](annuaire/.env) file.  
-  For example : `DATABASE_URL=mysql://username:password@127.0.0.1:3306/wellnessAnnuary`
+### 3. Setup config
+#### 3.1 Access _www_annuaire_ container
+  `docker exec -ti www_annuaire bash`
+#### 3.2 Install dependencies
+  `composer install`
+#### 3.3 Create database
+  `php bin/console doctrine:database:create`
 
 ## Tools & technologies
 * Docker & Docker-compose
