@@ -58,6 +58,11 @@ class Promotion
      */
     private $provider;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=ServiceCategory::class, inversedBy="promotions")
+     */
+    private $serviceCategory;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -155,6 +160,18 @@ class Promotion
     public function setProvider(?Provider $provider): self
     {
         $this->provider = $provider;
+
+        return $this;
+    }
+
+    public function getServiceCategory(): ?ServiceCategory
+    {
+        return $this->serviceCategory;
+    }
+
+    public function setServiceCategory(?ServiceCategory $serviceCategory): self
+    {
+        $this->serviceCategory = $serviceCategory;
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ServiceCategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,22 @@ class ServiceCategory
      * @ORM\Column(type="boolean")
      */
     private $validated;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Promotion::class, mappedBy="serviceCategory")
+     */
+    private $promotions;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Provider::class, mappedBy="serviceCategory")
+     */
+    private $providers;
+
+    public function __construct()
+    {
+        $this->promotions = new ArrayCollection();
+        $this->providers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +104,63 @@ class ServiceCategory
     public function setValidated(bool $validated): self
     {
         $this->validated = $validated;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Promotion[]
+     */
+    public function getPromotions(): Collection
+    {
+        return $this->promotions;
+    }
+
+    public function addPromotion(Promotion $promotion): self
+    {
+        if (!$this->promotions->contains($promotion)) {
+            $this->promotions[] = $promotion;
+            $promotion->setServiceCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removePromotion(Promotion $promotion): self
+    {
+        if ($this->promotions->removeElement($promotion)) {
+            // set the owning side to null (unless already changed)
+            if ($promotion->getServiceCategory() === $this) {
+                $promotion->setServiceCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Provider[]
+     */
+    public function getProviders(): Collection
+    {
+        return $this->providers;
+    }
+
+    public function addProvider(Provider $provider): self
+    {
+        if (!$this->providers->contains($provider)) {
+            $this->providers[] = $provider;
+            $provider->addServiceCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProvider(Provider $provider): self
+    {
+        if ($this->providers->removeElement($provider)) {
+            $provider->removeServiceCategory($this);
+        }
 
         return $this;
     }
