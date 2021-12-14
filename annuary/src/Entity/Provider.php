@@ -47,9 +47,15 @@ class Provider
      */
     private $internships;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Promotion::class, mappedBy="provider", orphanRemoval=true)
+     */
+    private $promotions;
+
     public function __construct()
     {
         $this->internships = new ArrayCollection();
+        $this->promotions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,6 +135,36 @@ class Provider
             // set the owning side to null (unless already changed)
             if ($internship->getProvider() === $this) {
                 $internship->setProvider(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Promotion[]
+     */
+    public function getPromotions(): Collection
+    {
+        return $this->promotions;
+    }
+
+    public function addPromotion(Promotion $promotion): self
+    {
+        if (!$this->promotions->contains($promotion)) {
+            $this->promotions[] = $promotion;
+            $promotion->setProvider($this);
+        }
+
+        return $this;
+    }
+
+    public function removePromotion(Promotion $promotion): self
+    {
+        if ($this->promotions->removeElement($promotion)) {
+            // set the owning side to null (unless already changed)
+            if ($promotion->getProvider() === $this) {
+                $promotion->setProvider(null);
             }
         }
 

@@ -52,6 +52,12 @@ class Promotion
      */
     private $displayedUntil;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Provider::class, inversedBy="promotions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $provider;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,6 +143,18 @@ class Promotion
     public function setDisplayedUntil(\DateTimeInterface $displayedUntil): self
     {
         $this->displayedUntil = $displayedUntil;
+
+        return $this;
+    }
+
+    public function getProvider(): ?Provider
+    {
+        return $this->provider;
+    }
+
+    public function setProvider(?Provider $provider): self
+    {
+        $this->provider = $provider;
 
         return $this;
     }
