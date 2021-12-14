@@ -56,6 +56,8 @@
       <path value="$PROJECT_DIR$/annuaire/vendor/symfony/http-foundation" />
       <path value="$PROJECT_DIR$/annuaire/vendor/symfony/var-exporter" />
       <path value="$PROJECT_DIR$/annuaire/vendor/symfony/requirements-checker" />
+      <path value="$PROJECT_DIR$/annuaire/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/annuaire/vendor/symfony/maker-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
