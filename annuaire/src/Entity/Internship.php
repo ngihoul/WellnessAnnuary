@@ -57,6 +57,12 @@ class Internship
      */
     private $displayUntil;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Provider::class, inversedBy="internships")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $provider;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +160,18 @@ class Internship
     public function setDisplayUntil(\DateTimeInterface $displayUntil): self
     {
         $this->displayUntil = $displayUntil;
+
+        return $this;
+    }
+
+    public function getProvider(): ?Provider
+    {
+        return $this->provider;
+    }
+
+    public function setProvider(?Provider $provider): self
+    {
+        $this->provider = $provider;
 
         return $this;
     }
