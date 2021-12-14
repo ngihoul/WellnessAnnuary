@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProviderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,6 +41,16 @@ class Provider
      */
     // VTA Number length limited to 15 chars to anticipate internalization
     private $VTANumber;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Internship::class, mappedBy="provider", orphanRemoval=true)
+     */
+    private $internships;
+
+    public function __construct()
+    {
+        $this->internships = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +101,36 @@ class Provider
     public function setVTANumber(string $VTANumber): self
     {
         $this->VTANumber = $VTANumber;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Internship[]
+     */
+    public function getInternships(): Collection
+    {
+        return $this->internships;
+    }
+
+    public function addInternship(Internship $internship): self
+    {
+        if (!$this->internships->contains($internship)) {
+            $this->internships[] = $internship;
+            $internship->setProvider($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInternship(Internship $internship): self
+    {
+        if ($this->internships->removeElement($internship)) {
+            // set the owning side to null (unless already changed)
+            if ($internship->getProvider() === $this) {
+                $internship->setProvider(null);
+            }
+        }
 
         return $this;
     }
