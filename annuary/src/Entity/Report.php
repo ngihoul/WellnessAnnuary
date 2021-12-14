@@ -27,6 +27,18 @@ class Report
      */
     private $reportedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="reports")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Customer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="reports")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $comment;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +64,30 @@ class Report
     public function setReportedAt(\DateTimeInterface $reportedAt): self
     {
         $this->reportedAt = $reportedAt;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->Customer;
+    }
+
+    public function setCustomer(?Customer $Customer): self
+    {
+        $this->Customer = $Customer;
+
+        return $this;
+    }
+
+    public function getComment(): ?Comment
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?Comment $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }
