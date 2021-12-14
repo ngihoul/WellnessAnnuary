@@ -57,6 +57,12 @@ class Provider
      */
     private $serviceCategories;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="provider", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->internships = new ArrayCollection();
@@ -197,6 +203,18 @@ class Provider
     public function removeServiceCategory(ServiceCategory $serviceCategory): self
     {
         $this->serviceCategories->removeElement($serviceCategory);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

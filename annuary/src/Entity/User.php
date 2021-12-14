@@ -65,6 +65,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $registrationConfirmed;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Provider::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $provider;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Customer::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $customer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -203,6 +213,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRegistrationConfirmed(bool $registrationConfirmed): self
     {
         $this->registrationConfirmed = $registrationConfirmed;
+
+        return $this;
+    }
+
+    public function getProvider(): ?Provider
+    {
+        return $this->provider;
+    }
+
+    public function setProvider(Provider $provider): self
+    {
+        // set the owning side of the relation if necessary
+        if ($provider->getUser() !== $this) {
+            $provider->setUser($this);
+        }
+
+        $this->provider = $provider;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(Customer $customer): self
+    {
+        // set the owning side of the relation if necessary
+        if ($customer->getUser() !== $this) {
+            $customer->setUser($this);
+        }
+
+        $this->customer = $customer;
 
         return $this;
     }
