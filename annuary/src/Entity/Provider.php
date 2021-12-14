@@ -55,13 +55,13 @@ class Provider
     /**
      * @ORM\ManyToMany(targetEntity=ServiceCategory::class, inversedBy="providers")
      */
-    private $serviceCategory;
+    private $serviceCategories;
 
     public function __construct()
     {
         $this->internships = new ArrayCollection();
         $this->promotions = new ArrayCollection();
-        $this->serviceCategory = new ArrayCollection();
+        $this->serviceCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -180,15 +180,15 @@ class Provider
     /**
      * @return Collection|ServiceCategory[]
      */
-    public function getServiceCategory(): Collection
+    public function getServiceCategories(): Collection
     {
-        return $this->serviceCategory;
+        return $this->serviceCategories;
     }
 
     public function addServiceCategory(ServiceCategory $serviceCategory): self
     {
-        if (!$this->serviceCategory->contains($serviceCategory)) {
-            $this->serviceCategory[] = $serviceCategory;
+        if (!$this->serviceCategories->contains($serviceCategory)) {
+            $this->serviceCategories[] = $serviceCategory;
         }
 
         return $this;
@@ -196,7 +196,7 @@ class Provider
 
     public function removeServiceCategory(ServiceCategory $serviceCategory): self
     {
-        $this->serviceCategory->removeElement($serviceCategory);
+        $this->serviceCategories->removeElement($serviceCategory);
 
         return $this;
     }
