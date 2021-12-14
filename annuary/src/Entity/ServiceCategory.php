@@ -49,10 +49,16 @@ class ServiceCategory
      */
     private $providers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="serviceCategory")
+     */
+    private $images;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
         $this->providers = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +166,36 @@ class ServiceCategory
     {
         if ($this->providers->removeElement($provider)) {
             $provider->removeServiceCategory($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setServiceCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getServiceCategory() === $this) {
+                $image->setServiceCategory(null);
+            }
         }
 
         return $this;

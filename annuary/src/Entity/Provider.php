@@ -68,12 +68,18 @@ class Provider
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="provider")
+     */
+    private $images;
+
     public function __construct()
     {
         $this->internships = new ArrayCollection();
         $this->promotions = new ArrayCollection();
         $this->serviceCategories = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -249,6 +255,36 @@ class Provider
             // set the owning side to null (unless already changed)
             if ($comment->getProvider() === $this) {
                 $comment->setProvider(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setProvider($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getProvider() === $this) {
+                $image->setProvider(null);
             }
         }
 
