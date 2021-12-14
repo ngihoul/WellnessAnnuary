@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Internship;
 use App\Repository\ProviderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -106,7 +107,7 @@ class Provider
     }
 
     /**
-     * @return Collection|Internship[]
+     * @return Collection
      */
     public function getInternships(): Collection
     {
