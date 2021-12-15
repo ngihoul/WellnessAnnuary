@@ -54,6 +54,7 @@ class Provider
 
     /**
      * @ORM\ManyToMany(targetEntity=ServiceCategory::class, inversedBy="providers")
+     * @JoinTable(name="provider_category")
      */
     private $serviceCategories;
 
@@ -73,6 +74,11 @@ class Provider
      */
     private $images;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Customer::class, inversedBy="favorites")
+     */
+    private $favorite;
+
     public function __construct()
     {
         $this->internships = new ArrayCollection();
@@ -80,6 +86,7 @@ class Provider
         $this->serviceCategories = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->favorite = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -287,6 +294,30 @@ class Provider
                 $image->setProvider(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Customer[]
+     */
+    public function getFavorite(): Collection
+    {
+        return $this->favorite;
+    }
+
+    public function addFavorite(Customer $favorite): self
+    {
+        if (!$this->favorite->contains($favorite)) {
+            $this->favorite[] = $favorite;
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Customer $favorite): self
+    {
+        $this->favorite->removeElement($favorite);
 
         return $this;
     }

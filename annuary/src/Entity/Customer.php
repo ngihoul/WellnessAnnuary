@@ -55,11 +55,18 @@ class Customer
      */
     private $images;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Provider::class, mappedBy="favorite")
+     * @JoinTable(name="favorite")
+     */
+    private $favorites;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->reports = new ArrayCollection();
         $this->image = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -200,6 +207,33 @@ class Customer
             if ($image->getCustomer() === $this) {
                 $image->setCustomer(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Provider[]
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addFavorite(Provider $favorite): self
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites[] = $favorite;
+            $favorite->addFavorite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Provider $favorite): self
+    {
+        if ($this->favorites->removeElement($favorite)) {
+            $favorite->removeFavorite($this);
         }
 
         return $this;
