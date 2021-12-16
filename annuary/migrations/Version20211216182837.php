@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20211216182225 extends AbstractMigration
+final class Version20211216182837 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -35,7 +35,7 @@ final class Version20211216182225 extends AbstractMigration
         $this->addSql('CREATE TABLE provider_customer (provider_id INT NOT NULL, customer_id INT NOT NULL, INDEX IDX_C97BE0E0A53A8AA (provider_id), INDEX IDX_C97BE0E09395C3F3 (customer_id), PRIMARY KEY(provider_id, customer_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE report (id INT AUTO_INCREMENT NOT NULL, customer_id INT NOT NULL, comment_id INT NOT NULL, description VARCHAR(255) NOT NULL, reported_at DATETIME NOT NULL, INDEX IDX_C42F77849395C3F3 (customer_id), INDEX IDX_C42F7784F8697D13 (comment_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE service_category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(120) NOT NULL, description LONGTEXT NOT NULL, highlighted TINYINT(1) NOT NULL, validated TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, address_number VARCHAR(10) NOT NULL, address_street VARCHAR(255) NOT NULL, registered_on DATETIME NOT NULL, unsuccessful_attempts INT DEFAULT NULL, banned TINYINT(1) NOT NULL, registration_confirmed TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, locality_id INT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, address_number VARCHAR(10) NOT NULL, address_street VARCHAR(255) NOT NULL, registered_on DATETIME NOT NULL, unsuccessful_attempts INT DEFAULT NULL, banned TINYINT(1) NOT NULL, registration_confirmed TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), INDEX IDX_8D93D64988823A92 (locality_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526CA53A8AA FOREIGN KEY (provider_id) REFERENCES provider (id)');
         $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526C9395C3F3 FOREIGN KEY (customer_id) REFERENCES customer (id)');
         $this->addSql('ALTER TABLE customer ADD CONSTRAINT FK_81398E09A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
@@ -56,6 +56,7 @@ final class Version20211216182225 extends AbstractMigration
         $this->addSql('ALTER TABLE provider_customer ADD CONSTRAINT FK_C97BE0E09395C3F3 FOREIGN KEY (customer_id) REFERENCES customer (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE report ADD CONSTRAINT FK_C42F77849395C3F3 FOREIGN KEY (customer_id) REFERENCES customer (id)');
         $this->addSql('ALTER TABLE report ADD CONSTRAINT FK_C42F7784F8697D13 FOREIGN KEY (comment_id) REFERENCES comment (id)');
+        $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D64988823A92 FOREIGN KEY (locality_id) REFERENCES locality (id)');
     }
 
     public function down(Schema $schema): void
@@ -67,6 +68,7 @@ final class Version20211216182225 extends AbstractMigration
         $this->addSql('ALTER TABLE image DROP FOREIGN KEY FK_C53D045F9395C3F3');
         $this->addSql('ALTER TABLE provider_customer DROP FOREIGN KEY FK_C97BE0E09395C3F3');
         $this->addSql('ALTER TABLE report DROP FOREIGN KEY FK_C42F77849395C3F3');
+        $this->addSql('ALTER TABLE user DROP FOREIGN KEY FK_8D93D64988823A92');
         $this->addSql('ALTER TABLE post_code DROP FOREIGN KEY FK_BE405793AE6F181C');
         $this->addSql('ALTER TABLE locality DROP FOREIGN KEY FK_E1D6B8E61A324924');
         $this->addSql('ALTER TABLE comment DROP FOREIGN KEY FK_9474526CA53A8AA');
