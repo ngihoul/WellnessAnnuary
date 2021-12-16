@@ -75,6 +75,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $customer;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Locality::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $locality;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -247,6 +253,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getLocality(): ?Locality
+    {
+        return $this->locality;
+    }
+
+    public function setLocality(?Locality $locality): self
+    {
+        $this->locality = $locality;
 
         return $this;
     }

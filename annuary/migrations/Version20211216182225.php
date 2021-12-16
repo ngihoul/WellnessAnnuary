@@ -10,11 +10,11 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20211215112742 extends AbstractMigration
+final class Version20211216182225 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Creating Entities & Relations except those for address management';
+        return 'Creating all Entities & relations';
     }
 
     public function up(Schema $schema): void
@@ -25,7 +25,10 @@ final class Version20211215112742 extends AbstractMigration
         $this->addSql('CREATE TABLE favorite (customer_id INT NOT NULL, provider_id INT NOT NULL, INDEX IDX_68C58ED99395C3F3 (customer_id), INDEX IDX_68C58ED9A53A8AA (provider_id), PRIMARY KEY(customer_id, provider_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE image (id INT AUTO_INCREMENT NOT NULL, service_category_id INT DEFAULT NULL, customer_id INT DEFAULT NULL, provider_id INT DEFAULT NULL, ordering INT NOT NULL, image VARCHAR(255) NOT NULL, INDEX IDX_C53D045FDEDCBB4E (service_category_id), INDEX IDX_C53D045F9395C3F3 (customer_id), INDEX IDX_C53D045FA53A8AA (provider_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE internship (id INT AUTO_INCREMENT NOT NULL, provider_id INT NOT NULL, name VARCHAR(120) NOT NULL, description LONGTEXT NOT NULL, price DOUBLE PRECISION NOT NULL, additional_information LONGTEXT DEFAULT NULL, start_at DATE NOT NULL, end_at DATE NOT NULL, displayed_from DATE NOT NULL, displayed_until DATE NOT NULL, INDEX IDX_10D1B00CA53A8AA (provider_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE locality (id INT AUTO_INCREMENT NOT NULL, post_code_id INT NOT NULL, name VARCHAR(180) NOT NULL, INDEX IDX_E1D6B8E61A324924 (post_code_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE municipality (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(180) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE newsletter (id INT AUTO_INCREMENT NOT NULL, published_at DATETIME NOT NULL, title VARCHAR(255) NOT NULL, pdfdocument VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE post_code (id INT AUTO_INCREMENT NOT NULL, municipality_id INT NOT NULL, post_code VARCHAR(16) NOT NULL, INDEX IDX_BE405793AE6F181C (municipality_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE promotion (id INT AUTO_INCREMENT NOT NULL, provider_id INT NOT NULL, service_category_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, pdfdocument VARCHAR(255) DEFAULT NULL, start_at DATE NOT NULL, end_at DATE NOT NULL, displayed_from DATE NOT NULL, displayed_until DATE NOT NULL, INDEX IDX_C11D7DD1A53A8AA (provider_id), INDEX IDX_C11D7DD1DEDCBB4E (service_category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE provider (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, name VARCHAR(255) NOT NULL, website VARCHAR(255) DEFAULT NULL, phone_number VARCHAR(25) NOT NULL, vtanumber VARCHAR(15) NOT NULL, UNIQUE INDEX UNIQ_92C4739CA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE provider_category (provider_id INT NOT NULL, service_category_id INT NOT NULL, INDEX IDX_4E0E7728A53A8AA (provider_id), INDEX IDX_4E0E7728DEDCBB4E (service_category_id), PRIMARY KEY(provider_id, service_category_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -42,6 +45,8 @@ final class Version20211215112742 extends AbstractMigration
         $this->addSql('ALTER TABLE image ADD CONSTRAINT FK_C53D045F9395C3F3 FOREIGN KEY (customer_id) REFERENCES customer (id)');
         $this->addSql('ALTER TABLE image ADD CONSTRAINT FK_C53D045FA53A8AA FOREIGN KEY (provider_id) REFERENCES provider (id)');
         $this->addSql('ALTER TABLE internship ADD CONSTRAINT FK_10D1B00CA53A8AA FOREIGN KEY (provider_id) REFERENCES provider (id)');
+        $this->addSql('ALTER TABLE locality ADD CONSTRAINT FK_E1D6B8E61A324924 FOREIGN KEY (post_code_id) REFERENCES post_code (id)');
+        $this->addSql('ALTER TABLE post_code ADD CONSTRAINT FK_BE405793AE6F181C FOREIGN KEY (municipality_id) REFERENCES municipality (id)');
         $this->addSql('ALTER TABLE promotion ADD CONSTRAINT FK_C11D7DD1A53A8AA FOREIGN KEY (provider_id) REFERENCES provider (id)');
         $this->addSql('ALTER TABLE promotion ADD CONSTRAINT FK_C11D7DD1DEDCBB4E FOREIGN KEY (service_category_id) REFERENCES service_category (id)');
         $this->addSql('ALTER TABLE provider ADD CONSTRAINT FK_92C4739CA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
@@ -62,6 +67,8 @@ final class Version20211215112742 extends AbstractMigration
         $this->addSql('ALTER TABLE image DROP FOREIGN KEY FK_C53D045F9395C3F3');
         $this->addSql('ALTER TABLE provider_customer DROP FOREIGN KEY FK_C97BE0E09395C3F3');
         $this->addSql('ALTER TABLE report DROP FOREIGN KEY FK_C42F77849395C3F3');
+        $this->addSql('ALTER TABLE post_code DROP FOREIGN KEY FK_BE405793AE6F181C');
+        $this->addSql('ALTER TABLE locality DROP FOREIGN KEY FK_E1D6B8E61A324924');
         $this->addSql('ALTER TABLE comment DROP FOREIGN KEY FK_9474526CA53A8AA');
         $this->addSql('ALTER TABLE favorite DROP FOREIGN KEY FK_68C58ED9A53A8AA');
         $this->addSql('ALTER TABLE image DROP FOREIGN KEY FK_C53D045FA53A8AA');
@@ -79,7 +86,10 @@ final class Version20211215112742 extends AbstractMigration
         $this->addSql('DROP TABLE favorite');
         $this->addSql('DROP TABLE image');
         $this->addSql('DROP TABLE internship');
+        $this->addSql('DROP TABLE locality');
+        $this->addSql('DROP TABLE municipality');
         $this->addSql('DROP TABLE newsletter');
+        $this->addSql('DROP TABLE post_code');
         $this->addSql('DROP TABLE promotion');
         $this->addSql('DROP TABLE provider');
         $this->addSql('DROP TABLE provider_category');
