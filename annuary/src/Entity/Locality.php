@@ -22,6 +22,12 @@ class Locality
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=postCode::class, inversedBy="localities")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $postCode;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +41,18 @@ class Locality
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getPostCode(): ?postCode
+    {
+        return $this->postCode;
+    }
+
+    public function setPostCode(?postCode $postCode): self
+    {
+        $this->postCode = $postCode;
 
         return $this;
     }
