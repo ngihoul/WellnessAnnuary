@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MunicipalityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,16 @@ class Municipality
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PostCode::class, mappedBy="municipality")
+     */
+    private $postCodes;
+
+    public function __construct()
+    {
+        $this->postCodes = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +47,36 @@ class Municipality
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PostCode[]
+     */
+    public function getPostCodes(): Collection
+    {
+        return $this->postCodes;
+    }
+
+    public function addPostCode(PostCode $postCode): self
+    {
+        if (!$this->postCodes->contains($postCode)) {
+            $this->postCodes[] = $postCode;
+            $postCode->setMunicipality($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostCode(PostCode $postCode): self
+    {
+        if ($this->postCodes->removeElement($postCode)) {
+            // set the owning side to null (unless already changed)
+            if ($postCode->getMunicipality() === $this) {
+                $postCode->setMunicipality(null);
+            }
+        }
 
         return $this;
     }

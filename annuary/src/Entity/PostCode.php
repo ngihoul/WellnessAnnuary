@@ -29,6 +29,12 @@ class PostCode
      */
     private $localities;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Municipality::class, inversedBy="postCodes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $municipality;
+
     public function __construct()
     {
         $this->localities = new ArrayCollection();
@@ -77,6 +83,18 @@ class PostCode
                 $locality->setPostCode(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMunicipality(): ?Municipality
+    {
+        return $this->municipality;
+    }
+
+    public function setMunicipality(?Municipality $municipality): self
+    {
+        $this->municipality = $municipality;
 
         return $this;
     }
