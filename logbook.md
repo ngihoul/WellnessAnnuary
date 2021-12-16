@@ -24,6 +24,13 @@
 * Finalization of the mobile version prototype (phase 1)
 * Starting desktop webdesign
 
+## 14th December 2021
+* Creating Entities & Relations
+
+## 15th December 2021
+* Finishing the creation of Entities & Relations except those for address management.  
+  Why ? In my opinion, DB structure needs to be reviewed. To check on 16th December with Natacha.
+
 ## Next to-do
 * Create vector logos on Adobe Illustrator (see footer in Figma design)
 * Creating desktop webdesign via Figma (Phase 1 only)
