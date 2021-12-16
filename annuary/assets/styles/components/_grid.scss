@@ -1,0 +1,29 @@
+// Flexbox grid
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@each $responsive-names, $responsive-sizes in $responsive-table {
+  @if ($responsive-names == "-xs") {
+    .col {
+      @include col-alone;
+    }
+    @for $i from 1 through $grid-columns {
+      .col-#{$i} {
+        @include custom-grid($i);
+      }
+    }
+  } @else {
+    @media screen and (min-width: $responsive-sizes) {
+      .col#{$responsive-names} {
+        @include col-alone;
+      }
+      @for $i from 1 through $grid-columns {
+        .col#{$responsive-names}-#{$i} {
+          @include custom-grid($i);
+        }
+      }
+    }
+  }
+}
