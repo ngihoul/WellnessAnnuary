@@ -65,7 +65,7 @@ class Customer
     {
         $this->comments = new ArrayCollection();
         $this->reports = new ArrayCollection();
-        $this->image = new ArrayCollection();
+        $this->images = new ArrayCollection();
         $this->favorites = new ArrayCollection();
     }
 

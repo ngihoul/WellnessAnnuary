@@ -59,6 +59,7 @@ class Comment
     public function __construct()
     {
         $this->reports = new ArrayCollection();
+        $this->publishedAt = new \DateTime();
     }
 
     public function getId(): ?int

@@ -81,6 +81,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $locality;
 
+    public function __construct()
+    {
+        $this->registeredOn = new \DateTime();
+        $this->unsuccessfulAttempts = 0;
+        $this->banned = 0;
+        $this->registrationConfirmed = 0;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
