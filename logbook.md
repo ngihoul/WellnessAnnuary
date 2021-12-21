@@ -28,12 +28,35 @@
 * Creating Entities & Relations
 
 ## 15th December 2021
-* Finishing the creation of Entities & Relations except those for address management.  
-  Why ? In my opinion, DB structure needs to be reviewed. To check on 16th December with Natacha.
+* Finishing the creation of Entities & Relations except those for address management.
+
+## 16th December 2021
+* Creating Addresses Entities & Relations
+* Creation of HomeController
+
+## 17th December 2021
+* Creating vector logos
+* Technical analysis of the homepage
+
+## 22nd December 2021
+* Configuring SASS
+* Creating Header
+  * Front (mobile & desktop)
+  * Backend - MenuService to generate categories list
+* Creating Footer
 
 ## Next to-do
-* Create vector logos on Adobe Illustrator (see footer in Figma design)
-* Creating desktop webdesign via Figma (Phase 1 only)
+* Create desktop webdesign via Figma (Phase 1 only)
+* Create :
+  * Header
+    * Mobile
+    * Desktop
+  * Footer (almost the same for mobile & desktop)
+  * Hero
+    * Search module
+      * API Backend
+      * autocomplete with AJAX
+  * Slider
 
 ### Remarks
 * Time constraints : tablet version webdesign will not be made

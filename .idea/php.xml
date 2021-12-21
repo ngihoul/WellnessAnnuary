@@ -186,6 +186,7 @@
       <path value="$PROJECT_DIR$/annuary/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/annuary/vendor/symfony/phpunit-bridge" />
       <path value="$PROJECT_DIR$/annuary/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/annuary/vendor/symfony/webpack-encore-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
