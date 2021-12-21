@@ -38,8 +38,10 @@
 * Creating vector logos
 * Technical analysis of the homepage
 
-## 22nd December 2021
+## 21st December 2021
 * Configuring SASS
+
+## 22nd December 2021
 * Creating Header
   * Front (mobile & desktop)
   * Backend - MenuService to generate categories list
