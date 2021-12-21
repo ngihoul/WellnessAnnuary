@@ -1,1 +1,25 @@
 // General variables
+// Colors
+$color-primary: #8490ff;
+$color-secondary: #62bdfc;
+$color-txt: darken(#777777, 5%);
+$color-title: #222222;
+$color-link: #8490ff;
+$color-bg-header: #fff;
+$color-bg-primary: #fff;
+$color-bg-secondary: #faf9ff;
+$color-aside-title: #fdfdff;
+$color-aside-subtitle: #fafafc;
+$color-footer-bg: #04091e;
+$color-footer-title: #fcfcff;
+
+
+// Grid
+$grid-columns: 12;
+
+$responsive-table: (
+        -xs: 360px,
+        -sm: 568px,
+        -md: 860px,
+        -lg: 1140px
+);
