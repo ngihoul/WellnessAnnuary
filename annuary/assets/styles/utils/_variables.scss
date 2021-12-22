@@ -1,18 +1,21 @@
 // General variables
 // Colors
-$color-primary: #8490ff;
-$color-secondary: #62bdfc;
-$color-txt: darken(#777777, 5%);
-$color-title: #222222;
-$color-link: #8490ff;
-$color-bg-header: #fff;
-$color-bg-primary: #fff;
-$color-bg-secondary: #faf9ff;
-$color-aside-title: #fdfdff;
-$color-aside-subtitle: #fafafc;
-$color-footer-bg: #04091e;
-$color-footer-title: #fcfcff;
+$bg-light: #FDF9F7;
+$bg-dark: #FAEEE7;
 
+$heading-primary: #33272A; // Dark black
+$txt-normal: #594A4E; // Light black
+
+$emphasis: #ECBCAA; // Light Pink
+$cta: #FF8BA7; // Flash Pink
+
+$white: #fff;
+
+// Fonts
+$font-heading: 'Playfair Display', serif;
+
+// Image directory
+$imageDir: '../../../public/img/';
 
 // Grid
 $grid-columns: 12;

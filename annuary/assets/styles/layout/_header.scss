@@ -1,1 +1,230 @@
-// Header
+// Header -- Mobile
+header {
+  position: sticky;
+  top: 0;
+  color: $txt-normal;
+  z-index: 9999;
+  background-color: $white;
+  @include box-shadow(false);
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+  }
+
+  // Button to open menu on Mobile
+  .openMenu {
+    @include header-icon('left');
+  }
+
+  .logo {
+    text-align: center;
+    min-width: 40%;
+    min-height: 100%;
+
+    img {
+      width: 80%;
+      max-width: 120px;
+    }
+  }
+
+  // Sliding menu on Mobile
+  .menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 100%;
+    width: 0;
+    text-align: center;
+    color: $txt-normal;
+    background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url($imageDir + 'menuBackground.png') top no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+    transition: .5s;
+    @include box-shadow(true);
+
+    a {
+      display: block;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity .2s, color .5s;
+      font-family: $font-heading;
+      font-size: 1.6rem;
+
+      &:hover {
+        color: $emphasis;
+        transition: color .5s;
+      }
+
+      &.active {
+        font-weight: 700;
+      }
+    }
+
+    // Dropdown for categories
+    .dropDown {
+      overflow: hidden;
+      height: 0;
+      padding: 0;
+
+      &.active {
+        display: block;
+        height: 100%;
+      }
+
+      li a {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+    }
+
+    // Menu when active
+    &.active {
+      width: 100vw;
+      transition: .5s;
+
+      a, .menuFooter, .langMobile {
+        opacity: 1;
+        transition: opacity 1s;
+      }
+    }
+
+    ul {
+      padding-top: 85px;
+    }
+
+    .chevronCategory {
+      padding-left: .5rem;
+    }
+
+    // Language menu on Mobile (inside menu)
+    .langMobile {
+
+      ul li {
+        display: inline-block;
+        max-width: 33.33%;
+      }
+
+      ul li a {
+        font-size: 0.8rem;
+        padding: 1.3rem 1.3rem;
+
+        &.active {
+          font-weight: 900;
+        }
+      }
+    }
+
+    // Logo in meni on Mobile
+    .menuFooter {
+      position: relative;
+      padding-top: 1.5rem;
+      opacity: 0;
+      transition: opacity .2s;
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 10%;
+        width: 80%;
+        height: 1px;
+        background-color: rgba(89, 74, 78, 0.5);
+      }
+    }
+  }
+
+  // Search & Login Buttons on Mobile
+  .navBtn {
+    @include header-icon('right');
+  }
+
+  // Language menu on Desktop
+  .lang {
+    display: none;
+  }
+}
+
+// Header - Desktop
+@media screen and (min-width: map-get($responsive-table, "-lg")) {
+  header {
+
+    .wrapper {
+      justify-content: space-between;
+    }
+    .openMenu {
+      display: none;
+    }
+
+    .logo {
+      min-width: 20%;
+      width: 20%;
+    }
+    // NavBar
+    .menu {
+      display: block;
+      position: static;
+      min-width: 70%;
+      width: 70%;
+      background: none;
+      box-shadow: none;
+
+      ul {
+        padding-top: 0;
+        text-align: right;
+      }
+
+      ul li {
+        display: inline-block;
+      }
+
+      ul li a {
+        display: inline-block;
+        opacity: 1;
+        font-size: 1rem;
+      }
+
+      .dropDown {
+        display: none;
+        text-align: center;
+
+        &.active {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          top: 64px;
+          height: 300px;
+          max-width: 500px;
+          overflow: visible;
+          background-color: $white;
+          z-index: 9999;
+          @include box-shadow(false);
+
+          li a {
+            display: block;
+            font-size: 0.8rem;
+          }
+
+          .column:not(:last-child) {
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+
+      .langMobile {
+        display: none;
+      }
+
+      .menuFooter {
+        display: none;
+      }
+    }
+
+    .navBtn {
+      display: none;
+    }
+  }
+}
