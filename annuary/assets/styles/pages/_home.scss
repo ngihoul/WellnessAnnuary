@@ -17,19 +17,51 @@
 
   h1 {
     position: relative;
-  }
 
-  h1::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 30%;
-    width: 40%;
-    height: 2px;
-    background-color: $emphasis;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 30%;
+      width: 40%;
+      height: 2px;
+      background-color: $emphasis;
+    }
   }
 
   form {
     padding: 3.5rem 0;
+  }
+}
+
+@media screen and (min-width: map-get($responsive-table, "-lg")) {
+  .hero {
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'heroBackground_full.png') center no-repeat;
+    background-size: cover;
+    height: 50vh;
+
+    .wrapper {
+      flex-direction: row;
+      justify-content: space-around;
+      height: 50vh;
+    }
+
+    h1 {
+      width: 40%;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 30%;
+        width: 40%;
+        height: 2px;
+        background-color: $emphasis;
+      }
+    }
+
+    form {
+      width: 40%;
+    }
   }
 }
