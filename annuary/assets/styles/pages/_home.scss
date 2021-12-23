@@ -1,11 +1,35 @@
 // Homepage
 
 // Hero
-main {
-  padding: 0 20px;
-}
 .hero {
+  padding: 0 20px;
   height: 100vh;
   text-align: center;
-  @include bg-gradient-white('menuBackground.png');
+  @include bg-gradient-white('heroBackground.png');
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  h1 {
+    position: relative;
+  }
+
+  h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+    width: 40%;
+    height: 2px;
+    background-color: $emphasis;
+  }
+
+  form {
+    padding: 3.5rem 0;
+  }
 }

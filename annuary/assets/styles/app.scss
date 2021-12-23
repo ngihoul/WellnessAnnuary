@@ -4,9 +4,11 @@
 @import "utils/reset";
 // Base
 @import "base/base";
-// Grids
 @import 'base/wrapper';
+// Grids
 @import "components/grid";
+// Forms
+@import "components/form";
 // Layout
 @import "layout/header";
 @import "layout/footer";

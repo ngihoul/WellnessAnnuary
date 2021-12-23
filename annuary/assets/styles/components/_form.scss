@@ -1,0 +1,50 @@
+label {
+  display: block;
+  width: 100%;
+  color: $heading-primary;
+  letter-spacing: .2rem;
+  font-size: .7rem;
+  text-align: left;
+  padding-left: 1rem;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: .4rem;
+  border: 1px solid $emphasis;
+  font-family: $font-txt;
+  color: $txt-normal;
+  border-radius: .2rem;
+  box-shadow: none;
+  margin-bottom: 1.5rem;
+
+  &::placeholder {
+    color: lighten($txt-normal, 20%);
+    font-size: .8rem;
+  }
+
+  &:focus, &:active {
+    outline: none;
+    border: 1px solid darken($emphasis, 30%);
+  }
+
+  &[type=submit] {
+    background-color: $emphasis;
+    cursor: pointer;
+    letter-spacing: .2rem;
+    font-size: .8rem;
+    font-weight: 500;
+    padding: .5rem;
+    @include box-shadow(false);
+
+    &:hover {
+      @include box-shadow-hover();
+    }
+
+    &:focus {
+      background-color: darken($emphasis, 10%);
+      border: 1px solid darken($emphasis, 10%);
+    }
+  }
+}
