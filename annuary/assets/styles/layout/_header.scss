@@ -39,8 +39,7 @@ header {
     width: 0;
     text-align: center;
     color: $txt-normal;
-    background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url($imageDir + 'menuBackground.png') top no-repeat;
-    background-size: cover;
+    @include bg-gradient-white('menuBackground.png');
     overflow-x: hidden;
     transition: .5s;
     @include box-shadow(true);

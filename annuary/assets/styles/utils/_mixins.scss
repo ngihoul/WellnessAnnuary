@@ -9,6 +9,13 @@
   flex-grow: 1;
   max-width: 100%;
 }
+
+// Background
+@mixin bg-gradient-white($url) {
+  background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url($imageDir + $url) top no-repeat;
+  background-size: cover;
+}
+
 // Box shadow Header
 @mixin box-shadow($inset) {
   @if($inset == false) {
