@@ -7,6 +7,7 @@
   text-align: center;
   border-radius: 10px;
   animation: fadeIn 2s;
+  @include box-shadow(false);
 
   &.alert-error {
     color: #721c24;
