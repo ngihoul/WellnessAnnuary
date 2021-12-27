@@ -33,7 +33,7 @@ class Image
     private $serviceCategory;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="provider")
+     * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="images")
      */
     private $customer;
 

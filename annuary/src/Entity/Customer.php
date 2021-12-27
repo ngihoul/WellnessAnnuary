@@ -56,8 +56,7 @@ class Customer
     private $images;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Provider::class, inversedBy="customer")
-     * @ORM\JoinTable(name="favorite")
+     * @ORM\ManyToMany(targetEntity=Provider::class, mappedBy="favorite")
      */
     private $favorites;
 

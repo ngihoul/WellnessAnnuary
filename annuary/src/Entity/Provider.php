@@ -76,6 +76,7 @@ class Provider
 
     /**
      * @ORM\ManyToMany(targetEntity=Customer::class, inversedBy="favorites")
+     * @ORM\JoinTable(name="favorite")
      */
     private $favorite;
 

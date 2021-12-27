@@ -45,7 +45,7 @@ class ServiceCategory
     private $promotions;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Provider::class, mappedBy="serviceCategory")
+     * @ORM\ManyToMany(targetEntity=Provider::class, mappedBy="serviceCategories")
      */
     private $providers;
 
