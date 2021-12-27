@@ -29,9 +29,14 @@ class ServiceCategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{category}', name: 'category_detail')]
-    public function show($category): Response {
-        $category = $this->serviceCategoryRepository->findOneBy(['name' => $category]);
+    #[Route('/{categoryName}', name: 'category_detail')]
+    public function show($categoryName): Response {
+        $category = $this->serviceCategoryRepository->findOneBy(['name' => $categoryName]);
+
+        if(!$category) {
+            $this->addFlash('error', "La catégorie <em>\"$categoryName\"</em> n'existe pas");
+            return $this->redirectToRoute('home');
+        }
 
         return $this->render('service_category/detail.html.twig', [
             'category' => $category,
