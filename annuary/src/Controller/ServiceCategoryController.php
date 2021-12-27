@@ -35,6 +35,7 @@ class ServiceCategoryController extends AbstractController
 
         if(!$category) {
             $this->addFlash('error', "La catégorie <em>\"$categoryName\"</em> n'existe pas");
+
             return $this->redirectToRoute('home');
         }
 

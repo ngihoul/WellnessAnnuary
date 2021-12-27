@@ -19,6 +19,7 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             {{ encore_entry_script_tags('menu') }}
+            {{ encore_entry_script_tags('alert') }}
         {% endblock %}
     </head>
     <body>
@@ -29,6 +30,7 @@
         {% for message in messages %}
             <div class="alert alert-{{ label }}">
                 <p>{{ message|raw }}</p>
+                <span class="alert-closeBtn">&times;</span>
             </div>
         {% endfor %}
     {% endfor %}
