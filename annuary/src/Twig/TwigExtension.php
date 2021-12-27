@@ -36,7 +36,7 @@ class TwigExtension extends AbstractExtension
         });
     }
 
-    public function renderSubMenuCategory(): string {
+    private function renderSubMenuCategory(): string {
         $categories = $this->serviceCategoryRepository->findBy([], ['name' => 'ASC']);
 
         $arraySize = count($categories);

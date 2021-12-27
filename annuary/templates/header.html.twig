@@ -6,7 +6,7 @@
             </a>
         </div>
         <div class="logo">
-            <a href="">
+            <a href="{{ path('home') }}">
                 <img src="{{ asset('/img/full_logo_120p.png') }}" />
             </a>
         </div>
@@ -14,6 +14,7 @@
             <ul class="navBar">
                 <li>
                     <a class="categoryLink" href="#">Catégories <i class="chevronCategory fas fa-chevron-down"></i></a>
+                    {# Custom Twig function to display Categories Sub Menu #}
                     {{ subMenuCategory() }}
                 </li>
                 <li><a href="#">Newsletter</a></li>
@@ -34,7 +35,7 @@
                 </ul>
             </div>
             <div class="menuFooter">
-                <img src="./img/short_logo_100p.png">
+                <img src="{{ asset('/img/short_logo_100p.png') }}">
             </div>
         </nav>
         <div class="navBtn">

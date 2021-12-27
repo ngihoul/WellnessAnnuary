@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ category.name }}{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+        <h1>{{ category.name }}</h1>
+        <p>{{ category.description }}</p>
+
+        <h2>Les plus populaires</h2>
+        <ul>
+            {% for provider in category.providers %}
+                <li>
+                    {{ provider.name }}
+                </li>
+            {% endfor %}
+
+        </ul>
+
+        <h2>Les derniers inscrits</h2>
+    </div>
+{% endblock %}

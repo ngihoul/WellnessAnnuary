@@ -25,7 +25,7 @@ class Locality
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=postCode::class, inversedBy="localities")
+     * @ORM\ManyToOne(targetEntity=PostCode::class, inversedBy="localities")
      * @ORM\JoinColumn(nullable=false)
      */
     private $postCode;

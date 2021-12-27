@@ -9,7 +9,11 @@ footer {
     position: static;
     box-shadow: none;
     padding-bottom: 2rem;
-    z-index: 0;
+    z-index: 1;
+
+    a {
+      display: block;
+    }
   }
 
   .footer-menu {

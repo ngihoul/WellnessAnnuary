@@ -1,12 +1,12 @@
 <footer>
     <div class="wrapper">
         <header class="logo">
-            <img src=" {{ asset('img/short_logo_100p.png') }}" alt="logo Bien-Être" />
+            <a href="{{ path('home') }}"><img src=" {{ asset('img/short_logo_100p.png') }}" alt="logo Bien-Être" /></a>
         </header>
         <nav class="footer-menu">
             <ul>
                 <li class="left">
-                    <a href="">Catégories</a>
+                    <a href="{{ path('category_index') }}">Catégories</a>
                 </li>
                 <li class="left">
                     <a href="">Newsletter</a>
