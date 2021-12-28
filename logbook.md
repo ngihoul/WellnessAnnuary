@@ -44,16 +44,23 @@
 ## 22nd December 2021
 * Creating Header
   * Front (mobile & desktop)
-  * Backend - MenuService to generate categories list
+  * Backend - TwigExtension to generate categories list (+ cache)
 * Creating Footer
+
+## 23rd December 2021
+* Creating Hero
+  * Front (mobile & desktop)
+
+## 27th December 2021
+* Creating serviceCategoryController
+* Correcting Entities relations
+* Messages management
+
+## 28th December 2021
+* Refactoring
 
 ## Next to-do
 * Create desktop webdesign via Figma (Phase 1 only)
-* Create :
-  * Header
-    * Mobile
-    * Desktop
-  * Footer (almost the same for mobile & desktop)
   * Hero
     * Search module
       * API Backend
