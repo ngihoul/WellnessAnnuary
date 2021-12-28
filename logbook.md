@@ -52,20 +52,29 @@
   * Front (mobile & desktop)
 
 ## 27th December 2021
+* Importing localities, postcodes & municipalities into the DB
 * Creating serviceCategoryController
 * Correcting Entities relations
 * Messages management
 
 ## 28th December 2021
-* Refactoring
+* Creating Category of the month section (Front & Backend)
+* Creating Last subscribers sections (Frontend)
+* Caching implementation
 
 ## Next to-do
 * Create desktop webdesign via Figma (Phase 1 only)
+* Homepage
   * Hero
     * Search module
       * API Backend
       * autocomplete with AJAX
   * Slider
+* Category page
+  * List of the categories
+  * Details of a category
+* Provider page
+* Improve messages management
 
 ### Remarks
 * Time constraints : tablet version webdesign will not be made
