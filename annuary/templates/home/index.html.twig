@@ -21,7 +21,7 @@
             <h2>Catégorie du moment</h2>
             <a href="{{ path('category_detail', { 'categoryName' : highlightedCategory.name }) }}">
                 <div class="bigCard">
-                    <img src="{{ asset('/img/category.jpg') }}" />
+                    <img src="{{ asset('/img/category.jpg') }}" alt="Image {{ highlightedCategory.name }}" />
                     <div class="bigCard-content">
                         <h3>{{ highlightedCategory.name }}</h3>
                         <p>{{ highlightedCategory.description }}</p>
@@ -33,8 +33,32 @@
             </a>
         </div>
     </section>
-    <div class="wrapper">
-
-    </div>
+    <section class="slider">
+        <div class="wrapper">
+            SLIDER
+        </div>
+    </section>
+    <section class="lastSubscribers">
+        <div class="wrapper">
+            <h2>Derniers inscrits</h2>
+            <a href="">
+                <div class="smallCard-container">
+                    {% for i in 1..4 %}
+                    <div class="smallCard">
+                        <img src="{{ asset('/img/thumbnail_provider.jpg') }}" />
+                        <div class="smallCard-content">
+                            <p class="name">Louis Vuitton</p>
+                            <p class="category">Massage, Spa, Hamman, Soin visage, Soin corps</p>
+                            <p class="place">4020 Liège</p>
+                        </div>
+                        <span class="reviews">8<i class="fas fa-star"></i></span>
+                        <span class="promos">Promos</span>
+                        <span class="internships">Stages</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </a>
+        </div>
+    </section>
 </main>
 {% endblock %}

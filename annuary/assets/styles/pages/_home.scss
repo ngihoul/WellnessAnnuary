@@ -46,9 +46,19 @@
   }
 }
 
+// * Last subscribers * //
+.lastSubscribers {
+  background-color : $color-bg-light;
+
+  h2 {
+    margin-bottom: 1.75rem;
+  }
+}
+
 
 
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
+  // * Hero * //
   .hero {
     background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'heroBackground_full.png') center no-repeat;
     background-size: cover;
@@ -78,6 +88,23 @@
 
     form {
       width: 40%;
+    }
+  }
+
+  .lastSubscribers {
+    .smallCard-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .smallCard {
+        min-width: 48%;
+        width: 48%;
+
+        &:nth-child(1n){
+          margin-left: 20px;
+        }
+      }
     }
   }
 }

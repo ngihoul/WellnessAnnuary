@@ -1,4 +1,6 @@
 .wrapper {
+  padding: 0 20px;
+
   @media screen and (min-width: map-get($responsive-table, "-lg")) {
     width: 1040px;
     margin: 0 auto;

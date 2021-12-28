@@ -1,5 +1,5 @@
 // ** Elements ** //
-// * Highlighted Category * //
+// * Big Cards - Highlighted Category * //
 .bigCard {
   margin: 1.75rem 0;
   border-radius: 10px;
@@ -38,7 +38,7 @@
 
 }
 
-// * Button * //
+// * Buttons * //
 .cta {
   font-family: $font-txt;
   width: 100%;
@@ -72,6 +72,75 @@
     width: 60%;
 
     a {
+      font-size: .7rem;
+    }
+  }
+}
+
+// * Small Cards - Last subscribers * //
+.smallCard {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: $white;
+  border-radius: 10px;
+  @include box-shadow(false);
+  margin-bottom: 20px;
+
+  &-content {
+    padding-left: 5px;
+    padding-right: 80px;
+  }
+
+  .name {
+    color: $color-heading-primary;
+  }
+
+  .category {
+    font-size: .6rem;
+    padding: .2rem 0;
+  }
+
+  .place {
+    font-size: .7rem;
+  }
+
+  &:hover {
+    @include box-shadow-hover();
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .promos, .internships {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    border: 2px solid $color-cta;
+    border-radius: 50px;
+    padding: 0 10px;
+    font-size: .6rem;
+    font-weight: bold;
+    color: $color-cta;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .internships {
+    bottom: 27px;
+  }
+
+  .reviews {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: .7rem;
+    color: $star-reviews;
+
+    i {
       font-size: .7rem;
     }
   }
