@@ -22,6 +22,7 @@ class ServiceCategoryRepository extends ServiceEntityRepository
     public function getHighlighted() {
         return $this->createQueryBuilder('c')
             ->andWhere('c.highlighted = 1')
+            ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;

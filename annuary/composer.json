@@ -95,6 +95,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "docker-cache:clear": [
+            "sudo docker exec -ti www_annuaire php bin/console cache:clear"
         ]
     },
     "conflict": {
