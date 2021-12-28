@@ -19,6 +19,14 @@ class ServiceCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, ServiceCategory::class);
     }
 
+    public function getHighlighted() {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.highlighted = 1')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return ServiceCategory[] Returns an array of ServiceCategory objects
     //  */

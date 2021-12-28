@@ -19,13 +19,18 @@
     <section class="highlightedCategory">
         <div class="wrapper">
             <h2>Catégorie du moment</h2>
-            <div class="bigCard">
-                <img src="" />
-                <div class="bigCard-content">
-                    <h3>Cosmétique</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae purus a ipsum efficitur fringilla. Nunc a pharetra libero, et semper felis. Praesent ipsum ex, tincidunt eget suscipit at, semper sit amet velit. Integer porttitor nibh metus, eu placerat massa tempor in. Integer quis purus eget nunc efficitur malesuada et non nisi. Aliquam pulvinar rutrum laoreet. Sed at tempor sem. Sed varius mauris a tincidunt luctus. </p>
+            <a href="{{ path('category_detail', { 'categoryName' : highlightedCategory.name }) }}">
+                <div class="bigCard">
+                    <img src="{{ asset('/img/category.jpg') }}" />
+                    <div class="bigCard-content">
+                        <h3>{{ highlightedCategory.name }}</h3>
+                        <p>{{ highlightedCategory.description }}</p>
+                        <div class="cta">
+                            <a href="{{ path('category_detail', { 'categoryName' : highlightedCategory.name }) }}">Découvrez les prestataires</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
     <div class="wrapper">

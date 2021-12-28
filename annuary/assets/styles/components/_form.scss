@@ -1,7 +1,7 @@
 label {
   display: block;
   width: 100%;
-  color: $heading-primary;
+  color: $color-heading-primary;
   letter-spacing: .2rem;
   font-size: .7rem;
   text-align: left;
@@ -12,25 +12,25 @@ input {
   display: block;
   width: 100%;
   padding: .4rem;
-  border: 1px solid $emphasis;
+  border: 1px solid $color-emphasis;
   font-family: $font-txt;
-  color: $txt-normal;
+  color: $color-txt-normal;
   border-radius: .2rem;
   box-shadow: none;
   margin-bottom: 1.5rem;
 
   &::placeholder {
-    color: lighten($txt-normal, 20%);
+    color: lighten($color-txt-normal, 20%);
     font-size: .8rem;
   }
 
   &:focus, &:active {
     outline: none;
-    border: 1px solid darken($emphasis, 30%);
+    border: 1px solid darken($color-emphasis, 30%);
   }
 
   &[type=submit] {
-    background-color: $emphasis;
+    background-color: $color-emphasis;
     cursor: pointer;
     letter-spacing: .2rem;
     font-size: .8rem;
@@ -43,8 +43,8 @@ input {
     }
 
     &:focus {
-      background-color: darken($emphasis, 10%);
-      border: 1px solid darken($emphasis, 10%);
+      background-color: darken($color-emphasis, 10%);
+      border: 1px solid darken($color-emphasis, 10%);
     }
   }
 }
