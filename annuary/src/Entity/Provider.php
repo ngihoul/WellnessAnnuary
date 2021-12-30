@@ -80,6 +80,11 @@ class Provider
      */
     private $favorite;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
     public function __construct()
     {
         $this->internships = new ArrayCollection();
@@ -319,6 +324,18 @@ class Provider
     public function removeFavorite(Customer $favorite): self
     {
         $this->favorite->removeElement($favorite);
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
