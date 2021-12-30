@@ -4,7 +4,7 @@
   padding: 0 20px;
   height: 100vh;
   text-align: center;
-  @include bg-gradient-white('heroBackground.png');
+  @include bg-gradient-white('heroHomepage.png');
 
   .wrapper {
     display: flex;
@@ -14,20 +14,6 @@
     height: 100vh;
   }
 
-  h1 {
-    position: relative;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 30%;
-      width: 40%;
-      height: 2px;
-      background-color: $color-emphasis;
-    }
-  }
-
   form {
     padding: 3.5rem 0;
   }
@@ -35,7 +21,6 @@
 
 // * Highlighted category * //
 .highlightedCategory {
-  background-color: $color-bg-dark;
 
   .wrapper {
     padding: 0 20px;
@@ -47,13 +32,6 @@
 }
 
 // * Last subscribers * //
-.lastSubscribers {
-  background-color : $color-bg-light;
-
-  h2 {
-    margin-bottom: 1.75rem;
-  }
-}
 
 
 

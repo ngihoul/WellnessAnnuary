@@ -46,6 +46,7 @@ class ServiceCategory
 
     /**
      * @ORM\ManyToMany(targetEntity=Provider::class, mappedBy="serviceCategories")
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $providers;
 

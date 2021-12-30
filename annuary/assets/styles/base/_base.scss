@@ -36,11 +36,37 @@ h3 {
 }
 
 section {
-  padding: 3.5rem 0;
+  padding: 2.5rem 0;
+
+  &:nth-child(odd) {
+    background-color: $color-bg-light;
+  }
+
+  &:nth-child(even) {
+    background-color: $color-bg-dark;
+  }
+
+  &.listing {
+    padding-bottom: 1rem;
+  }
+
+  h1 {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 30%;
+      width: 40%;
+      height: 2px;
+      background-color: $color-emphasis;
+    }
+  }
 
   h2 {
     position: relative;
     z-index: 999;
+    margin-bottom: 1.75rem;
 
     &::before {
       content: '';
@@ -75,7 +101,7 @@ section {
 }
 
 p {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: $color-txt-normal;
 }
 

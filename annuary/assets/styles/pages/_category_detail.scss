@@ -1,0 +1,22 @@
+// ** Category detail ** //
+// * Hero * /
+.heading.listing {
+  @include bg-gradient-white('heroHammam.jpg');
+  text-align: center;
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    padding-top: 3.5rem;
+  }
+}
+
+@media screen and (min-width: map-get($responsive-table, "-lg")) {
+  .heading.listing {
+    p {
+      padding-bottom: 3.5rem;
+    }
+  }
+}
