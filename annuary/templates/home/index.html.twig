@@ -7,17 +7,6 @@
     <section class="hero">
         <div class="wrapper">
             <h1>Trouvez le bonheur près de chez vous</h1>
-            <!--
-            <form action="/search">
-                <label for="q">Que cherchez-vous ?</label>
-                <input name="q" type="search" autocomplete="false" placeholder="Prestataire"/>
-                <label for="c">Dans quelle catégorie ?</label>
-                <input name="c" type="search" autocomplete="false" placeholder="Catégorie"/>
-                <label for="w">Où le cherchez-vous ?</label>
-                <input name="w" type="search" autocomplete="false" placeholder="Ville, code postal, localité, ..."/>
-                <input type="submit" value="Evadez-vous" />
-            </form>
-            -->
             {{ render(controller(
                 'App\\Controller\\SearchController::displayForm'
             )) }}

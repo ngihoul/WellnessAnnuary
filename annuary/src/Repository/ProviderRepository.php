@@ -19,6 +19,13 @@ class ProviderRepository extends ServiceEntityRepository
         parent::__construct($registry, Provider::class);
     }
 
+    /**
+     * Query for search feature - By name OR/AND By Category OR/AND By localization
+     * @param $what
+     * @param $whichCategory
+     * @param $where
+     * @return mixed
+     */
     public function findBySearch($what = null, $whichCategory = 0, $where = null) {
         $queryBuilder = $this->createQueryBuilder('p')
             ->join('p.user', 'u')
@@ -55,33 +62,4 @@ class ProviderRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-    // /**
-    //  * @return Provider[] Returns an array of Provider objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Provider
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -29,6 +29,12 @@ class TwigExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * Get categories SubMenu for navBar from cache if exists
+     * @return string
+     * @throws \Psr\Cache\CacheException
+     * @throws \Psr\Cache\InvalidArgumentException
+     */
     public function getSubMenuCategory(): string {
         return $this->cache->get('subMenuCategory', function(ItemInterface $item) {
             $item->tag(['category']);
@@ -36,6 +42,13 @@ class TwigExtension extends AbstractExtension
         });
     }
 
+    /**
+     * Get categories SubMenu for navBar
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     private function renderSubMenuCategory(): string {
         $categories = $this->serviceCategoryRepository->findBy([], ['name' => 'ASC']);
 
@@ -47,6 +60,5 @@ class TwigExtension extends AbstractExtension
             'arraySize' => $arraySize,
             'nbCategoriesPerColumn' => $nbCategoriesPerColumn,
         ]);
-
     }
 }

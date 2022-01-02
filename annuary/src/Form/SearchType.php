@@ -37,9 +37,6 @@ class SearchType extends AbstractType
                 },
                 'label' => 'Dans quelle categorie ?',
                 'required' => false,
-                'attr' => [
-                    'placeholder' => 'Toutes les catégories',
-                ]
             ])
             ->add('w', \Symfony\Component\Form\Extension\Core\Type\SearchType::class, [
                 'label' => 'Où le cherchez-vous ?',
