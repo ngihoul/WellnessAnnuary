@@ -21,6 +21,7 @@ class Provider
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ORM\OrderBy({"name", "ASC"})
      */
     private $name;
 

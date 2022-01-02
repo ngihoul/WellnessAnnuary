@@ -19,7 +19,7 @@ class ProviderRepository extends ServiceEntityRepository
         parent::__construct($registry, Provider::class);
     }
 
-    public function findBySearch(string $what = null, string $whichCategory = null, string $where = null) {
+    public function findBySearch($what = null, $whichCategory = 0, $where = null) {
         $queryBuilder = $this->createQueryBuilder('p')
             ->join('p.user', 'u')
             ->addSelect('u')
@@ -46,7 +46,7 @@ class ProviderRepository extends ServiceEntityRepository
 
         if($whichCategory) {
             $queryBuilder
-                ->andWhere('c.name = :whichCategory')
+                ->andWhere('c.id = :whichCategory')
                 ->setparameter(':whichCategory', $whichCategory);
         }
 
