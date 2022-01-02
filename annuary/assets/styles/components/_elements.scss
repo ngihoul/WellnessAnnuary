@@ -70,7 +70,7 @@
 
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
   .cta {
-    width: 60%;
+    margin: 0 auto;
 
     a {
       font-size: .7rem;
@@ -78,7 +78,7 @@
   }
 }
 
-// * Small Cards - Last subscribers * //
+// * Small Cards - Last subscribers / Category detail * //
 .smallCard {
   display: flex;
   align-items: center;
@@ -144,5 +144,11 @@
     i {
       font-size: .7rem;
     }
+  }
+}
+
+@media screen and (min-width: map-get($responsive-table, "-lg")) {
+  .smallCard-container {
+    margin: 0 auto;
   }
 }
