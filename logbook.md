@@ -62,17 +62,27 @@
 * Creating Last subscribers sections (Frontend)
 * Caching implementation
 
+## 29th December 2021
+* Details of a category
+
+## 31st December 2021 & 1st January 2022
+* Happy New Year :) !
+
+## 2nd January 2022
+* Search module
+  * SearchController
+  * API Backend for autocompletion
+  * AJAX calls
+
 ## Next to-do
-* Create desktop webdesign via Figma (Phase 1 only)
+* Finish desktop webdesign via Figma (Phase 1 only)
 * Homepage
   * Hero
     * Search module
-      * API Backend
-      * autocomplete with AJAX
+      * Populate AJAX calls for autocompletion
   * Slider
 * Category page
   * List of the categories
-  * Details of a category
 * Provider page
 * Improve messages management
 
