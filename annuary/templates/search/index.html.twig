@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Résultats pour {{ what }} {{ (where is not empty) ? ('à ' ~ where) : '' }}{% endblock %}
+
+{% block body %}
+    {%  for result in results %}
+        {{ result.id }}, {{ result.name }}, {{ result.description }}, {{ result.user.locality.postCode.postCode }}, {{ result.user.locality.postCode.municipality.name|capitalize }} </br>
+    {% endfor %}
+{% endblock %}

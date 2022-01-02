@@ -19,6 +19,43 @@ class ProviderRepository extends ServiceEntityRepository
         parent::__construct($registry, Provider::class);
     }
 
+    public function findBySearch(string $what = null, string $whichCategory = null, string $where = null) {
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->join('p.user', 'u')
+            ->addSelect('u')
+            ->join('u.locality', 'l')
+            ->addSelect('l')
+            ->join('l.postCode', 'pc')
+            ->addSelect('pc')
+            ->join('pc.municipality', 'm')
+            ->addSelect('m')
+            ->join('p.serviceCategories', 'c')
+            ->addSelect('c');
+
+        if($what) {
+            $queryBuilder
+                ->andWhere('p.name LIKE :what OR p.description LIKE :what')
+                ->setparameter('what', '%'.$what.'%');
+        }
+
+        if($where) {
+            $queryBuilder
+                ->andWhere('l.name LIKE :where OR m.name LIKE :where OR pc.postCode LIKE :where')
+                ->setparameter('where', '%'.$where.'%');
+        }
+
+        if($whichCategory) {
+            $queryBuilder
+                ->andWhere('c.name = :whichCategory')
+                ->setparameter(':whichCategory', $whichCategory);
+        }
+
+        return $queryBuilder
+            ->orderBy('p.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Provider[] Returns an array of Provider objects
     //  */
