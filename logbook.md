@@ -72,6 +72,7 @@
 * Search module
   * SearchController
   * API Backend for autocompletion
+    * Testing API with Postman
   * AJAX calls
 
 ## Next to-do
