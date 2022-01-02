@@ -11,7 +11,6 @@ openMenu.addEventListener('click', (e) => {
    } else {
       openLogo.innerHTML = '<i class="fas fa-ellipsis-v"></i>';
    }
-
 });
 
 // Display magnifier if scroll down

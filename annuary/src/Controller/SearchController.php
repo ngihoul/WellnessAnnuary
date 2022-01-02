@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProviderRepository;
+use App\Repository\LocalityRepository;
 use App\Form\SearchType;
 
 class SearchController extends AbstractController
@@ -21,7 +23,7 @@ class SearchController extends AbstractController
 
     /**
      * Display Search results
-     * @param Request $request
+     * @param ProviderRepository $providerRepository
      * @return Response
      */
     #[Route('/search', methods:["GET"])]
@@ -29,6 +31,7 @@ class SearchController extends AbstractController
     {
 
         $query = $request->get('search');
+
         // Get all search parameters
         $what = $query['q'];
         $whichCategory = $query['c'];
@@ -42,5 +45,28 @@ class SearchController extends AbstractController
             'where' => $where,
             'results' => $results
         ]);
+    }
+
+    /**
+     * API for autocomplete
+     */
+    #[Route('/search/what/', name: 'search_what')]
+    public function what(Request $request, ProviderRepository $providerRepository) {
+
+        $what = trim($request->get('q'));
+
+        $results = $providerRepository->findForAutoCompletion($what);
+
+        return new JsonResponse($results);
+    }
+
+    #[Route('/search/where/', name: 'search_where')]
+    public function where(Request $request, LocalityRepository $localityRepository) {
+
+        $where = trim($request->get('w'));
+
+        $results = $localityRepository->findForAutoCompletion($where);
+
+        return new JsonResponse($results);
     }
 }

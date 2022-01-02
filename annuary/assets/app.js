@@ -10,3 +10,31 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+
+// ** Search module ** //
+const fetchAndDisplayAutoCompletion = (searchType, field) => {
+    let query = searchType == 'what' ? 'q' : 'w';
+    field.addEventListener('input', () => {
+        fetch(`/search/${searchType}/?${query}=${field.value.trim()}`)
+            .then((response) => {
+                if(!response) {
+                    throw new Error(`erreur HTTP! statut: ${reponse.status}`);
+                }
+                return response.json();
+            }).then((data) => {
+            console.log(data);
+        });
+    });
+}
+// * Autocompletion of "What" field * /
+const searchQ = document.querySelector('#search_q');
+fetchAndDisplayAutoCompletion('what', searchQ);
+
+// * Autocompletion of "Where" field * /
+const searchW = document.querySelector('#search_w');
+fetchAndDisplayAutoCompletion('where', searchW);
+
+
+
+
+

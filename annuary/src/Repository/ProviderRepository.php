@@ -62,4 +62,15 @@ class ProviderRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findForAutoCompletion($query) {
+        return $this->createQueryBuilder('p')
+            ->select('p.id', 'p.name', 'p.description')
+            ->andWhere('p.name LIKE :value OR p.description LIKE :value')
+            ->setParameter(':value', '%'.$query.'%')
+            ->orderBy('p.name', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
 }

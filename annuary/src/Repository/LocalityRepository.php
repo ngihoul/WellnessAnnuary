@@ -19,32 +19,22 @@ class LocalityRepository extends ServiceEntityRepository
         parent::__construct($registry, Locality::class);
     }
 
-    // /**
-    //  * @return Locality[] Returns an array of Locality objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
+    public function findForAutoCompletion($query) {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
+            ->select('l.name AS locality')
+            ->join('l.postCode', 'p')
+            ->addSelect('p.postCode AS postCode')
+            ->join('p.municipality', 'm')
+            ->addSelect('m.name AS municipality')
+            ->andWhere('m.name LIKE :value')
+            ->orWhere('p.postCode LIKE :value')
+            ->orWhere('l.name LIKE :value')
+            ->setParameter(':value', '%' . $query . '%')
+            ->addOrderBy('l.name', 'ASC')
+            ->addOrderBy('m.name', 'ASC')
+            ->addOrderBy('p.postCode', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Locality
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
