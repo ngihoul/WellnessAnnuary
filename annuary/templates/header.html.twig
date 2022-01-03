@@ -40,7 +40,7 @@
         </nav>
         <div class="navBtn">
             <span class="searchBtn">
-                <a href="#">
+                <a class="openSearch" href="">
                     <i class="fas fa-search"></i>
                 </a>
             </span>
@@ -62,6 +62,12 @@
                     <a href="#">DE</a>
                 </li>
             </ul>
+        </div>
+        <div class="searchMod">
+            <h1>Trouvez le bonheur près de chez vous</h1>
+            {{ render(controller(
+                'App\\Controller\\SearchController::displayForm'
+            )) }}
         </div>
     </div>
 </header>

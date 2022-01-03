@@ -115,7 +115,7 @@ header {
       }
     }
 
-    // Logo in meni on Mobile
+    // Logo in menu on Mobile
     .menuFooter {
       position: relative;
       padding-top: 1.5rem;
@@ -135,9 +135,42 @@ header {
     }
   }
 
+  .searchMod {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 100%;
+    width: 0;
+    text-align: center;
+    color: $color-txt-normal;
+    @include bg-gradient-white('menuBackground.png');
+    overflow-x: hidden;
+    transition: .5s;
+    @include box-shadow(true);
+
+    &.active {
+      width: 100vw;
+      padding: 0 20px;
+      transition: .5s;
+
+      & > * {
+        opacity: 1;
+        transition: opacity 1s;
+      }
+    }
+  }
+
   // Search & Login Buttons on Mobile
   .navBtn {
     @include header-icon('right');
+
+    .searchBtn {
+      display: inline-block;
+
+      &.hidden {
+        display: none;
+      }
+    }
   }
 
   // Language menu on Desktop
@@ -160,13 +193,14 @@ header {
     .logo {
       min-width: 20%;
       width: 20%;
+      text-align: left;
     }
     // NavBar
     .menu {
       display: block;
       position: static;
-      min-width: 70%;
-      width: 70%;
+      min-width: 60%;
+      width: 60%;
       background: none;
       box-shadow: none;
 
@@ -231,7 +265,43 @@ header {
     }
 
     .navBtn {
-      display: none;
+      display: block;
+      min-width: 10%;
+      width: 10%;
+    }
+
+    .searchMod {
+      height: auto;
+      width: 100%;
+      padding: 20px;
+      margin-top: -500px;
+      @include box-shadow(false);
+
+      h1 {
+        display: none;
+      }
+
+      form {
+        display: flex;
+
+        div {
+          width: 25%;
+          max-width: 25%;
+          margin: 0 10px;
+
+          button {
+            margin-top: 15px;
+          }
+        }
+      }
+
+      &.active {
+        height: auto;
+        width: 100%;
+        margin-top: 5px;
+        z-index: 999;
+        padding: 20px;
+      }
     }
   }
 }
