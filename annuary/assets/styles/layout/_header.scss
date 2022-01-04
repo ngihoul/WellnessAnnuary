@@ -273,7 +273,6 @@ header {
     .searchMod {
       height: auto;
       width: 100%;
-      padding: 20px;
       margin-top: -500px;
       @include box-shadow(false);
 
@@ -300,7 +299,7 @@ header {
         width: 100%;
         margin-top: 5px;
         z-index: 999;
-        padding: 20px;
+        padding: 20px 20px 0;
       }
     }
   }
