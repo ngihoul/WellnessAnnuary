@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Provider;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Provider|null find($id, $lockMode = null, $lockVersion = null)
@@ -72,5 +73,31 @@ class ProviderRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->getQuery()
             ->getResult();
+    }
+
+    public function getLastSubscribers($start, $offset): Paginator
+    {
+        $query = $this->createQueryForLastSubscribers()
+            ->setFirstResult($start)
+            ->setMaxResults($offset)
+            ->getQuery();
+
+        return $paginator = new Paginator($query, true);
+    }
+
+    private function createQueryForLastSubscribers() {
+        return $this->createQueryBuilder('p')
+            ->join('p.user', 'u')
+            ->addSelect('u')
+            ->join('u.locality', 'l')
+            ->addSelect('l')
+            ->join('l.postCode', 'pc')
+            ->addSelect('pc')
+            ->join('pc.municipality', 'm')
+            ->addSelect('m')
+            ->join('p.serviceCategories', 'c')
+            ->addSelect('c')
+            ->orderBy('u.registeredOn', 'DESC')
+            ->addOrderBy('p.name', 'ASC');
     }
 }

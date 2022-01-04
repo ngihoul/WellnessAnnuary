@@ -43,17 +43,25 @@
             <h2>Derniers inscrits</h2>
             <a href="">
                 <div class="smallCard-container">
-                    {% for i in 1..4 %}
+                    {% for lastSubscriber in lastSubscribers %}
                         <div class="smallCard">
                             <img src="{{ asset('/img/thumbnail_provider.jpg') }}" />
                             <div class="smallCard-content">
-                                <p class="name">Louis Vuitton</p>
-                                <p class="category">Massage, Spa, Hamman, Soin visage, Soin corps</p>
-                                <p class="place">4020 Liège</p>
+                                <p class="name">{{ lastSubscriber.name }}</p>
+                                <p class="category">
+                                    {% for serviceCategory in lastSubscriber.serviceCategories %}
+                                        {{ serviceCategory.name }}{{ loop.index != loop.last ? ', ' : '' }}
+                                    {% endfor %}
+                                </p>
+                                <p class="place">{{ lastSubscriber.user.locality.postCode.postCode ~ ' ' ~ lastSubscriber.user.locality.name|capitalize }}</p>
                             </div>
                             <span class="reviews">8<i class="fas fa-star"></i></span>
-                            <span class="promos">Promos</span>
-                            <span class="internships">Stages</span>
+                            {% if lastSubscriber.promotions|length != 0 %}
+                                <span class="promos">Promos</span>
+                            {% endif %}
+                            {% if lastSubscriber.internships|length > 0 %}
+                                <span class="internships">Stages</span>
+                            {% endif %}
                         </div>
                     {% endfor %}
                 </div>
