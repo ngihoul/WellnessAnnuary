@@ -23,6 +23,7 @@ class SearchController extends AbstractController
 
     /**
      * Display Search results
+     * @param Request $request
      * @param ProviderRepository $providerRepository
      * @return Response
      */
@@ -54,7 +55,10 @@ class SearchController extends AbstractController
     }
 
     /**
-     * API for autocomplete
+     * API : Autocompletion of WHAT field
+     * @param Request $request
+     * @param ProviderRepository $providerRepository
+     * @return JsonResponse
      */
     #[Route('/search/what/', name: 'search_what')]
     public function what(Request $request, ProviderRepository $providerRepository) {
@@ -66,6 +70,12 @@ class SearchController extends AbstractController
         return new JsonResponse($results);
     }
 
+    /**
+     * API : Autocompletion for WHERE field
+     * @param Request $request
+     * @param LocalityRepository $localityRepository
+     * @return JsonResponse
+     */
     #[Route('/search/where/', name: 'search_where')]
     public function where(Request $request, LocalityRepository $localityRepository) {
 
