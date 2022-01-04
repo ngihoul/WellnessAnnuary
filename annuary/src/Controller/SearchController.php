@@ -30,21 +30,27 @@ class SearchController extends AbstractController
     public function search(Request $request, ProviderRepository $providerRepository): Response
     {
 
-        $query = $request->get('search');
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
 
-        // Get all search parameters
-        $what = $query['q'];
-        $whichCategory = $query['c'];
-        $where = $query['w'];
+        if($form->isSubmitted() && $form->isValid()) {
+            $what = $form->getData()['q'];
+            $whichCategory = $form->getData()['c'];
+            $where = $form->getData()['w'];
 
-        $results = $providerRepository->findBySearch($what, $whichCategory, $where);
+            $results = $providerRepository->findBySearch($what, $whichCategory, $where);
 
-        return $this->render('search/index.html.twig', [
-            'what' => $what,
-            'whichCategory' => $whichCategory,
-            'where' => $where,
-            'results' => $results
-        ]);
+            return $this->render('search/index.html.twig', [
+                'what' => $what,
+                'whichCategory' => $whichCategory,
+                'where' => $where,
+                'results' => $results
+            ]);
+        }
+
+        $this->addFlash('error', 'Recherche incorrecte. Veuillez utiliser le formulaire.');
+
+        return $this->redirectToRoute('home');
     }
 
     /**
