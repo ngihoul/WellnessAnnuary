@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | Résultats pour {{ what }} {{ (where is not empty) ? ('à ' ~ where) : '' }}{% endblock %}
+{% block title %}
+    {{ parent() }} | Résultats pour {{ what }} {{ (where is not empty) ? ('à ' ~ where) : '' }}
+{% endblock %}
 
 {% block body %}
     {%  for result in results %}
