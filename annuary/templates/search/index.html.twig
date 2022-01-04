@@ -1,11 +1,70 @@
 {% extends 'base.html.twig' %}
 
+{# Define default values for null variables #}
+{% if what is null %}
+    {% set what = 'Tous les prestataires' %}
+{% endif %}
+{% if where is null %}
+    {% set where = 'Belgique' %}
+{% endif %}
+{% if whichCategory is null %}
+    {% set whichCategory = 'Toutes les catégories' %}
+{% endif %}
+
 {% block title %}
-    {{ parent() }} | Résultats pour {{ what }} {{ (where is not empty) ? ('à ' ~ where) : '' }}
+    {{ parent() }} | Résultats pour {{ what }} {{ (where == 'Belgique') ? ('en ' ~ where) : 'à ' ~ where }}
 {% endblock %}
 
 {% block body %}
-    {%  for result in results %}
-        {{ result.id }}, {{ result.name }}, {{ result.description }}, {{ result.user.locality.postCode.postCode }}, {{ result.user.locality.postCode.municipality.name|capitalize }} </br>
-    {% endfor %}
+    <section class="heading listing categoryDetail">
+        <div class="wrapper">
+            <h1>
+                Résultat{{ providers|length > 1 ? 's' : '' }} pour </br>
+                <em>"{{ what }}"</em>
+            </h1>
+            <p>
+                Catégorie : </br>
+                <em>"{{ whichCategory.name }}"</em>
+            </p>
+            <p>
+                Où : </br>
+                <em>"{{ where }}"</em>
+            </p>
+        </div>
+    </section>
+    <section class="content listing categoryDetail">
+        <div class="wrapper">
+            <h2>Tous les prestataires</h2>
+            <div class="smallCard-container">
+                {% if providers|length == 0 %}
+                    <p>Aucun prestataire pour cette recherche</p>
+                {% else %}
+                    {% for provider in providers %}
+                        <div class="smallCard">
+                            <img src="{{ asset('/img/thumbnail_provider.jpg') }}" />
+                            <div class="smallCard-content">
+                                <p class="name">{{ provider.name }}</p>
+                                <p class="category">
+                                    {% for serviceCategory in provider.serviceCategories %}
+                                        {{ serviceCategory.name }}{{ loop.index != loop.last ? ', ' : '' }}
+                                    {% endfor %}
+                                </p>
+                                <p class="place">{{ provider.user.locality.postCode.postCode ~ ' ' ~ provider.user.locality.name|capitalize }}</p>
+                            </div>
+                            <span class="reviews">8<i class="fas fa-star"></i></span>
+                            {% if provider.promotions|length != 0 %}
+                                <span class="promos">Promos</span>
+                            {% endif %}
+                            {% if provider.internships|length > 0 %}
+                                <span class="internships">Stages</span>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="cta">
+                <a href="#">Voir plus</a>
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -39,13 +39,13 @@ class SearchController extends AbstractController
             $whichCategory = $form->getData()['c'];
             $where = $form->getData()['w'];
 
-            $results = $providerRepository->findBySearch($what, $whichCategory, $where);
+            $providers = $providerRepository->findBySearch($what, $whichCategory, $where);
 
             return $this->render('search/index.html.twig', [
                 'what' => $what,
                 'whichCategory' => $whichCategory,
                 'where' => $where,
-                'results' => $results
+                'providers' => $providers
             ]);
         }
 
