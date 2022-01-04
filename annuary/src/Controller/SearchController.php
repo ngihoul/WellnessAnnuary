@@ -41,7 +41,7 @@ class SearchController extends AbstractController
 
             $providers = $providerRepository->findBySearch($what, $whichCategory, $where);
 
-            return $this->render('search/index.html.twig', [
+            return $this->render('search/results.html.twig', [
                 'what' => $what,
                 'whichCategory' => $whichCategory,
                 'where' => $where,

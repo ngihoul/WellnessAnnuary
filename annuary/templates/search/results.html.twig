@@ -7,34 +7,23 @@
 {% if where is null %}
     {% set where = 'Belgique' %}
 {% endif %}
-{% if whichCategory is null %}
-    {% set whichCategory = 'Toutes les catégories' %}
-{% endif %}
 
 {% block title %}
     {{ parent() }} | Résultats pour {{ what }} {{ (where == 'Belgique') ? ('en ' ~ where) : 'à ' ~ where }}
 {% endblock %}
 
 {% block body %}
-    <section class="heading listing categoryDetail">
+    <section class="heading listing results">
         <div class="wrapper">
             <h1>
                 Résultat{{ providers|length > 1 ? 's' : '' }} pour </br>
                 <em>"{{ what }}"</em>
             </h1>
-            <p>
-                Catégorie : </br>
-                <em>"{{ whichCategory.name }}"</em>
-            </p>
-            <p>
-                Où : </br>
-                <em>"{{ where }}"</em>
-            </p>
         </div>
     </section>
-    <section class="content listing categoryDetail">
+    <section class="content listing results">
         <div class="wrapper">
-            <h2>Tous les prestataires</h2>
+            <h2>Les prestataires</h2>
             <div class="smallCard-container">
                 {% if providers|length == 0 %}
                     <p>Aucun prestataire pour cette recherche</p>

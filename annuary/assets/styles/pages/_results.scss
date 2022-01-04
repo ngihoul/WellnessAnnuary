@@ -1,0 +1,8 @@
+// Search results
+.results {
+  h1 {
+    &::after {
+      content: none;
+    }
+  }
+}

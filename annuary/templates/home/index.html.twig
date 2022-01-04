@@ -22,18 +22,20 @@
     <section class="highlightedCategory">
         <div class="wrapper">
             <h2>Catégorie du moment</h2>
-            <a href="{{ path('category_detail', { 'categoryName' : highlightedCategory.name }) }}">
-                <div class="bigCard">
+            <div class="bigCard">
+                <div class="img-container">
                     <img src="{{ asset('/img/category.jpg') }}" alt="Image {{ highlightedCategory.name }}" />
-                    <div class="bigCard-content">
-                        <h3>{{ highlightedCategory.name }}</h3>
-                        <p>{{ highlightedCategory.description }}</p>
-                        <div class="cta">
-                            <a href="{{ path('category_detail', { 'categoryName' : highlightedCategory.name }) }}">Découvrez les prestataires</a>
-                        </div>
-                    </div>
                 </div>
-            </a>
+                <div class="bigCard-content">
+                    <h3>{{ highlightedCategory.name }}</h3>
+                    <p>{{ highlightedCategory.description }}</p>
+                    <a href="{{ path('category_detail', { 'categoryName' : highlightedCategory.name }) }}">
+                        <div class="cta">
+                            Découvrez les prestataires
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
     <section class="lastSubscribers">

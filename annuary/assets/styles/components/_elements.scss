@@ -6,9 +6,18 @@
   background-color: $white;
   @include box-shadow(false);
 
+  &:hover {
+    @include box-shadow-hover();
+  }
+
+  .img-container {
+    height: 86px;
+    overflow: hidden;
+  }
+
   img {
+    display: block;
     width: 100%;
-    height:86px;
     border-radius: 10px 10px 0 0;
   }
 
@@ -20,15 +29,22 @@
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
   .bigCard {
     display: flex;
+    flex-wrap: nowrap;
+
+    .img-container {
+      width: 30%;
+      height: auto;
+      overflow: hidden;
+    }
 
     img {
-      min-width: 250px;
       height: 100%;
       border-radius: 10px 0 0 10px;
     }
 
     &-content {
       align-self: center;
+      width: 70%;
 
       p {
         padding: 1rem 0;
@@ -52,11 +68,8 @@
   margin: 2rem 0 1rem;
   padding: .5rem;
   @include box-shadow(false);
-
-  a {
-    color: $color-emphasis;
-    font-size: .7rem;
-  }
+  color: $color-emphasis;
+  font-size: .7rem;
 
   &:hover {
     @include box-shadow-hover();
@@ -70,11 +83,7 @@
 
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
   .cta {
-    margin: 0 auto;
-
-    a {
-      font-size: .7rem;
-    }
+    font-size: .7rem;
   }
 }
 

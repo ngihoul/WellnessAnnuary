@@ -1,12 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | Nos catégories de services{% endblock %}
+{% block title %}
+    {{ parent() }} | Nos catégories de services
+{% endblock %}
 
 {% block body %}
-    <div class="wrapper">
-        {% for category in categories %}
-            <h2>{{ category.name }}</h2>
-            <p>{{ category.description }}</p>
-        {% endfor %}
-    </div>
+    <section class="heading listing category">
+        <div class="wrapper">
+            <h1>Nos catégories</h1>
+        </div>
+    </section>
+    <section>
+        <div class="wrapper">
+            {% for category in categories %}
+                <div class="bigCard">
+                    <div class="img-container">
+                        <img src="{{ asset('/img/category.jpg') }}" alt="Image {{ category.name }}" />
+                    </div>
+                    <div class="bigCard-content">
+                        <h3>{{ category.name }}</h3>
+                        <p>{{ category.description }}</p>
+                        <a href="{{ path('category_detail', { 'categoryName' : category.name }) }}">
+                            <div class="cta">
+                                Découvrez les prestataires
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
