@@ -1,0 +1,104 @@
+// Details of a provider
+.providerDetail {
+
+  h1 {
+    padding-bottom: 1rem;
+    margin-bottom: 3.5rem;
+  }
+
+  &.heading {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  .logoContainer {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 80%;
+      min-width: 280px;
+      height: 1.5rem;
+      bottom: 7px;
+      left: -20px;
+      background-color: $color-emphasis;
+      border-radius: 0 1rem 1rem 0;
+      z-index: 9;
+    }
+  }
+
+  .logo {
+    position: relative;
+    display: block;
+    margin: -6rem auto 0;
+    height: 120px;
+    width: 120px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.25);
+    z-index: 99;
+  }
+
+  p {
+    margin: 2rem 0;
+  }
+
+  .contactIconsContainer {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .map {
+    margin: 2.5rem 0 0;
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+    }
+  }
+
+  &.navBar {
+    position: relative;
+    text-align: center;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1), 0px -2px 2px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+
+    li {
+      display: inline-block;
+
+      a {
+        position: relative;
+        display: block;
+        font-family: $font-heading;
+        text-transform: uppercase;
+        font-size: .8rem;
+        padding: 1rem 1rem;
+
+        &::after {
+          content: '⬤';
+          position: absolute;
+          top: calc(50% - 5px);
+          right: -7px;
+          font-size: .4rem;
+        }
+      }
+
+      &:last-child > a::after {
+        content: none;
+      }
+    }
+  }
+
+  .internship {
+
+    z-index: 0;
+    margin-top: -10px;
+  }
+}
+
+
+
+section.providerDetail.content {
+  padding-bottom: 1rem;
+}
