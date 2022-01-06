@@ -38,39 +38,40 @@
             </div>
         </div>
     </section>
-    <section class="lastSubscribers">
-        <div class="wrapper">
-            <h2>Derniers inscrits</h2>
-            <div class="smallCard-container">
-                {% for lastSubscriber in lastSubscribers %}
-                    <div class="smallCard">
-                        <img src="{{ asset('/img/thumbnail_provider.jpg') }}" />
-                        <div class="smallCard-content">
-                            <p class="name">{{ lastSubscriber.name }}</p>
-                            <p class="category">
-                                {% for serviceCategory in lastSubscriber.serviceCategories %}
-                                    {{ serviceCategory.name }}{{ loop.index != loop.last ? ', ' : '' }}
-                                {% endfor %}
-                            </p>
-                            <p class="place">{{ lastSubscriber.user.locality.postCode.postCode ~ ' ' ~ lastSubscriber.user.locality.name|capitalize }}</p>
-                        </div>
-                        <span class="reviews">8<i class="fas fa-star"></i></span>
-                        {% if lastSubscriber.promotions|length != 0 %}
-                            <span class="promos">Promos</span>
-                        {% endif %}
-                        {% if lastSubscriber.internships|length > 0 %}
-                            <span class="internships">Stages</span>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
     <section class="slider">
         <div class="wrapper">
             SLIDER
         </div>
     </section>
-
+    <section class="lastSubscribers">
+        <div class="wrapper">
+            <h2>Derniers inscrits</h2>
+            <div class="smallCard-container">
+                {% for lastSubscriber in lastSubscribers %}
+                    <a href="{{ path('provider_detail', { id : lastSubscriber.id } ) }}">
+                        <div class="smallCard">
+                            <img src="{{ asset('/img/thumbnail_provider.jpg') }}" />
+                            <div class="smallCard-content">
+                                <p class="name">{{ lastSubscriber.name }}</p>
+                                <p class="category">
+                                    {% for serviceCategory in lastSubscriber.serviceCategories %}
+                                        {{ serviceCategory.name }}{{ loop.index != loop.last ? ', ' : '' }}
+                                    {% endfor %}
+                                </p>
+                                <p class="place">{{ lastSubscriber.user.locality.postCode.postCode ~ ' ' ~ lastSubscriber.user.locality.name|capitalize }}</p>
+                            </div>
+                            <span class="reviews">8<i class="fas fa-star"></i></span>
+                            {% if lastSubscriber.promotions|length != 0 %}
+                                <span class="promos">Promos</span>
+                            {% endif %}
+                            {% if lastSubscriber.internships|length > 0 %}
+                                <span class="internships">Stages</span>
+                            {% endif %}
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 </main>
 {% endblock %}
