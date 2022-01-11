@@ -32,7 +32,7 @@
     flex-wrap: nowrap;
 
     .img-container {
-      width: 30%;
+      width: 20%;
       height: auto;
       overflow: hidden;
     }
@@ -44,9 +44,9 @@
 
     &-content {
       align-self: center;
-      width: 70%;
+      width: 100%;
 
-      p {
+      .description {
         padding: 1rem 0;
       }
     }

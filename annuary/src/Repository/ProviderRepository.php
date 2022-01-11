@@ -85,6 +85,7 @@ class ProviderRepository extends ServiceEntityRepository
         return $paginator = new Paginator($query, true);
     }
 
+    // TODO: revoir
     private function createQueryForLastSubscribers() {
         return $this->createQueryBuilder('p')
             ->join('p.user', 'u')
@@ -97,6 +98,7 @@ class ProviderRepository extends ServiceEntityRepository
             ->addSelect('m')
             ->join('p.serviceCategories', 'c')
             ->addSelect('c')
+            // To test : p.user.registeredOn
             ->orderBy('u.registeredOn', 'DESC')
             ->addOrderBy('p.name', 'ASC');
     }
