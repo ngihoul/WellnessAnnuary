@@ -35,6 +35,11 @@ h3 {
   margin-bottom: 1rem;
 }
 
+p {
+  font-size: 0.9rem;
+  color: $color-txt-normal;
+}
+
 section {
   padding: 2.5rem 0;
 
@@ -94,11 +99,6 @@ section {
       z-index: -1;
     }
   }
-}
-
-p {
-  font-size: 0.9rem;
-  color: $color-txt-normal;
 }
 
 @media screen and (min-width: map-get($responsive-table, "-lg")){

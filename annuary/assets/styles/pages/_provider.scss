@@ -1,4 +1,8 @@
 // Details of a provider
+section.providerDetail {
+  padding-top: 80px;
+}
+
 .providerDetail {
 
   h1 {
@@ -38,9 +42,10 @@
     box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.25);
     z-index: 99;
   }
-
-  p {
-    margin: 2rem 0;
+  .description {
+    p {
+      margin: 2rem 0;
+    }
   }
 
   .contactIconsContainer {
@@ -95,10 +100,62 @@
     z-index: 0;
     margin-top: -10px;
   }
+
+  .image img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
 }
-
-
 
 section.providerDetail.content {
   padding-bottom: 1rem;
 }
+
+// bigCard
+
+.bigCard-heading {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      bottom: -.5rem;
+      left: 0px;
+      background-color: $color-emphasis;
+  }
+
+  h3 {
+    width: 70%;
+    margin: 0 0 .5rem;
+
+    &::before {
+      content: none;
+    }
+  }
+
+  .price {
+    color: $color-txt-price;
+    font-weight: 500;
+    text-align: right;
+    width: 30%;
+  }
+
+  .date {
+    width: 100%;
+    font-size: .8rem;
+  }
+
+  .bigCard-content {
+    .description {
+      margin-top: 2rem;
+    }
+  }
+}
+

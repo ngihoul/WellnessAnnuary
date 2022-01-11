@@ -48,9 +48,11 @@
             <h2>Derniers inscrits</h2>
             <div class="smallCard-container">
                 {% for lastSubscriber in lastSubscribers %}
-                    <a href="{{ path('provider_detail', { id : lastSubscriber.id } ) }}">
-                        <div class="smallCard">
+                    <div class="smallCard">
+                        <a href="{{ path('provider_detail', { id : lastSubscriber.id } ) }}">
                             <img src="{{ asset('/img/thumbnail_provider.jpg') }}" />
+                        </a>
+                        <a href="{{ path('provider_detail', { id : lastSubscriber.id } ) }}">
                             <div class="smallCard-content">
                                 <p class="name">{{ lastSubscriber.name }}</p>
                                 <p class="category">
@@ -60,15 +62,17 @@
                                 </p>
                                 <p class="place">{{ lastSubscriber.user.locality.postCode.postCode ~ ' ' ~ lastSubscriber.user.locality.name|capitalize }}</p>
                             </div>
-                            <span class="reviews">8<i class="fas fa-star"></i></span>
-                            {% if lastSubscriber.promotions|length != 0 %}
-                                <span class="promos">Promos</span>
-                            {% endif %}
-                            {% if lastSubscriber.internships|length > 0 %}
-                                <span class="internships">Stages</span>
-                            {% endif %}
-                        </div>
-                    </a>
+                        </a>
+                        <span class="reviews">8<i class="fas fa-star"></i></span>
+                        {% if lastSubscriber.promotions|length != 0 %}
+                            <span class="promos">Promos</span>
+                        {% endif %}
+                        {% if lastSubscriber.internships|length > 0 %}
+                            <span class="internships">Stages</span>
+                        {% endif %}
+                        </a>
+                    </div>
+
                 {% endfor %}
             </div>
         </div>

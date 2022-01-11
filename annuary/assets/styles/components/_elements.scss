@@ -51,7 +51,6 @@
       }
     }
   }
-
 }
 
 // * Buttons * //
@@ -120,6 +119,7 @@
   }
 
   img {
+    display: block;
     width: 80px;
     height: 80px;
     border-radius: 10px 0 0 10px;
