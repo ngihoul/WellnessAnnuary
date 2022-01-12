@@ -15,6 +15,8 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ProviderRepository extends ServiceEntityRepository
 {
+    public const PAGINATOR_PER_PAGE = 3;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Provider::class);
@@ -27,7 +29,7 @@ class ProviderRepository extends ServiceEntityRepository
      * @param $where
      * @return mixed
      */
-    public function findBySearch($what = null, $whichCategory = 0, $where = null) {
+    public function findBySearch($what = null, $whichCategory = 0, $where = null, $offset = 0) {
         $queryBuilder = $this->createQueryBuilder('p')
             ->join('p.user', 'u')
             ->addSelect('u')
@@ -58,10 +60,13 @@ class ProviderRepository extends ServiceEntityRepository
                 ->setparameter(':whichCategory', $whichCategory);
         }
 
-        return $queryBuilder
+        $queryBuilder
             ->orderBy('p.name', 'ASC')
-            ->getQuery()
-            ->getResult();
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery();
+
+        return new Paginator($queryBuilder);
     }
 
     public function findForAutoCompletion($query) {
@@ -75,6 +80,7 @@ class ProviderRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    // TODO: revoir
     public function getLastSubscribers($start, $offset): Paginator
     {
         $query = $this->createQueryForLastSubscribers()

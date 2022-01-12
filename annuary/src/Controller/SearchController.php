@@ -27,7 +27,7 @@ class SearchController extends AbstractController
      * @param ProviderRepository $providerRepository
      * @return Response
      */
-    #[Route('/search', methods:["GET"])]
+    #[Route('/search', name: 'search', methods:["GET"])]
     public function search(Request $request, ProviderRepository $providerRepository): Response
     {
 
@@ -39,13 +39,16 @@ class SearchController extends AbstractController
             $whichCategory = $form->getData()['c'];
             $where = $form->getData()['w'];
 
-            $providers = $providerRepository->findBySearch($what, $whichCategory, $where);
+            $offset = max(0, $request->query->getInt('offset', 0));
+            $providers = $providerRepository->findBySearch($what, $whichCategory, $where, $offset);
 
             return $this->render('search/results.html.twig', [
                 'what' => $what,
                 'whichCategory' => $whichCategory,
                 'where' => $where,
-                'providers' => $providers
+                'providers' => $providers,
+                'previous' => $offset - ProviderRepository::PAGINATOR_PER_PAGE,
+                'next' => min(count($providers), $offset + ProviderRepository::PAGINATOR_PER_PAGE)
             ]);
         }
 
