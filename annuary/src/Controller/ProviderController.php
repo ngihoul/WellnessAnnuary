@@ -27,10 +27,15 @@ class ProviderController extends AbstractController
 
     #[Route('/{id}', name: 'provider_detail')]
     public function show($id) {
+        // Fetch data of targeted provider
         $provider = $this->providerRepository->find($id);
+
+        // Find similar providers according categories & localization
+        $similarProviders = $this->providerRepository->findSimilar($provider);
 
         return $this->render('provider/index.html.twig', [
             'provider' => $provider,
+            'similarProviders' => $similarProviders,
         ]);
     }
 }

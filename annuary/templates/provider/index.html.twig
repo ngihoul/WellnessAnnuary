@@ -190,4 +190,39 @@
             </div>
         </section>
     {% endif %}
+    {% if similarProviders|length > 0 %}
+        <section class="similarProviders">
+            <div class="wrapper">
+                <h2>Prestataires similaires</h2>
+                <div class="smallCard-container">
+                    {% for similarProvider in similarProviders %}
+                        <div class="smallCard">
+                            <a href="{{ path('provider_detail', { id : similarProvider.id } ) }}">
+                                <img src="{{ asset('/img/thumbnail_provider.jpg') }}" />
+                            </a>
+                            <a href="{{ path('provider_detail', { id : similarProvider.id } ) }}">
+                                <div class="smallCard-content">
+                                    <p class="name">{{ similarProvider.name }}</p>
+                                    <p class="category">
+                                        {% for serviceCategory in similarProvider.serviceCategories %}
+                                            {{ serviceCategory.name }}{{ loop.index != loop.last ? ', ' : '' }}
+                                        {% endfor %}
+                                    </p>
+                                    <p class="place">{{ similarProvider.user.locality.postCode.postCode ~ ' ' ~ similarProvider.user.locality.name|capitalize }}</p>
+                                </div>
+                            </a>
+                            <span class="reviews">8<i class="fas fa-star"></i></span>
+                            {% if similarProvider.promotions|length != 0 %}
+                                <span class="promos">Promos</span>
+                            {% endif %}
+                            {% if similarProvider.internships|length > 0 %}
+                                <span class="internships">Stages</span>
+                            {% endif %}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
 {% endblock %}

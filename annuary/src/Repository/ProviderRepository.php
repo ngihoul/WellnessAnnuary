@@ -102,4 +102,25 @@ class ProviderRepository extends ServiceEntityRepository
             ->orderBy('u.registeredOn', 'DESC')
             ->addOrderBy('p.name', 'ASC');
     }
+
+    public function findSimilar($provider) {
+        return $this->createQueryBuilder('p')
+            ->join('p.user', 'u')
+            ->join('u.locality', 'l')
+            ->join('l.postCode', 'pc')
+            ->join('pc.municipality', 'm')
+            ->join('p.serviceCategories', 'c')
+            // Municipality = Provider.municipality AND not the selected provider
+            ->andWhere('m.name = :municipality AND u.id != :id')
+            ->setParameter(':municipality', $provider->getUser()->getLocality()->getPostCode()->getMunicipality()->getName())
+            ->setParameter(':id', $provider->getUser()->getId())
+            // Category IS Provider.category (multiple categories)
+            ->andWhere($this->createQueryBuilder('c')->expr()->in('c', ':c'))
+            ->setParameter(':c', $provider->getServiceCategories())
+            ->orderBy('p.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+
+    }
 }
