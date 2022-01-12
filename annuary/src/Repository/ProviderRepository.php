@@ -24,12 +24,14 @@ class ProviderRepository extends ServiceEntityRepository
 
     /**
      * Query for search feature - By name OR/AND By Category OR/AND By localization
-     * @param $what
-     * @param $whichCategory
-     * @param $where
+     * @param null $what
+     * @param int $whichCategory
+     * @param null $where
+     * @param int $offset
      * @return mixed
      */
-    public function findBySearch($what = null, $whichCategory = 0, $where = null, $offset = 0) {
+    public function findBySearch($what = null, $whichCategory = 0, $where = null, $offset = 0): Paginator
+    {
         $queryBuilder = $this->createQueryBuilder('p')
             ->join('p.user', 'u')
             ->addSelect('u')
@@ -67,6 +69,19 @@ class ProviderRepository extends ServiceEntityRepository
             ->getQuery();
 
         return new Paginator($queryBuilder);
+    }
+
+    public function findByCategory($category, $offset): Paginator
+    {
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->join('p.serviceCategories', 'c')
+            ->andWhere('c.id = :id')
+            ->setParameter(':id', $category->getId())
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery();
+
+        return new Paginator($queryBuilder, true);
     }
 
     public function findForAutoCompletion($query) {

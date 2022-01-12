@@ -86,6 +86,42 @@
   }
 }
 
+// Pagination
+.pagination {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: .5rem;
+
+  .cta {
+    padding: 0;
+  }
+
+  .previous, .next {
+    flex-shrink: 1;
+    margin-top: 0;
+
+    a {
+      display: block;
+      font-size: .7rem;
+      letter-spacing: 0;
+      padding: .7rem;
+    }
+  }
+}
+
+@media screen and (min-width: map-get($responsive-table, '-lg')){
+  .pagination {
+    .previous, .next {
+      max-width: 50%;
+    }
+
+    .next {
+      margin-left: auto;
+    }
+  }
+}
+
 // * Small Cards - Last subscribers / Category detail * //
 .smallCard {
   display: flex;

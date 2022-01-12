@@ -11,14 +11,14 @@
             <p>{{ category.description }}</p>
         </div>
     </section>
-    <section class="content listing categoryDetail">
+    <section id="results" class="content listing categoryDetail">
         <div class="wrapper">
             <h2>Tous les prestataires</h2>
             <div class="smallCard-container">
                 {% if category.providers|length == 0 %}
                     <p>Aucun prestataire pour cette catégorie</p>
                 {% else %}
-                    {% for provider in category.providers %}
+                    {% for provider in providers %}
                         <a href="{{ path('provider_detail', { id : provider.id } ) }}">
                             <div class="smallCard">
                                 <img src="{{ asset('/img/thumbnail_provider.jpg') }}" />
@@ -43,8 +43,21 @@
                     {% endfor %}
                 {% endif %}
             </div>
-            <div class="cta">
-                <a href="#">Voir plus</a>
+            <div class="pagination">
+                {% if previous >= 0 %}
+                    <div class="cta previous">
+                        <a href="{{ path('category_detail', { categoryName: category.name, offset: previous}) }}#results">
+                            Précédents
+                        </a>
+                    </div>
+                {% endif %}
+                {% if next < providers|length %}
+                    <div class="cta next">
+                        <a href="{{ path('category_detail', { categoryName: category.name, offset: next}) }}#results">
+                            Suivants
+                        </a>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </section>

@@ -13,6 +13,10 @@
   }
 }
 
+section.categoryDetail.content{
+  padding-top: 80px;
+}
+
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
   .heading.listing {
     p {
