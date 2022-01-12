@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ServiceCategoryRepository;
 use App\Repository\ProviderRepository;
+use App\Repository\ImageRepository;
 use Symfony\Contracts\Cache\ItemInterface;
 
 class HomeController extends AbstractController
@@ -17,12 +18,14 @@ class HomeController extends AbstractController
     private EntityManagerInterface $entityManager;
     private ServiceCategoryRepository $serviceCategoryRepository;
     private ProviderRepository $providerRepository;
+    private ImageRepository $imageRepository;
     private TagAwareAdapterInterface $cache;
 
-    public function __construct(EntityManagerInterface $entityManager, ServiceCategoryRepository $serviceCategoryRepository, ProviderRepository $providerRepository, TagAwareAdapterInterface $cache) {
+    public function __construct(EntityManagerInterface $entityManager, ServiceCategoryRepository $serviceCategoryRepository, ProviderRepository $providerRepository, ImageRepository $imageRepository, TagAwareAdapterInterface $cache) {
         $this->entityManager = $entityManager;
         $this->serviceCategoryRepository = $serviceCategoryRepository;
         $this->providerRepository = $providerRepository;
+        $this->imageRepository = $imageRepository;
         $this->cache = $cache;
     }
 
@@ -54,14 +57,17 @@ class HomeController extends AbstractController
 
             // $item->tag(['provider']);
 
-            $lastSubscribers = $this->providerRepository->getLastSubscribers(0,4);
+        $lastSubscribers = $this->providerRepository->getLastSubscribers(0,4);
 
         // });
+
+        $images = $this->imageRepository->findAll();
 
 
         return $this->render('home/index.html.twig', [
             'highlightedCategory' => $highlightedCategory,
-            'lastSubscribers' => $lastSubscribers
+            'lastSubscribers' => $lastSubscribers,
+            'images' => $images,
         ]);
     }
 }

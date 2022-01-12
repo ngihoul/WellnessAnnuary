@@ -18,4 +18,27 @@ window.addEventListener('scroll', () => {
     } else {
         searchBtn.classList.add('hidden');
     }
-})
+});
+
+const swiper = new Swiper(".swiper", {
+    loop: true,
+    autoplay: {
+        delay: 3000,
+    },
+    effect: 'fade',
+    fadeEffect: {
+        crossFade: true
+    },
+
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+
+    pagination: {
+        el: ".swiper-pagination",
+        dynamicBullets: true,
+    },
+
+
+});

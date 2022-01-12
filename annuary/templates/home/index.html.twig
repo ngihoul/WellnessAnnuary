@@ -1,8 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     {{ encore_entry_script_tags('home') }}
+
 {% endblock %}
 
 {% block title %}
@@ -39,8 +46,17 @@
         </div>
     </section>
     <section class="slider">
-        <div class="wrapper">
-            SLIDER
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                {% for image in images %}
+                    <div class="swiper-slide">
+                        <img src="{{ images_directory ~ image.image }}"/>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-pagination"></div>
         </div>
     </section>
     <section class="lastSubscribers">
@@ -72,7 +88,6 @@
                         {% endif %}
                         </a>
                     </div>
-
                 {% endfor %}
             </div>
         </div>
