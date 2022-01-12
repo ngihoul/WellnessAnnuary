@@ -36,7 +36,6 @@ class ServiceCategoryController extends AbstractController
     #[Route('/{categoryName}', name: 'category_detail')]
     public function show($categoryName): Response
     {
-        // ?? Impossible to cache this data => $category is null
         $category = $this->serviceCategoryRepository->findOneBy(['name' => $categoryName]);
 
         if(!$category) {

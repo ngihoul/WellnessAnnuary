@@ -56,6 +56,7 @@ class Provider
     /**
      * @ORM\ManyToMany(targetEntity=ServiceCategory::class, inversedBy="providers")
      * @ORM\JoinTable(name="provider_category")
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $serviceCategories;
 

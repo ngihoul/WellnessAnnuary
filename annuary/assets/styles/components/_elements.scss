@@ -161,3 +161,24 @@
     margin: 0 auto;
   }
 }
+
+// Pils
+.bigPill {
+  display: inline-block;
+  border: 3px solid $color-cta;
+  border-radius: 5rem;
+  color: $color-cta;
+  font-weight: 500;
+  margin: .3rem;
+  padding: .3rem 0;
+
+  &:hover {
+    color: darken($color-cta, 10%);
+    transform: scale(1.1);
+  }
+
+  a {
+    font-size: .9rem;
+    padding: .5rem 1rem;
+  }
+}
