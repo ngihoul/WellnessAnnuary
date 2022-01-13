@@ -26,9 +26,15 @@
     color: $color-cta;
   }
 
+  .swiper-pagination-bullet {
+    background: $white;
+    opacity: 0.75;
+  }
+
   .swiper-pagination-bullet-active {
   background: $color-cta;
-}
+    opacity: 1;
+  }
 
 .swiper-slide img {
     display: block;
