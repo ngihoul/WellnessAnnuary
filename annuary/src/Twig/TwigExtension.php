@@ -12,6 +12,8 @@ use App\Repository\ServiceCategoryRepository;
 
 class TwigExtension extends AbstractExtension
 {
+    public const CATEGORIES_PER_COLUMN = 10;
+
     private ServiceCategoryRepository $serviceCategoryRepository;
     private Environment $twig;
     private TagAwareAdapterInterface $cache;
@@ -53,7 +55,7 @@ class TwigExtension extends AbstractExtension
         $categories = $this->serviceCategoryRepository->findBy([], ['name' => 'ASC']);
 
         $arraySize = count($categories);
-        $nbCategoriesPerColumn = 10;
+        $nbCategoriesPerColumn = self::CATEGORIES_PER_COLUMN;
 
         return $this->twig->render('fragments/_subMenuCategory.html.twig', [
             'categories' => $categories,
