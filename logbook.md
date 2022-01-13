@@ -75,16 +75,31 @@
     * Testing API with Postman
   * AJAX calls
 
+## 3rd January 2022
+* Making the search module accessible throughout the site
+
+## 4th January 2022
+* Optimization of search feature
+* Optimization of icons (using SVG instead of Fontawesome - too slow)
+* Factoring SCSS Header & Footer
+* Styling search section
+* Last subscribers feature
+
+## 6th January 2022
+* Creating provider page
+
+## 11th January 2022
+* Adding categories on provider page
+* Adding similar providers on provider page
+* Adding pagination to search results
+* Adding pagination to category detail page
+* Adding slider on homepage
+
+## 12th January 2022
+* Optimisation of category caching for the search form and menu
+* Mobile menu review
+
 ## Next to-do
-* Finish desktop webdesign via Figma (Phase 1 only)
-* Homepage
-  * Hero
-    * Search module
-      * Populate AJAX calls for autocompletion
-  * Slider
-* Category page
-  * List of the categories
-* Provider page
 * Improve messages management
 
 ### Remarks
