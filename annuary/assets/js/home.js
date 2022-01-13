@@ -20,6 +20,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// ** Slider with SwiperJS ** //
 const swiper = new Swiper(".swiper", {
     loop: true,
     autoplay: {
