@@ -39,7 +39,8 @@ header {
     width: 100vw;
     text-align: center;
     color: $color-txt-normal;
-    @include bg-gradient-white('menuBackground.png');
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'menuBackground.jpg') center no-repeat;
+    background-size: cover;
     overflow-x: hidden;
     transition: .5s;
     @include box-shadow(true);
@@ -146,7 +147,8 @@ header {
     margin-left: -100vw;
     text-align: center;
     color: $color-txt-normal;
-    @include bg-gradient-white('menuBackground.png');
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'searchBackground.jpg') center no-repeat;
+    background-size: cover;
     overflow-x: hidden;
     transition: margin .5s;
     @include box-shadow(true);
