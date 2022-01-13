@@ -203,6 +203,7 @@ header {
       width: 60%;
       background: none;
       box-shadow: none;
+      margin-left: 0;
 
       ul {
         padding-top: 0;
@@ -274,6 +275,8 @@ header {
       height: auto;
       width: 100%;
       margin-top: -500px;
+      margin-left: 0;
+      background: $white;
       @include box-shadow(false);
 
       h1 {
