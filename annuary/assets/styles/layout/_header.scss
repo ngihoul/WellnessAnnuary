@@ -13,7 +13,7 @@ header {
     min-height: 60px;
   }
 
-  // Button to open menu on Mobile
+  // * Button to open menu on Mobile * //
   .openMenu {
     @include header-icon('left');
   }
@@ -29,13 +29,14 @@ header {
     }
   }
 
-  // Sliding menu on Mobile
+  // * Sliding menu on Mobile * //
   .menu {
     position: fixed;
     top: 60px;
     left: 0;
+    margin-left: -100vw;
     height: 100%;
-    width: 0;
+    width: 100vw;
     text-align: center;
     color: $color-txt-normal;
     @include bg-gradient-white('menuBackground.png');
@@ -61,7 +62,7 @@ header {
       }
     }
 
-    // Dropdown for categories
+    // * Dropdown for categories * //
     .dropDown {
       overflow: hidden;
       height: 0;
@@ -78,9 +79,9 @@ header {
       }
     }
 
-    // Menu when active
+    // * Menu when active * //
     &.active {
-      width: 100vw;
+      margin-left: 0;
       transition: .5s;
 
       a, .menuFooter, .langMobile {
@@ -97,7 +98,7 @@ header {
       padding-left: .5rem;
     }
 
-    // Language menu on Mobile (inside menu)
+    // * Language menu on Mobile (inside menu) * //
     .langMobile {
 
       ul li {
@@ -115,7 +116,7 @@ header {
       }
     }
 
-    // Logo in menu on Mobile
+    // * Logo in menu on Mobile * //
     .menuFooter {
       position: relative;
       padding-top: 1.5rem;
@@ -135,32 +136,29 @@ header {
     }
   }
 
+  // * Searching module * //
   .searchMod {
     position: fixed;
     top: 60px;
     left: 0;
     height: 100%;
-    width: 0;
+    width: 100vw;
+    margin-left: -100vw;
     text-align: center;
     color: $color-txt-normal;
     @include bg-gradient-white('menuBackground.png');
     overflow-x: hidden;
-    transition: .5s;
+    transition: margin .5s;
     @include box-shadow(true);
 
     &.active {
-      width: 100vw;
+      margin-left: 0;
       padding: 0 20px;
-      transition: .5s;
-
-      & > * {
-        opacity: 1;
-        transition: opacity 1s;
-      }
+      transition: margin .5s;
     }
   }
 
-  // Search & Login Buttons on Mobile
+  // * Search & Login Buttons on Mobile * //
   .navBtn {
     @include header-icon('right');
 
@@ -173,13 +171,13 @@ header {
     }
   }
 
-  // Language menu on Desktop
+  // * Language menu on Desktop * //
   .lang {
     display: none;
   }
 }
 
-// Header - Desktop
+// ** Header - Desktop ** //
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
   header {
 
@@ -195,7 +193,7 @@ header {
       width: 20%;
       text-align: left;
     }
-    // NavBar
+    // * NavBar * //
     .menu {
       display: block;
       position: static;
