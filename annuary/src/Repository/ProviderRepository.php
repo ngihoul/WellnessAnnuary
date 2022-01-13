@@ -77,7 +77,7 @@ class ProviderRepository extends ServiceEntityRepository
             ->join('p.serviceCategories', 'c')
             ->join('p.user', 'u')
             ->andWhere('c.id = :id')
-            ->setParameter(':id', $category->getId())
+            ->setParameter(':id', $category)
             ->orderBy('u.registeredOn', 'DESC')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
