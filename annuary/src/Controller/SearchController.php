@@ -39,6 +39,10 @@ class SearchController extends AbstractController
             $whichCategory = $form->getData()['c'];
             $where = $form->getData()['w'];
 
+            if(null != $whichCategory) {
+                $whichCategory = (int) $whichCategory->getId();
+            }
+
             $offset = max(0, $request->query->getInt('offset', 0));
             $providers = $providerRepository->findBySearch($what, $whichCategory, $where, $offset);
 

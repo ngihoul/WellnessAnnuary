@@ -44,7 +44,7 @@ class ServiceCategoryController extends AbstractController
 
         // Paginator for providers in this category
         $offset = max(0, $request->query->getInt('offset', 0));
-        $providers = $this->providerRepository->findBycategory($category, $offset);
+        $providers = $this->providerRepository->findByCategory($category, $offset);
 
         if(!$category) {
             $this->addFlash('error', "La catégorie <em>\"$categoryName\"</em> n'existe pas");
