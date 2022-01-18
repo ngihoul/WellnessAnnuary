@@ -10,7 +10,6 @@ BREAKING_POINT_RESPONSIVE = (screenWidth >= 1140) ? (screenHeight/5) : (screenHe
 
 // * Display/hide searchBtn after scrolling on Mobile * //
 searchBtn.classList.add('hidden');
-console.log(BREAKING_POINT_RESPONSIVE);
 
 window.addEventListener('scroll', () => {
     if(window.scrollY > BREAKING_POINT_RESPONSIVE) {
@@ -40,6 +39,4 @@ const swiper = new Swiper(".swiper", {
         el: ".swiper-pagination",
         dynamicBullets: true,
     },
-
-
 });
