@@ -34,15 +34,10 @@ class ProviderRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('p')
             ->join('p.user', 'u')
-            ->addSelect('u')
             ->join('u.locality', 'l')
-            ->addSelect('l')
             ->join('l.postCode', 'pc')
-            ->addSelect('pc')
             ->join('pc.municipality', 'm')
-            ->addSelect('m')
-            ->join('p.serviceCategories', 'c')
-            ->addSelect('c');
+            ->join('p.serviceCategories', 'c');
 
         if($what) {
             $queryBuilder
@@ -97,7 +92,6 @@ class ProviderRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    // TODO: revoir
     public function getLastSubscribers($start, $offset): Paginator
     {
         $query = $this->createQueryForLastSubscribers()
@@ -108,20 +102,9 @@ class ProviderRepository extends ServiceEntityRepository
         return $paginator = new Paginator($query, true);
     }
 
-    // TODO: revoir
     private function createQueryForLastSubscribers() {
         return $this->createQueryBuilder('p')
             ->join('p.user', 'u')
-            ->addSelect('u')
-            ->join('u.locality', 'l')
-            ->addSelect('l')
-            ->join('l.postCode', 'pc')
-            ->addSelect('pc')
-            ->join('pc.municipality', 'm')
-            ->addSelect('m')
-            ->join('p.serviceCategories', 'c')
-            ->addSelect('c')
-            // To test : p.user.registeredOn
             ->orderBy('u.registeredOn', 'DESC')
             ->addOrderBy('p.name', 'ASC');
     }
@@ -143,7 +126,5 @@ class ProviderRepository extends ServiceEntityRepository
             ->orderBy('p.name', 'ASC')
             ->getQuery()
             ->getResult();
-
-
     }
 }
