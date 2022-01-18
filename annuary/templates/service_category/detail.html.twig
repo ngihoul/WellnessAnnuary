@@ -5,62 +5,64 @@
 {% endblock %}
 
 {% block body %}
-    <section class="heading listing categoryDetail">
-        <div class="wrapper">
-            <h1>{{ category.name }}</h1>
-            <p>{{ category.description }}</p>
-        </div>
-    </section>
-    <section id="results" class="content listing categoryDetail">
-        <div class="wrapper">
-            <h2>Tous les prestataires</h2>
-            <div class="smallCard-container">
-                {% if category.providers|length == 0 %}
-                    <p>Aucun prestataire pour cette catégorie</p>
-                {% else %}
-                    {% for provider in providers %}
-                        <a href="{{ path('provider_detail', { id : provider.id } ) }}">
-                            <div class="smallCard">
-                                <img loading="lazy" src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="Image {{ provider.name }}" />
-                                <div class="smallCard-content">
-                                    <p class="name">{{ provider.name }}</p>
-                                    <p class="category">
-                                        {% for serviceCategory in provider.serviceCategories %}
-                                            {{ serviceCategory.name }}{{ loop.index != loop.last ? ', ' : '' }}
-                                        {% endfor %}
-                                    </p>
-                                    <p class="place">{{ provider.user.locality.postCode.postCode ~ ' ' ~ provider.user.locality.name|capitalize }}</p>
+    <main>
+        <section class="heading listing categoryDetail">
+            <div class="wrapper">
+                <h1>{{ category.name }}</h1>
+                <p>{{ category.description }}</p>
+            </div>
+        </section>
+        <section id="results" class="content listing categoryDetail">
+            <div class="wrapper">
+                <h2>Tous les prestataires</h2>
+                <div class="smallCard-container">
+                    {% if category.providers|length == 0 %}
+                        <p>Aucun prestataire pour cette catégorie</p>
+                    {% else %}
+                        {% for provider in providers %}
+                            <a href="{{ path('provider_detail', { id : provider.id } ) }}">
+                                <div class="smallCard">
+                                    <img loading="lazy" src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="Image {{ provider.name }}" />
+                                    <div class="smallCard-content">
+                                        <p class="name">{{ provider.name }}</p>
+                                        <p class="category">
+                                            {% for serviceCategory in provider.serviceCategories %}
+                                                {{ serviceCategory.name }}{{ loop.index != loop.last ? ', ' : '' }}
+                                            {% endfor %}
+                                        </p>
+                                        <p class="place">{{ provider.user.locality.postCode.postCode ~ ' ' ~ provider.user.locality.name|capitalize }}</p>
+                                    </div>
+                                    <span class="reviews">8<i class="fas fa-star"></i></span>
+                                    {% if provider.promotions|length > 0 and provider.internships|length > 0 %}
+                                        <span class="smallPills-1 promos">Promos</span>
+                                        <span class="smallPills-2 internships">Stages</span>
+                                    {% elseif provider.promotions|length > 0 %}
+                                        <span class="smallPills-1 promos">Promos</span>
+                                    {% elseif provider.internships|length > 0 %}
+                                        <span class="smallPills-1 internships">Stages</span>
+                                    {% endif %}
                                 </div>
-                                <span class="reviews">8<i class="fas fa-star"></i></span>
-                                {% if provider.promotions|length > 0 and provider.internships|length > 0 %}
-                                    <span class="smallPills-1 promos">Promos</span>
-                                    <span class="smallPills-2 internships">Stages</span>
-                                {% elseif provider.promotions|length > 0 %}
-                                    <span class="smallPills-1 promos">Promos</span>
-                                {% elseif provider.internships|length > 0 %}
-                                    <span class="smallPills-1 internships">Stages</span>
-                                {% endif %}
-                            </div>
-                        </a>
-                    {% endfor %}
-                {% endif %}
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="pagination">
+                    {% if previous >= 0 %}
+                        <div class="cta previous">
+                            <a href="{{ path('category_detail', { categoryName: category.name, offset: previous}) }}#results">
+                                Précédents
+                            </a>
+                        </div>
+                    {% endif %}
+                    {% if next < providers|length %}
+                        <div class="cta next">
+                            <a href="{{ path('category_detail', { categoryName: category.name, offset: next}) }}#results">
+                                Suivants
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
-            <div class="pagination">
-                {% if previous >= 0 %}
-                    <div class="cta previous">
-                        <a href="{{ path('category_detail', { categoryName: category.name, offset: previous}) }}#results">
-                            Précédents
-                        </a>
-                    </div>
-                {% endif %}
-                {% if next < providers|length %}
-                    <div class="cta next">
-                        <a href="{{ path('category_detail', { categoryName: category.name, offset: next}) }}#results">
-                            Suivants
-                        </a>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 {% endblock %}

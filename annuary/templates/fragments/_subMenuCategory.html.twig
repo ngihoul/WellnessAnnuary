@@ -1,11 +1,11 @@
 <ul class="dropDown">
     {% for category in categories %}
         {% if loop.index0 % nbCategoriesPerColumn == 0 %}
-            <div class="column">
+            <span class="column">
         {% endif %}
                 <li><a href="{{ path('category_detail', { 'categoryName': category.name|lower }) }}">{{ category.name }}</a></li>
         {% if loop.index % nbCategoriesPerColumn == 0 or loop.last %}
-            </div>
+            </span>
         {% endif %}
     {% endfor %}
 </ul>

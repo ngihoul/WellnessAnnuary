@@ -107,7 +107,8 @@ footer {
     }
 
     .copyright {
-        padding-top: .5rem;
+      position: relative;
+      padding-top: .5rem;
 
       &::before {
         content: '';
