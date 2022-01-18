@@ -16,7 +16,7 @@
     <section class="content providerDetail">
         <div class="wrapper">
             <div class="logoContainer">
-                <img class="logo" src="{{ asset('img/logoProvider.jpg') }}" alt="" title="" />
+                <img class="logo" src="{{ asset('img/logoProvider.jpg') }}" alt="Image {{ provider.name }}" title="" />
             </div>
             <div class="description">
                 <p>{{ provider.description }}</p>
@@ -33,7 +33,6 @@
             </div>
             <h2>Coordonnées</h2>
             <div class="contactIconsContainer">
-
                 <span class="contactIcon website">
                     <a target="_blank" href="{{ 'http://' ~ provider.website }}">
                         <svg width="58" height="74" viewBox="0 0 58 74" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -165,7 +164,7 @@
                 <div class="smallCard-container">
                     {% for promotion in provider.promotions %}
                         <div class="smallCard">
-                            <img src="{{ asset('/img/thumbnail_provider.jpg') }}" />
+                            <img src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="Image {{ provider.name }} stage" />
                             <div class="smallCard-content">
                                 <p class="name">{{ promotion.name }}</p>
                                 <p class="category">{{ promotion.description }}</p>
@@ -183,7 +182,7 @@
                 <div class="images-container">
                     {% for image in provider.images %}
                         <div class="image">
-                            <img loading="lazy" src="{{ images_directory ~ image.image }}" alt="" title="">
+                            <img loading="lazy" src="{{ images_directory ~ image.image }}" alt="Photo {{ provider.name }}" title="">
                         </div>
                     {% endfor %}
                 </div>
@@ -198,7 +197,7 @@
                     {% for similarProvider in similarProviders %}
                         <div class="smallCard">
                             <a href="{{ path('provider_detail', { id : similarProvider.id } ) }}">
-                                <img src="{{ asset('/img/thumbnail_provider.jpg') }}" />
+                                <img src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="{{ similarProvider.name }}" />
                             </a>
                             <a href="{{ path('provider_detail', { id : similarProvider.id } ) }}">
                                 <div class="smallCard-content">
