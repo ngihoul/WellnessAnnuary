@@ -16,7 +16,7 @@
     <section class="content providerDetail">
         <div class="wrapper">
             <div class="logoContainer">
-                <img class="logo" src="{{ asset('img/logoProvider.jpg') }}" alt="Image {{ provider.name }}" title="" />
+                <img loading="lazy" class="logo" src="{{ asset('img/logoProvider.jpg') }}" alt="Image {{ provider.name }}" title="" />
             </div>
             <div class="description">
                 <p>{{ provider.description }}</p>
@@ -142,7 +142,7 @@
                 {% for internship in provider.internships %}
                     <div class="bigCard internship">
                         <div class="img-container">
-                            <img src="{{ asset('/img/category.jpg') }}" alt="Image {{ internship.name }}" />
+                            <img loading="lazy" src="{{ asset('/img/category.jpg') }}" alt="Image {{ internship.name }}" />
                         </div>
                         <div class="bigCard-content">
                             <div class="bigCard-heading">
@@ -164,7 +164,7 @@
                 <div class="smallCard-container">
                     {% for promotion in provider.promotions %}
                         <div class="smallCard">
-                            <img src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="Image {{ provider.name }} stage" />
+                            <img loading="lazy" src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="Image {{ provider.name }} stage" />
                             <div class="smallCard-content">
                                 <p class="name">{{ promotion.name }}</p>
                                 <p class="category">{{ promotion.description }}</p>
@@ -197,7 +197,7 @@
                     {% for similarProvider in similarProviders %}
                         <div class="smallCard">
                             <a href="{{ path('provider_detail', { id : similarProvider.id } ) }}">
-                                <img src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="{{ similarProvider.name }}" />
+                                <img loading="lazy" src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="{{ similarProvider.name }}" />
                             </a>
                             <a href="{{ path('provider_detail', { id : similarProvider.id } ) }}">
                                 <div class="smallCard-content">

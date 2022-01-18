@@ -31,7 +31,7 @@
             <h2>Catégorie du moment</h2>
             <div class="bigCard">
                 <div class="img-container">
-                    <img src="{{ asset('/img/category.jpg') }}" alt="Image {{ highlightedCategory.name }}" />
+                    <img loading="lazy" src="{{ asset('/img/category.jpg') }}" alt="Image {{ highlightedCategory.name }}" />
                 </div>
                 <div class="bigCard-content">
                     <h3>{{ highlightedCategory.name }}</h3>
@@ -50,7 +50,7 @@
             <div class="swiper-wrapper">
                 {% for image in images %}
                     <div class="swiper-slide">
-                        <img src="{{ images_directory ~ image.image }}" alt="Image Slider {{ loop.index }}"/>
+                        <img loading="lazy" src="{{ images_directory ~ image.image }}" alt="Image Slider {{ loop.index }}"/>
                     </div>
                 {% endfor %}
             </div>
@@ -66,7 +66,7 @@
                 {% for lastSubscriber in lastSubscribers %}
                     <div class="smallCard">
                         <a href="{{ path('provider_detail', { id : lastSubscriber.id } ) }}">
-                            <img src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="Image {{ lastSubscriber.name }}" />
+                            <img loading="lazy" src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="Image {{ lastSubscriber.name }}" />
                         </a>
                         <a href="{{ path('provider_detail', { id : lastSubscriber.id } ) }}">
                             <div class="smallCard-content">
