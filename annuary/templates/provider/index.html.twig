@@ -211,11 +211,13 @@
                                 </div>
                             </a>
                             <span class="reviews">8<i class="fas fa-star"></i></span>
-                            {% if similarProvider.promotions|length != 0 %}
-                                <span class="promos">Promos</span>
-                            {% endif %}
-                            {% if similarProvider.internships|length > 0 %}
-                                <span class="internships">Stages</span>
+                            {% if similarProvider.promotions|length > 0 and similarProvider.internships|length > 0 %}
+                                <span class="smallPills-1 promos">Promos</span>
+                                <span class="smallPills-2 internships">Stages</span>
+                            {% elseif similarProvider.promotions|length > 0 %}
+                                <span class="smallPills-1 promos">Promos</span>
+                            {% elseif similarProvider.internships|length > 0 %}
+                                <span class="smallPills-1 internships">Stages</span>
                             {% endif %}
                             </a>
                         </div>

@@ -161,24 +161,6 @@
     border-radius: 10px 0 0 10px;
   }
 
-  .promos, .internships {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    border: 2px solid $color-cta;
-    border-radius: 50px;
-    padding: 0 10px;
-    font-size: .6rem;
-    font-weight: bold;
-    color: $color-cta;
-    min-width: 70px;
-    text-align: center;
-  }
-
-  .internships {
-    bottom: 27px;
-  }
-
   .reviews {
     position: absolute;
     right: 5px;
@@ -199,6 +181,26 @@
 }
 
 // Pils
+@for $i from 1 through 2 {
+  .smallPills-#{$i} {
+    position: absolute;
+    @if $i == 1 {
+      bottom: 5px;
+    } @else {
+      bottom: 27px;
+    }
+    right: 5px;
+    border: 2px solid $color-cta;
+    border-radius: 50px;
+    padding: 0 10px;
+    font-size: .6rem;
+    font-weight: bold;
+    color: $color-cta;
+    min-width: 70px;
+    text-align: center;
+  }
+}
+
 .bigPill {
   display: inline-block;
   border: 3px solid $color-cta;
