@@ -73,6 +73,7 @@ class UserType extends AbstractType
             ])
             ->add('postCode', TextType::class, [
                 'label' => 'Code postal',
+                'mapped' => false,
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

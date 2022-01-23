@@ -8,7 +8,7 @@ label {
   padding-left: 1rem;
 }
 
-input, select, button {
+input, select, button, textarea {
   display: block;
   width: 100%;
   padding: .4rem;
@@ -48,6 +48,10 @@ input, select, button {
       border: 1px solid darken($color-emphasis, 10%);
     }
   }
+}
+
+textarea {
+  min-height: 150px;
 }
 
 // Registration form
