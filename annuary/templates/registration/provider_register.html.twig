@@ -20,25 +20,27 @@
         <div class="wrapper">
             {{ form_start(form) }}
             <fieldset class="form-provider">
-                <legend>Données de votre société</legend>
+                <legend>Votre société</legend>
                 <div class="form-name">
                     {{ form_row(form.name) }}
                 </div>
-                <div class="form-website">
-                    {{ form_row(form.website) }}
-                </div>
-                <div class="form-phoneNumber">
-                    {{ form_row(form.phoneNumber) }}
-                </div>
-                <div class="form-VTANumber">
-                    {{ form_row(form.VTANumber) }}
+                <div class="form-provider-contact">
+                    <div class="form-website">
+                        {{ form_row(form.website) }}
+                    </div>
+                    <div class="form-phoneNumber">
+                        {{ form_row(form.phoneNumber) }}
+                    </div>
+                    <div class="form-VTANumber">
+                        {{ form_row(form.VTANumber) }}
+                    </div>
                 </div>
                 <div class="form-description">
                     {{ form_row(form.description) }}
                 </div>
             </fieldset>
             <fieldset class="form-user">
-                <legend>Données utilisateur</legend>
+                <legend>Vos données</legend>
                 {{ form_row(form.user.email) }}
                 <div class="form-password">
                     <div class="form-password-password">

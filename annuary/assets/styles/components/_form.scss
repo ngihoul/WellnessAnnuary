@@ -54,44 +54,75 @@ textarea {
   min-height: 150px;
 }
 
-// Registration form
-.form-address {
-  display: flex;
-  flex-wrap: wrap;
+fieldset {
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  border: 1px solid lighten($color-txt-normal, 50%);
 
-  // Address
-  &-street {
-    width: 70%;
-    padding-right: .5rem;
-  }
-
-  &-locality {
-    width: 70%;
-    padding-left: .5rem;
-  }
-
-  &-number {
-    width: 30%;
-    padding-left: .5rem;
-  }
-
-  &-postcode {
-    width: 30%;
-    padding-right: .5rem;
+  legend {
+    font-family: $font-heading;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: $color-txt-normal;
+    padding: 0 1rem;
   }
 }
 
-.form-password {
-  display: flex;
-  flex-wrap: wrap;
+@media screen and (min-width: map-get($responsive-table, "-lg")) {
+  // Registration form
+  .form-provider-contact {
+    display: flex;
 
-  &-password {
-    width: 50%;
-    padding-right: .5rem;
+    & > div {
+      width: 33.33%;
+      padding-right: .5rem;
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
   }
 
-  &-confirmPassword {
-    width: 50%;
-    padding-right: .5rem;
+  .form-address {
+    display: flex;
+    flex-wrap: wrap;
+
+    // Address
+    &-street {
+      width: 70%;
+      padding-right: .5rem;
+    }
+
+    &-locality {
+      width: 70%;
+      padding-left: .5rem;
+    }
+
+    &-number {
+      width: 30%;
+      padding-left: .5rem;
+    }
+
+    &-postcode {
+      width: 30%;
+      padding-right: .5rem;
+    }
+  }
+
+  .form-password {
+    display: flex;
+    flex-wrap: wrap;
+
+    &-password {
+      width: 50%;
+      padding-right: .5rem;
+    }
+
+    &-confirmPassword {
+      width: 50%;
+      padding-right: .5rem;
+    }
   }
 }
+
+
