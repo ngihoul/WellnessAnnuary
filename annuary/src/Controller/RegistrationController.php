@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Provider;
 use App\Entity\User;
-use App\Form\RegistrationFormType;
+use App\Form\ProviderType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,27 +26,29 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-    #[Route('/register', name: 'app_register')]
+    #[Route('/register/provider', name: 'registration_provider')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $provider = new Provider();
+        $form = $this->createForm(ProviderType::class, $provider);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = new User();
+            $user = $provider->getUser();
             // encode the plain password
             $user->setPassword(
             $userPasswordHasher->hashPassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
 
-            $entityManager->persist($user);
+            $entityManager->persist($provider);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $provider,
                 (new TemplatedEmail())
                     ->from(new Address('ngihoul@hotmail.com', 'Bien-Être'))
                     ->to($user->getEmail())
@@ -57,8 +60,8 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+        return $this->render('registration/provider_register.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 

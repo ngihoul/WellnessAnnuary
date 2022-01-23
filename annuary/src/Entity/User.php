@@ -63,11 +63,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $banned;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $registrationConfirmed;
-
-    /**
      * @ORM\OneToOne(targetEntity=Provider::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $provider;

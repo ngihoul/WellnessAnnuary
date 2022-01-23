@@ -49,3 +49,45 @@ input, select, button {
     }
   }
 }
+
+// Registration form
+.form-address {
+  display: flex;
+  flex-wrap: wrap;
+
+  // Address
+  &-street {
+    width: 70%;
+    padding-right: .5rem;
+  }
+
+  &-locality {
+    width: 70%;
+    padding-left: .5rem;
+  }
+
+  &-number {
+    width: 30%;
+    padding-left: .5rem;
+  }
+
+  &-postcode {
+    width: 30%;
+    padding-right: .5rem;
+  }
+}
+
+.form-password {
+  display: flex;
+  flex-wrap: wrap;
+
+  &-password {
+    width: 50%;
+    padding-right: .5rem;
+  }
+
+  &-confirmPassword {
+    width: 50%;
+    padding-right: .5rem;
+  }
+}
