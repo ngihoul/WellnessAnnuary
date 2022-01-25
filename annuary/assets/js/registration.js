@@ -13,6 +13,8 @@ const fetchAndDisplayAutoCompletion = (field) => {
                 }).then((data) => {
                 displayLocality(localityField, data);
             });
+        } else {
+            localityField.innerHTML = "";
         }
     });
 }

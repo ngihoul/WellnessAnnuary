@@ -11,57 +11,57 @@
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
-    <section class="heading">
+    <section class="heading registration">
         <div class="wrapper">
-            <h1>S'inscrire</h1>
+            <h1>Inscription</h1>
         </div>
     </section>
     <section class="form-registration">
         <div class="wrapper">
-            {{ form_start(form) }}
             <h2>Votre société</h2>
-            <div class="form-name">
-                {{ form_row(form.name) }}
-            </div>
-            <div class="form-provider-contact">
-                <div class="form-website">
-                    {{ form_row(form.website) }}
+            {{ form_start(form) }}
+                <div class="form-name">
+                    {{ form_row(form.name) }}
                 </div>
-                <div class="form-phoneNumber">
-                    {{ form_row(form.phoneNumber) }}
+                <div class="form-provider-contact">
+                    <div class="form-website">
+                        {{ form_row(form.website) }}
+                    </div>
+                    <div class="form-phoneNumber">
+                        {{ form_row(form.phoneNumber) }}
+                    </div>
+                    <div class="form-VTANumber">
+                        {{ form_row(form.VTANumber) }}
+                    </div>
                 </div>
-                <div class="form-VTANumber">
-                    {{ form_row(form.VTANumber) }}
+                <div class="form-description">
+                    {{ form_row(form.description) }}
                 </div>
-            </div>
-            <div class="form-description">
-                {{ form_row(form.description) }}
-            </div>
-            <h2>Vos données</h2>
-            {{ form_row(form.user.email) }}
-            <div class="form-password">
-                <div class="form-password-password">
-                    {{ form_row(form.user.password) }}
+                <h2>Vos données</h2>
+                {{ form_row(form.user.email) }}
+                <div class="form-password">
+                    <div class="form-password-password">
+                        {{ form_row(form.user.password) }}
+                    </div>
+                    <div class="form-password-confirmPassword">
+                        {{ form_row(form.user.confirmPassword) }}
+                    </div>
                 </div>
-                <div class="form-password-confirmPassword">
-                    {{ form_row(form.user.confirmPassword) }}
+                <div class="form-address">
+                    <div class="form-address-street">
+                        {{ form_row(form.user.addressStreet) }}
+                    </div>
+                    <div class="form-address-number">
+                        {{ form_row(form.user.addressNumber) }}
+                    </div>
+                    <div class="form-address-postcode">
+                        {{ form_row(form.user.postCode) }}
+                    </div>
+                    <div class="form-address-locality">
+                        {{ form_row(form.user.locality) }}
+                    </div>
                 </div>
-            </div>
-            <div class="form-address">
-                <div class="form-address-street">
-                    {{ form_row(form.user.addressStreet) }}
-                </div>
-                <div class="form-address-number">
-                    {{ form_row(form.user.addressNumber) }}
-                </div>
-                <div class="form-address-postcode">
-                    {{ form_row(form.user.postCode) }}
-                </div>
-                <div class="form-address-locality">
-                    {{ form_row(form.user.locality) }}
-                </div>
-            </div>
-            {{ form_row(form.user.submit) }}
+                {{ form_row(form.user.submit) }}
             {{ form_end(form) }}
         </div>
     </section>
