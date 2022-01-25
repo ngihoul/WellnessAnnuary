@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('registration') }}
+{% endblock %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+    <section class="heading">
+        <div class="wrapper">
+            <h1>S'inscrire</h1>
+        </div>
+    </section>
+    <section class="form-registration">
+        <div class="wrapper">
+            {{ form_start(form) }}
+            <fieldset class="form-user">
+                <legend>Vos données</legend>
+                <div class="form-customer">
+                    <div class="form-customer-lastName">
+                        {{ form_row(form.lastName) }}
+                    </div>
+                    <div class="form-customer-firstName">
+                        {{ form_row(form.firstName) }}
+                    </div>
+                </div>
+                <div class="form-mail">
+                    {{ form_row(form.user.email) }}
+                </div>
+                <div class="form-address">
+                    <div class="form-address-street">
+                        {{ form_row(form.user.addressStreet) }}
+                    </div>
+                    <div class="form-address-number">
+                        {{ form_row(form.user.addressNumber) }}
+                    </div>
+                    <div class="form-address-postcode">
+                        {{ form_row(form.user.postCode) }}
+                    </div>
+                    <div class="form-address-locality">
+                        {{ form_row(form.user.locality) }}
+                    </div>
+                </div>
+                <div class="form-password">
+                    <div class="form-password-password">
+                        {{ form_row(form.user.password) }}
+                    </div>
+                    <div class="form-password-confirmPassword">
+                        {{ form_row(form.user.confirmPassword) }}
+                    </div>
+                </div>
+            </fieldset>
+            {{ form_row(form.user.agreeTerms) }}
+            {{ form_row(form.user.submit) }}
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

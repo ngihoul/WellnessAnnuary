@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Provider;
 use App\Entity\User;
+use App\Entity\Provider;
 use App\Form\ProviderType;
+use App\Entity\Customer;
+use App\Form\CustomerType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,15 +28,30 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-    #[Route('/register/provider', name: 'registration_provider')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
+    #[Route('/register/{typeOfUser}', name: 'registration_provider')]
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserRepository $userRepository, $typeOfUser): Response
     {
-        $provider = new Provider();
-        $form = $this->createForm(ProviderType::class, $provider);
+        // Check whether customer or provider form should be displayed.
+        $typeOfUser = strtolower($typeOfUser);
+
+        // $subUser = Provider or Customer Object
+        if($typeOfUser == 'provider') {
+            $subUser = new Provider();
+            $form = $this->createForm(ProviderType::class, $subUser);
+            $formTemplate = 'registration/provider_register.html.twig';
+        } elseif ($typeOfUser == 'customer') {
+            $subUser = new Customer();
+            $form = $this->createForm(CustomerType::class, $subUser);
+            $formTemplate = 'registration/customer_register.html.twig';
+        } else {
+            $this->addFlash('error', 'Cette page n\'existe pas');
+            return $this->redirectToRoute('home');
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $provider->getUser();
+            $user = $subUser->getUser();
 
             // Check if email already used by a registered user in DB
             $userExist = $userRepository->findOneBy(['email' => $user->getEmail()]);
@@ -70,7 +87,7 @@ class RegistrationController extends AbstractController
             );
 
             // Save data in DB
-            $entityManager->persist($provider);
+            $entityManager->persist($subUser);
             $entityManager->flush();
 
             // Generate a signed url and email it to the user
@@ -86,7 +103,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('registration/provider_register.html.twig', [
+        return $this->render($formTemplate, [
             'form' => $form->createView(),
         ]);
     }
