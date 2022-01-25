@@ -1,3 +1,6 @@
+const postCode = document.getElementById('provider_user_postCode') || document.getElementById('customer_user_postCode');
+const localityField = document.getElementById('provider_user_locality') || document.getElementById('customer_user_locality');
+
 const fetchAndDisplayAutoCompletion = (field) => {
     field.addEventListener('input', () => {
         if(field.value.length == 4) {
@@ -8,23 +11,23 @@ const fetchAndDisplayAutoCompletion = (field) => {
                     }
                     return response.json();
                 }).then((data) => {
-                displayLocality(data);
+                displayLocality(localityField, data);
             });
         }
     });
 }
 
-const displayLocality = (data) => {
-    const localityField = document.getElementById('registration_form_locality');
+const displayLocality = (localityField, data) => {
     localityField.innerHTML = "";
     data.forEach((element) => {
         localityField.innerHTML += `<option value="${element.id}">${element.locality}</option>`;
     });
 }
 
-const postCode = document.getElementById('registration_form_postCode');
-const localityField = document.getElementById('registration_form_locality');
+
 // Delete all options in Locality <select>
 localityField.innerHTML = "";
 // Display Locality in relation with the postCode typed by the user
 fetchAndDisplayAutoCompletion(postCode);
+
+console.log(localityField);
