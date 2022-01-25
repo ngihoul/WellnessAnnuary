@@ -20,13 +20,13 @@ class CustomerType extends AbstractType
     {
         $builder
             ->add('lastName', TextType::class, [
-
+                'label' => 'Nom de famille'
             ])
             ->add('firstName', TextType::class, [
-
+                'label' => 'Prénom'
             ])
             ->add('newsletter', CheckboxType::class, [
-
+                'label' => 'Souhaitez-vous vous inscrire à notre super newsletter ?'
             ])
             ->add('user', UserType::class)
         ;

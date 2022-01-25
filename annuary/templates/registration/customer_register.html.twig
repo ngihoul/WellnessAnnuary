@@ -19,43 +19,41 @@
     <section class="form-registration">
         <div class="wrapper">
             {{ form_start(form) }}
-            <fieldset class="form-user">
-                <legend>Vos données</legend>
-                <div class="form-customer">
-                    <div class="form-customer-lastName">
-                        {{ form_row(form.lastName) }}
-                    </div>
-                    <div class="form-customer-firstName">
-                        {{ form_row(form.firstName) }}
-                    </div>
+            <h2>Vos données</h2>
+            <div class="form-customer">
+                <div class="form-customer-lastName">
+                    {{ form_row(form.lastName) }}
                 </div>
-                <div class="form-mail">
-                    {{ form_row(form.user.email) }}
+                <div class="form-customer-firstName">
+                    {{ form_row(form.firstName) }}
                 </div>
-                <div class="form-address">
-                    <div class="form-address-street">
-                        {{ form_row(form.user.addressStreet) }}
-                    </div>
-                    <div class="form-address-number">
-                        {{ form_row(form.user.addressNumber) }}
-                    </div>
-                    <div class="form-address-postcode">
-                        {{ form_row(form.user.postCode) }}
-                    </div>
-                    <div class="form-address-locality">
-                        {{ form_row(form.user.locality) }}
-                    </div>
+            </div>
+            <div class="form-mail">
+                {{ form_row(form.user.email) }}
+            </div>
+            <div class="form-address">
+                <div class="form-address-street">
+                    {{ form_row(form.user.addressStreet) }}
                 </div>
-                <div class="form-password">
-                    <div class="form-password-password">
-                        {{ form_row(form.user.password) }}
-                    </div>
-                    <div class="form-password-confirmPassword">
-                        {{ form_row(form.user.confirmPassword) }}
-                    </div>
+                <div class="form-address-number">
+                    {{ form_row(form.user.addressNumber) }}
                 </div>
-            </fieldset>
-            {{ form_row(form.user.agreeTerms) }}
+                <div class="form-address-postcode">
+                    {{ form_row(form.user.postCode) }}
+                </div>
+                <div class="form-address-locality">
+                    {{ form_row(form.user.locality) }}
+                </div>
+            </div>
+            <div class="form-password">
+                <div class="form-password-password">
+                    {{ form_row(form.user.password) }}
+                </div>
+                <div class="form-password-confirmPassword">
+                    {{ form_row(form.user.confirmPassword) }}
+                </div>
+            </div>
+            {{ form_row(form.newsletter) }}
             {{ form_row(form.user.submit) }}
             {{ form_end(form) }}
         </div>

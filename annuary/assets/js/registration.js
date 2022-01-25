@@ -29,5 +29,3 @@ const displayLocality = (localityField, data) => {
 localityField.innerHTML = "";
 // Display Locality in relation with the postCode typed by the user
 fetchAndDisplayAutoCompletion(postCode);
-
-console.log(localityField);

@@ -75,14 +75,14 @@ class UserType extends AbstractType
                 'label' => 'Code postal',
                 'mapped' => false,
             ])
-            ->add('agreeTerms', CheckboxType::class, [
+/*            ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
-            ])
+            ])*/
             ->add('submit', SubmitType::class, [
                 'label' => 'Direction le paradis !',
             ])
