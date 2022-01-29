@@ -22,17 +22,27 @@ class ProviderType extends AbstractType
                 'label' => 'Nom',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Introduisez au moins 2 carectères',
+                        'message' => 'Introduisez un nom de société',
                     ]),
                     new Length([
-                        'min' => 2,
+                        'min' => 1,
                         'minMessage' => 'Introduisez un nom de société avec au moins {{ limit }} caractères',
                         'max' => 255,
                     ]),
                 ],
             ])
             ->add('website', UrlType::class, [
-                'label' => 'Site internet'
+                'label' => 'Site internet',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Introduisez une adresse internet',
+                    ]),
+                    new Length([
+                        'min' => 9,
+                        'minMessage' => 'Introduisez une adresse internet avec au moins {{ limit }} caractères',
+                        'max' => 255,
+                    ]),
+                ],
             ])
             ->add('phoneNumber', TextType::class, [
                 'label' => 'Téléphone',
@@ -51,9 +61,22 @@ class ProviderType extends AbstractType
             ])
             ->add('VTANumber', TextType::class, [
                 'label' => 'Numéro de TVA',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Introduisez un numéro de TVA valable',
+                    ]),
+                    new Length([
+                        // Min for VTA in Belgium
+                        'min' => 10,
+                        'minMessage' => 'Introduisez un numéro TVA avec au moins {{ limit }} caractères',
+                        // Maximum for longest VTA number in the world
+                        'max' => 15,
+                    ]),
+                ],
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
+                'required' => false,
             ])
             ->add('user', UserType::class)
         ;
