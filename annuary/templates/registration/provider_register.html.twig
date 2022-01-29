@@ -13,11 +13,14 @@
     {% endfor %}
     <section class="heading registration">
         <div class="wrapper">
-            <h1>Inscription</h1>
+            <h1>Inscription<br>Professionnel</h1>
         </div>
     </section>
     <section class="form-registration">
         <div class="wrapper">
+            <div class="disclamer">
+                <p>Si vous êtes un particulier, inscrivez-vous via <a href="{{ path('registration', { 'typeOfUser' : 'customer' }) }}">ce formulaire</a></p>
+            </div>
             <h2>Votre société</h2>
             {{ form_start(form) }}
                 <div class="form-name">
@@ -39,14 +42,6 @@
                 </div>
                 <h2>Vos données</h2>
                 {{ form_row(form.user.email) }}
-                <div class="form-password">
-                    <div class="form-password-password">
-                        {{ form_row(form.user.password) }}
-                    </div>
-                    <div class="form-password-confirmPassword">
-                        {{ form_row(form.user.confirmPassword) }}
-                    </div>
-                </div>
                 <div class="form-address">
                     <div class="form-address-street">
                         {{ form_row(form.user.addressStreet) }}
@@ -59,6 +54,14 @@
                     </div>
                     <div class="form-address-locality">
                         {{ form_row(form.user.locality) }}
+                    </div>
+                </div>
+                <div class="form-password">
+                    <div class="form-password-password">
+                        {{ form_row(form.user.password) }}
+                    </div>
+                    <div class="form-password-confirmPassword">
+                        {{ form_row(form.user.confirmPassword) }}
                     </div>
                 </div>
                 {{ form_row(form.user.submit) }}

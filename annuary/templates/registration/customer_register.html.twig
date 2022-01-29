@@ -13,11 +13,14 @@
     {% endfor %}
     <section class="heading registration">
         <div class="wrapper">
-            <h1>Inscription</h1>
+            <h1>Inscription<br>Particulier</h1>
         </div>
     </section>
     <section class="form-registration">
         <div class="wrapper">
+            <div class="disclamer">
+                <p>Si vous êtes un professionnel du secteur du Bien-Être, inscrivez-vous via <a href="{{ path('registration', { 'typeOfUser' : 'provider' }) }}">ce formulaire</a></p>
+            </div>
             <h2>Vos données</h2>
             {{ form_start(form) }}
                 <div class="form-customer">

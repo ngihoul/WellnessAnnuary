@@ -3,7 +3,7 @@ const localityField = document.getElementById('provider_user_locality') || docum
 
 const fetchAndDisplayAutoCompletion = (field) => {
     field.addEventListener('input', () => {
-        if(field.value.length == 4) {
+        if(field.value.length > 0) {
             fetch(`/search/where/?w=${field.value.trim()}`)
                 .then((response) => {
                     if(!response) {
@@ -22,6 +22,7 @@ const fetchAndDisplayAutoCompletion = (field) => {
 const displayLocality = (localityField, data) => {
     localityField.innerHTML = "";
     data.forEach((element) => {
+        console.log(element);
         localityField.innerHTML += `<option value="${element.id}">${element.locality}</option>`;
     });
 }

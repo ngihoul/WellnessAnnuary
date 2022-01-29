@@ -28,7 +28,7 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-    #[Route('/register/{typeOfUser}', name: 'registration_provider')]
+    #[Route('/register/{typeOfUser}', name: 'registration')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserRepository $userRepository, $typeOfUser): Response
     {
         // Check whether customer or provider form should be displayed.
@@ -114,13 +114,15 @@ class RegistrationController extends AbstractController
         $id = $request->get('id');
 
         if (null === $id) {
-            return $this->redirectToRoute('registration_provider');
+            $this->addFlash('error', 'Ce lien n\'est pas correct. Veuillez vous inscrire.');
+            return $this->redirectToRoute('registration', ['typeOfUser' => 'customer']);
         }
 
         $user = $userRepository->find($id);
 
         if (null === $user) {
-            return $this->redirectToRoute('registration_provider');
+            $this->addFlash('error', 'Ce lien n\'est pas correct. Veuillez vous inscrire.');
+            return $this->redirectToRoute('registration', ['typeOfUser' => 'customer']);
         }
 
         // validate email confirmation link, sets User::isVerified=true and persists
@@ -128,13 +130,12 @@ class RegistrationController extends AbstractController
             $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $exception->getReason());
-
-            return $this->redirectToRoute('registration_provider');
+            return $this->redirectToRoute('registration', ['typeOfUser' => 'customer']);
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Votre compte a été validé. Vous pouvez vous connecter.');
 
-        return $this->redirectToRoute('registration_provider');
+        return $this->redirectToRoute('home');
     }
 }

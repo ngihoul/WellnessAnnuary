@@ -21,7 +21,7 @@ class LocalityRepository extends ServiceEntityRepository
 
     public function findForAutoCompletion($query) {
         return $this->createQueryBuilder('l')
-            ->select('l.name AS locality')
+            ->select('l.id AS id, l.name AS locality')
             ->join('l.postCode', 'p')
             ->addSelect('p.postCode AS postCode')
             ->join('p.municipality', 'm')

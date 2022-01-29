@@ -32,7 +32,7 @@ class ProviderType extends AbstractType
                 ],
             ])
             ->add('website', UrlType::class, [
-
+                'label' => 'Site internet'
             ])
             ->add('phoneNumber', TextType::class, [
                 'label' => 'Téléphone',
