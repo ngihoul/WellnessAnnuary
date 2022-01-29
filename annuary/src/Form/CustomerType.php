@@ -46,7 +46,8 @@ class CustomerType extends AbstractType
                 ],
             ])
             ->add('newsletter', CheckboxType::class, [
-                'label' => 'Souhaitez-vous vous inscrire à notre super newsletter ?'
+                'label' => 'Souhaitez-vous vous inscrire à notre super newsletter ?',
+                'required' => false,
             ])
             ->add('user', UserType::class)
         ;

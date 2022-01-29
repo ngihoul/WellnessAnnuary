@@ -46,6 +46,7 @@ class ProviderType extends AbstractType
             ])
             ->add('phoneNumber', TextType::class, [
                 'label' => 'Téléphone',
+                'data' => '+32',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Introduisez un numéro de téléphone valable',
