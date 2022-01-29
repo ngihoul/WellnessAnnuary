@@ -25,7 +25,16 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'Votre adresse mail'
+                'label' => 'Votre adresse mail',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Introduisez une adresse email',
+                    ]),
+                    new Length([
+                        'min' => 7,
+                        'max' => 180,
+                    ]),
+                ],
             ])
             ->add('password', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -38,10 +47,9 @@ class UserType extends AbstractType
                         'message' => 'Introduisez un mot de passe',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => 7,
                         'minMessage' => 'Choisissez un mot de passe avec au moins {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
+                        'max' => 255,
                     ]),
                 ],
             ])
@@ -54,17 +62,35 @@ class UserType extends AbstractType
                         'message' => 'Introduisez une confirmation de mot de passe',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => 7,
                         'minMessage' => 'Choisissez un mot de passe avec au moins {{ limit }} caractères',
-                        'max' => 4096,
+                        'max' => 255,
                     ]),
                 ],
             ])
             ->add('addressStreet', TextType::class, [
                 'label' => 'Rue',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Introduisez un nom de rue',
+                    ]),
+                    new Length([
+                        'min' => 2,
+                        'max' => 255,
+                    ]),
+                ],
             ])
             ->add('addressNumber', TextType::class, [
                 'label' => 'Numéro',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Introduisez un numéro de rue',
+                    ]),
+                    new Length([
+                        'min' => 1,
+                        'max' => 10,
+                    ]),
+                ],
             ])
             ->add('locality', EntityType::class, [
                 'label' => 'Localité',
@@ -74,15 +100,16 @@ class UserType extends AbstractType
             ->add('postCode', TextType::class, [
                 'label' => 'Code postal',
                 'mapped' => false,
-            ])
-/*            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
                 'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                    new NotBlank([
+                        'message' => 'Introduisez un code postal',
+                    ]),
+                    new Length([
+                        'min' => 4,
+                        'max' => 16,
                     ]),
                 ],
-            ])*/
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Direction le paradis !',
             ])
