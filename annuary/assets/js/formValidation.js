@@ -3,7 +3,7 @@
 // *********************** //
 
 // ** Variables & constants ** //
-const providerInputs = document.forms['provider'].getElementsByTagName('input');
+const providerInputs = document.forms['provider'].getElementsByTagName('input') || document.forms['customer'].getElementsByTagName('input');
 const websiteField = document.getElementById('provider_website');
 const phoneNumberField = document.getElementById('provider_phoneNumber');
 const VTANumberField = document.getElementById('provider_VTANumber');
@@ -195,7 +195,6 @@ const isPassword = field => {
 
 // ** check if confirm password is similar to password ** ///
 const formatIfPasswordsNotSimilar = (field) => {
-    console.log(passwordIsSimilar(field));
     if(passwordIsSimilar(field)) {
         fieldNotValidated(field);
         if(!field.nextSibling) {
@@ -210,8 +209,7 @@ const formatIfPasswordsNotSimilar = (field) => {
 }
 
 const passwordIsSimilar = field => {
-    console.log(field.value);
-    field.value != passwordField.value ? false : true;
+    return field.value != passwordField.value ? false : true;
 }
 
 // *** Scripts *** //
