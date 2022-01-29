@@ -20,10 +20,30 @@ class CustomerType extends AbstractType
     {
         $builder
             ->add('lastName', TextType::class, [
-                'label' => 'Nom de famille'
+                'label' => 'Nom de famille',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Introduisez votre nom de famille',
+                    ]),
+                    new Length([
+                        'min' => 2,
+                        'minMessage' => 'Introduisez un nom de famille avec au moins {{ limit }} caractères',
+                        'max' => 50,
+                    ]),
+                ],
             ])
             ->add('firstName', TextType::class, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Introduisez votre prénom',
+                    ]),
+                    new Length([
+                        'min' => 2,
+                        'minMessage' => 'Introduisez un prénom avec au moins {{ limit }} caractères',
+                        'max' => 50,
+                    ]),
+                ],
             ])
             ->add('newsletter', CheckboxType::class, [
                 'label' => 'Souhaitez-vous vous inscrire à notre super newsletter ?'
