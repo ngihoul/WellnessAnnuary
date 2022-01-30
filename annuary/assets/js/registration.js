@@ -2,28 +2,24 @@
 // **** Registration Form **** //
 // *************************** //
 
-// ***************************** //
-// *** Variables & constants *** //
-// ***************************** //
+// ** Variables & constants ** //
+// * Variables * /
 const postCodeField = document.getElementById('provider_user_postCode') || document.getElementById('customer_user_postCode');
 const localityField = document.getElementById('provider_user_locality') || document.getElementById('customer_user_locality');
 
-// ***************** //
-// *** Functions *** //
-// ***************** //
+// * Constants * //
+const POSTCODE_LENGTH  = 4;
+const AJAX_URL = '/search/where/?w=';
 
-// **************** //
-// ** Localities ** //
-// **************** //
-
+// ** Functions ** //
 // * Capitalize strings * //
-const capitalizeFirstLetter = (string) => {
+const capitalizeFirstLetter = string => {
     string = string.toLowerCase();
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 // * Display Localities if there is a change on an input * //
-const displayLocalitiesOnInputEvent = (field) => {
+const displayLocalitiesOnInputEvent = field => {
     field.addEventListener('input', () => {
         if(field.value.length > 0) {
             fetchAndDisplayLocalities(field);
@@ -34,15 +30,15 @@ const displayLocalitiesOnInputEvent = (field) => {
 }
 
 // * Display localities if input value has already a length value of 4 * //
-const displayLocalitiesIfFieldValueEqualsFour = (field) => {
-    if(field.value.length == 4) {
+const displayLocalitiesIfFieldValueEqualsFour = field => {
+    if(field.value.length == POSTCODE_LENGTH) {
         fetchAndDisplayLocalities(field);
     }
 }
 
 // * Fetch and Display Locailities in appropriate field * //
-const fetchAndDisplayLocalities = (field) => {
-    fetch(`/search/where/?w=${field.value.trim()}`)
+const fetchAndDisplayLocalities = field => {
+    fetch(`${AJAX_URL}${field.value.trim()}`)
     .then(response => response.json())
     .then(data => displayLocalities(localityField, data));
 }
@@ -51,19 +47,11 @@ const fetchAndDisplayLocalities = (field) => {
 const displayLocalities = (localityField, data) => {
     localityField.innerHTML = "";
     data.forEach((element) => {
-        console.log(element);
         localityField.innerHTML += `<option value="${element.id}">${capitalizeFirstLetter(element.locality)}</option>`;
     });
 }
 
-
-
-
-
-// *************** //
-// *** SCRIPTS *** //
-// *************** //
-
+// ** Scripts ** //
 // * Delete all options in Locality <select> * //
 localityField.innerHTML = "";
 
