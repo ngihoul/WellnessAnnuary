@@ -6,6 +6,8 @@
 // * Variables * /
 const postCodeField = document.getElementById('provider_user_postCode') || document.getElementById('customer_user_postCode');
 const localityField = document.getElementById('provider_user_locality') || document.getElementById('customer_user_locality');
+const passwordField = document.getElementById('provider_user_password') || document.getElementById('customer_user_password');
+const passwordConfirmField = document.getElementById('provider_user_passwordConfirm') || document.getElementById('customer_user_passwordConfirm');
 
 // * Constants * //
 const POSTCODE_LENGTH  = 4;

@@ -3,20 +3,29 @@
 // *********************** //
 
 // * Variables * //
-const providerInputs = document.forms['provider'].getElementsByTagName('input') || document.forms['customer'].getElementsByTagName('input');
-const websiteField = document.getElementById('provider_website');
-const phoneNumberField = document.getElementById('provider_phoneNumber');
-const VTANumberField = document.getElementById('provider_VTANumber');
-const emailField = document.getElementById('provider_user_email');
+if(document.forms['provider'] !== undefined) {
+    var formInputs = document.forms['provider'];
+    var websiteField = document.getElementById('provider_website');
+    var phoneNumberField = document.getElementById('provider_phoneNumber');
+    var VTANumberField = document.getElementById('provider_VTANumber');
+} else if (document.forms['customer'] !== undefined) {
+    var formInputs = document.forms['customer'];
+    var newsletterField = document.getElementById('customer_newsletter');
+}
+
+const emailField = document.getElementById('provider_user_email') || document.getElementById('customer_user_email');
 const postCodeField = document.getElementById('provider_user_postCode') || document.getElementById('customer_user_postCode');
 const passwordField = document.getElementById('provider_user_password') || document.getElementById('customer_user_password');
 const passwordConfirmField = document.getElementById('provider_user_confirmPassword') || document.getElementById('customer_user_confirmPassword');
+const submitBtn = document.getElementById('provider_user_submit') || document.getElementById('customer_user_submit');
 
 // * Constants * //
 const PREFIX_BELGIUM = '+32';
 const HTML_CLASS_VALIDATED = 'validated';
 const HTML_CLASS_NOT_VALIDATED = 'notValidated';
 const HTML_CLASS_ERROR_MSG = 'error-message';
+const HTML_CLASS_INFO_MSG = 'info-message';
+const HTML_CLASS_LABEL_VALID = 'labelValidated';
 const PHONENUMBER_MIN_LENGTH = 12;
 const PHONENUMBER_MAX_LENGTH = 13;
 const VTANUMBER_MIN_LENGTH = 12;
@@ -39,15 +48,25 @@ const MSG_NOT_SIMILAR = 'Les mots de passe ne sont pas identiques';
 // * Add style if field is validated or not * //
 const fieldValidated = field => {
     field.className = HTML_CLASS_VALIDATED;
+    // Delete error-message
     if(field.nextSibling) {
         field.nextSibling.remove();
     }
+    // Add checked icon before label
+    field.previousSibling.classList.add(HTML_CLASS_LABEL_VALID);
 }
 
 const fieldNotValidated = (field, message) => {
     field.className = HTML_CLASS_NOT_VALIDATED;
     if(!field.nextSibling) {
         addMessage(field, message);
+    // If there is already a info-message
+    } else if (field.nextSibling.classList.contains(HTML_CLASS_INFO_MSG)) {
+        field.nextSibling.className = HTML_CLASS_ERROR_MSG;
+    }
+    // In case user switch to valid to invalid value
+    if(field.previousSibling.classList.contains(HTML_CLASS_LABEL_VALID)) {
+        field.previousSibling.classList.remove(HTML_CLASS_LABEL_VALID);
     }
 }
 
@@ -143,34 +162,54 @@ const passwordIsSimilar = field => {
 }
 
 // ** Scripts ** //
-// * If field is blank * //
-for(let input of providerInputs) {
-    if(input != websiteField &&
-        input != phoneNumberField &&
-        input != VTANumberField &&
-        input != emailField &&
-        input != postCodeField &&
-        input != passwordField &&
-        input != passwordConfirmField ) {
+// Only for Provider Registration form
+if(document.forms['provider'] !== undefined) {
+    for (let input of formInputs) {
+        if (input != websiteField &&
+            input != phoneNumberField &&
+            input != VTANumberField &&
+            input != emailField &&
+            input != postCodeField &&
+            input != passwordField &&
+            input != passwordConfirmField &&
+            input != submitBtn) {
 
             input.addEventListener('focusout', () => {
                 formatIfNotBlank(input);
-        });
+            });
+        }
+    }
+
+    websiteField.addEventListener('focusout', () => {
+        formatIfNotWebsite(websiteField);
+    });
+
+    phoneNumberField.addEventListener('focusout', () => {
+        formatIfNotPhoneNumber(phoneNumberField);
+    });
+
+    VTANumberField.addEventListener('focusout', () => {
+        formatIfNotBelgianVTANumber(VTANumberField);
+    });
+
+// Only for Customer registration form
+} else {
+    for (let input of formInputs) {
+        if (input != emailField &&
+            input != postCodeField &&
+            input != passwordField &&
+            input != passwordConfirmField &&
+            input != newsletterField &&
+            input != submitBtn) {
+
+            input.addEventListener('focusout', () => {
+                formatIfNotBlank(input);
+            });
+        }
     }
 }
 
-websiteField.addEventListener('focusout', () => {
-    formatIfNotWebsite(websiteField);
-});
-
-phoneNumberField.addEventListener('focusout', () => {
-    formatIfNotPhoneNumber(phoneNumberField);
-});
-
-VTANumberField.addEventListener('focusout', () => {
-    formatIfNotBelgianVTANumber(VTANumberField);
-});
-
+// For all registration forms
 emailField.addEventListener('focusout', () => {
     formatIfNotEmail(emailField);
 });
@@ -180,7 +219,7 @@ postCodeField.addEventListener('focusout', () => {
 });
 
 // Add message to password
-addMessage(passwordField, MSG_NOT_PASSWORD, 'info-message');
+addMessage(passwordField, MSG_NOT_PASSWORD, HTML_CLASS_INFO_MSG);
 
 passwordField.addEventListener('focusout', () => {
     formatIfNotPassword(passwordField);
