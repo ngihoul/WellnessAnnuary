@@ -25,7 +25,7 @@ class Image
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $image;
+    private $fileName;
 
     /**
      * @ORM\ManyToOne(targetEntity=ServiceCategory::class, inversedBy="images")
@@ -41,6 +41,11 @@ class Image
      * @ORM\ManyToOne(targetEntity=Provider::class, inversedBy="images")
      */
     private $provider;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
 
     public function getId(): ?int
     {
@@ -59,14 +64,14 @@ class Image
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getFileName(): ?string
     {
-        return $this->image;
+        return $this->fileName;
     }
 
-    public function setImage(string $image): self
+    public function setFileName(string $fileName): self
     {
-        $this->image = $image;
+        $this->fileName = $fileName;
 
         return $this;
     }
@@ -103,6 +108,18 @@ class Image
     public function setProvider(?Provider $provider): self
     {
         $this->provider = $provider;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
