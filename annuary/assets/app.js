@@ -134,3 +134,47 @@ fetchAndDisplayAutoCompletion('what', searchQ);
 // * Autocompletion of "Where" field * /
 const searchW = document.querySelector('#search_w');
 fetchAndDisplayAutoCompletion('where', searchW);
+
+// ** Open/close login form ** //
+const loginBtn = document.querySelector('.loginBtn');
+const loginMod = document.querySelector('.loginMod')
+
+loginBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if(!loginMod.classList.contains('active') &&
+        (menu.classList.contains('active') ||
+        searchMod.classList.contains('active'))) {
+            menu.classList.remove('active');
+            searchMod.classList.remove('active');
+            loginMod.classList.add('active');
+            openLogo.innerHTML = BACK_LOGO;
+    } else if (!loginMod.classList.contains('active')) {
+        loginMod.classList.add('active');
+        openLogo.innerHTML = BACK_LOGO;
+    } else if (loginMod.classList.contains('active')) {
+        loginMod.classList.remove('active');
+        openLogo.innerHTML = HAMBURGER_LOGO;
+    }
+});
+
+// ** Register routing ** //
+const registerLink = document.querySelector('.registerLink');
+registerLink.addEventListener('click', (e) => {
+    displayRegistrationFormChoice(loginMod);
+});
+
+const displayRegistrationFormChoice = (field) => {
+    loginMod.innerHTML = '';
+
+    let btnCustomer = document.createElement('p');
+    btnCustomer.className = 'cta';
+    btnCustomer.innerHTML = '<a href="/register/customer">Je suis <br>un particulier<br>et je veux profiter des bons plans</a>';
+    console.log(btnCustomer);
+    field.appendChild(btnCustomer);
+
+    let btnProvider = document.createElement('p');
+    btnProvider.className = 'cta';
+    btnProvider.innerHTML = '<a href="/register/provider">Je suis <br>un professionnel<br>et je souhaite partager mes supperbes offres</a>';
+    field.appendChild(btnProvider);
+}

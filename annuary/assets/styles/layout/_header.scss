@@ -160,6 +160,28 @@ header {
     }
   }
 
+  .loginMod {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 100%;
+    width: 100vw;
+    margin-left: 100vw;
+    text-align: center;
+    color: $color-txt-normal;
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'loginModBackground.jpg') center no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+    transition: margin .5s;
+    @include box-shadow(true);
+
+    &.active {
+      margin-left: 0;
+      padding: 0 20px;
+      transition: margin .5s;
+    }
+  }
+
   // * Search & Login Buttons on Mobile * //
   .navBtn {
     @include header-icon('right');
