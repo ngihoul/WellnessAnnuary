@@ -83,6 +83,19 @@ fieldset {
     }
   }
 
+  .form-customer {
+    display: flex;
+
+    .form-customer-lastName {
+      width: 50%;
+      padding-right: .5rem;
+    }
+
+    .form-customer-firstName {
+      width: 50%;
+      padding-left: .5rem;
+    }
+  }
   .form-address {
     display: flex;
     flex-wrap: wrap;
