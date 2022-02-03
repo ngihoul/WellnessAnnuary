@@ -4,20 +4,23 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Provider;
-use App\Form\ProviderType;
 use App\Entity\Customer;
+use App\Entity\Image;
+use App\Form\ProviderType;
 use App\Form\CustomerType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -29,7 +32,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register/{typeOfUser}', name: 'registration')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserRepository $userRepository, $typeOfUser): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserRepository $userRepository, SluggerInterface $slugger, $typeOfUser): Response
     {
         // Check whether customer or provider form should be displayed.
         $typeOfUser = strtolower($typeOfUser);
@@ -39,10 +42,12 @@ class RegistrationController extends AbstractController
             $subUser = new Provider();
             $form = $this->createForm(ProviderType::class, $subUser);
             $formTemplate = 'registration/provider_register.html.twig';
+            $typeOfImage = 'logo';
         } elseif ($typeOfUser == 'customer') {
             $subUser = new Customer();
             $form = $this->createForm(CustomerType::class, $subUser);
             $formTemplate = 'registration/customer_register.html.twig';
+            $typeOfImage = 'avatar';
         } else {
             $this->addFlash('error', 'Cette page n\'existe pas');
             return $this->redirectToRoute('home');
@@ -86,6 +91,30 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            // Save logo in DB
+            $logo = $form->get('logo')->getData();
+
+            $originalFileName = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);
+
+            $safeFileName = $slugger->slug($originalFileName);
+            $newFileName = $safeFileName . '-' . uniqid() . '.' . $logo->guessExtension();
+
+            try {
+                $logo->move(
+                    $this->getParameter('images_directory'),
+                    $newFileName
+                );
+            } catch (FileException $e) {
+                // TODO: handle exception
+            }
+
+            // Create Image Object
+            $image = New Image();
+            $image->setType($typeOfImage);
+            $image->setFileName($newFileName);
+
+            $subUser->addImage($image);
+
             // Save data in DB
             $entityManager->persist($subUser);
             $entityManager->flush();
@@ -103,8 +132,8 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render($formTemplate, [
-            'form' => $form->createView(),
+        return $this->renderForm($formTemplate, [
+            'form' => $form,
         ]);
     }
 

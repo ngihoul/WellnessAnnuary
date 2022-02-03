@@ -24,8 +24,13 @@
             </div>
             <h2>Votre société</h2>
             {{ form_start(form) }}
-                <div class="form-name">
-                    {{ form_row(form.name) }}
+                <div class="form-provider-identity">
+                    <div class="form-name">
+                        {{ form_row(form.name) }}
+                    </div>
+                    <div class="form-logo">
+                        {{ form_row(form.logo) }}
+                    </div>
                 </div>
                 <div class="form-provider-contact">
                     <div class="form-website">

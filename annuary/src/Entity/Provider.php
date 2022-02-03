@@ -72,7 +72,7 @@ class Provider
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="provider")
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="provider", cascade={"persist", "remove"})
      */
     private $images;
 

@@ -6,11 +6,11 @@ use App\Entity\Customer;
 use App\Form\UserType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -43,6 +43,23 @@ class CustomerType extends AbstractType
                         'minMessage' => 'Introduisez un prénom avec au moins {{ limit }} caractères',
                         'max' => 50,
                     ]),
+                ],
+            ])
+            ->add('logo', FileType::class, [
+                'label' => 'Avatar',
+                'multiple' => false,
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'maxSizeMessage' => 'La taille du logo ne doit pas dépasser 1Mo',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif',
+                        ],
+                        'mimeTypesMessage' => 'Le format du logo doit être jpg, jpeg, gif ou png',
+                    ])
                 ],
             ])
             ->add('newsletter', CheckboxType::class, [

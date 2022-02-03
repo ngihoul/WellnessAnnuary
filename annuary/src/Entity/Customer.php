@@ -51,7 +51,7 @@ class Customer
     private $reports;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="customer")
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="customer", cascade={"persist", "remove"})
      */
     private $images;
 

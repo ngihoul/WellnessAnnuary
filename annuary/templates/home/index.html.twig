@@ -49,7 +49,7 @@
             <div class="swiper-wrapper">
                 {% for image in images %}
                     <div class="swiper-slide">
-                        <img loading="lazy" src="{{ images_directory ~ image.image }}" alt="Image Slider {{ loop.index }}"/>
+                        <img loading="lazy" src="{{ images_directory ~ image.fileName }}" alt="Image Slider {{ loop.index }}"/>
                     </div>
                 {% endfor %}
             </div>

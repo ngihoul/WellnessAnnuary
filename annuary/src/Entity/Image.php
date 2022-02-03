@@ -20,7 +20,7 @@ class Image
     /**
      * @ORM\Column(type="integer")
      */
-    private $ordering;
+    private $ordering = 0;
 
     /**
      * @ORM\Column(type="string", length=255)
