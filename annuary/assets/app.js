@@ -139,50 +139,52 @@ const searchW = document.querySelector('#search_w');
 fetchAndDisplayAutoCompletion('where', searchW);
 
 // ** Open/close login form ** //
-const loginBtn = document.querySelector('.loginBtn');
-const loginMod = document.querySelector('.loginMod')
+if(document.querySelector('.loginBtn')) {
+    const loginBtn = document.querySelector('.loginBtn');
+    const loginMod = document.querySelector('.loginMod');
 
-loginBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if(!loginMod.classList.contains('active') &&
-        (menu.classList.contains('active') ||
-        searchMod.classList.contains('active'))) {
+    loginBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if(!loginMod.classList.contains('active') &&
+            (menu.classList.contains('active') ||
+                searchMod.classList.contains('active'))) {
             menu.classList.remove('active');
             searchMod.classList.remove('active');
             loginMod.classList.add('active');
             loginBtn.innerHTML = BACK_LOGO;
-    } else if (!loginMod.classList.contains('active')) {
-        loginMod.classList.add('active');
-        loginBtn.innerHTML = BACK_LOGO;
-    } else if (loginMod.classList.contains('active')) {
-        loginMod.classList.remove('active');
-        loginBtn.innerHTML = LOGIN_LOGO;
-    }
-});
+        } else if (!loginMod.classList.contains('active')) {
+            loginMod.classList.add('active');
+            loginBtn.innerHTML = BACK_LOGO;
+        } else if (loginMod.classList.contains('active')) {
+            loginMod.classList.remove('active');
+            loginBtn.innerHTML = LOGIN_LOGO;
+        }
+    });
 
 // ** Register routing ** //
-const registerLink = document.querySelector('.registerLink');
-registerLink.addEventListener('click', (e) => {
-    displayRegistrationFormChoices(loginMod);
-});
+    const registerLink = document.querySelector('.registerLink');
+    registerLink.addEventListener('click', (e) => {
+        displayRegistrationFormChoices(loginMod);
+    });
 
-const displayRegistrationFormChoices = (field) => {
-    let title = document.querySelector('.loginMod h1');
-    let loginForm = document.querySelector('.loginForm');
-    let registerLink = document.querySelector('.register');
-    title.innerText = 'Inscrivez-vous';
-    loginForm = loginForm.remove();
-    registerLink = registerLink.remove();
+    const displayRegistrationFormChoices = (field) => {
+        let title = document.querySelector('.loginMod h1');
+        let loginForm = document.querySelector('.loginForm');
+        let registerLink = document.querySelector('.register');
+        title.innerText = 'Inscrivez-vous';
+        loginForm = loginForm.remove();
+        registerLink = registerLink.remove();
 
-    createRegisterBtn('/register/customer', 'Je suis <br><strong>un particulier</strong><br>et je veux profiter des bons plans', field);
+        createRegisterBtn('/register/customer', 'Je suis <br><strong>un particulier</strong><br>et je veux profiter des bons plans', field);
 
-    createRegisterBtn('/register/provider', 'Je suis <br><strong>un professionnel</strong><br>et je souhaite partager mes supperbes offres', field);
-}
+        createRegisterBtn('/register/provider', 'Je suis <br><strong>un professionnel</strong><br>et je souhaite partager mes supperbes offres', field);
+    }
 
-const createRegisterBtn = (link, htmlMessage, parentField) => {
-    let btnCustomer = document.createElement('p');
-    btnCustomer.className = 'cta';
-    btnCustomer.innerHTML = `<a href="${link}">${htmlMessage}</a>`;
-    parentField.appendChild(btnCustomer);
+    const createRegisterBtn = (link, htmlMessage, parentField) => {
+        let btnCustomer = document.createElement('p');
+        btnCustomer.className = 'cta';
+        btnCustomer.innerHTML = `<a href="${link}">${htmlMessage}</a>`;
+        parentField.appendChild(btnCustomer);
+    }
 }
