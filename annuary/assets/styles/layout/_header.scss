@@ -347,5 +347,43 @@ header {
         padding: 20px 20px 0;
       }
     }
+
+    .loginMod {
+      height: auto;
+      width: 40%;
+      margin-left: 40%;
+      margin-right: 20%;
+      margin-top: -500px;
+      background: $white;
+      z-index: 99;
+      @include box-shadow(false);
+
+      h1 {
+        display: none;
+      }
+
+      form {
+        display: flex;
+        flex-wrap: wrap;
+
+        .loginForm-mail, .loginForm-password {
+          width: 50%;
+          max-width: 50%;
+          padding: 0 10px;
+
+          button {
+            width: 100%;
+            margin-top: 15px;
+          }
+        }
+      }
+
+      &.active {
+        margin-left: 40%;
+        margin-right: 20%;
+        margin-top: 5px;
+        padding: 20px;
+      }
+    }
   }
 }
