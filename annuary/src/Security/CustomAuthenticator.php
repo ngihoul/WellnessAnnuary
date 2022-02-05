@@ -49,7 +49,7 @@ class CustomAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // TODO : redirect to profile
+        $request->getSession()->getFlashBag()->add('success', 'Vous êtes connecté.<br>Bienvenue au paradis !');
         return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
