@@ -206,12 +206,8 @@ header {
   .navBtn {
     @include header-icon('right');
 
-    .searchBtn {
-      display: inline-block;
-
-      &.hidden {
-        display: none;
-      }
+    .searchBtn.hidden {
+      display: none;
     }
   }
 
@@ -308,7 +304,6 @@ header {
     }
 
     .navBtn {
-      display: block;
       min-width: 10%;
       width: 10%;
     }
