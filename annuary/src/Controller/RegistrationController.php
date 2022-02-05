@@ -105,7 +105,7 @@ class RegistrationController extends AbstractController
                     $newFileName
                 );
             } catch (FileException $e) {
-                // TODO: handle exception
+                dd('Impossible de sauver image ' . $e);
             }
 
             // Create Image Object
