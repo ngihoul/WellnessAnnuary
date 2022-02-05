@@ -83,11 +83,15 @@
             )) }}
         </div>
         <div class="loginMod">
+            <h1>Enregistrez-vous</h1>
             {{ render(controller(
                 'App\\Controller\\SecurityController::login'
             )) }}
-            <h1>Pas encore inscrit ?</h1>
-            <p><span class="registerLink">Incrivez-vous maintenant !</span></p>
+            <div class="register">
+                <p>Pas encore inscrit ? <br>
+                    <span class="registerLink">Incrivez-vous maintenant !</span>
+                </p>
+            </div>
         </div>
     </div>
 </header>

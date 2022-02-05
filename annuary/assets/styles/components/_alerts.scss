@@ -1,8 +1,8 @@
 .alert {
   position: fixed;
-  width: 40%;
+  width: 80%;
   top: 80px;
-  left: 30%;
+  left: 10%;
   z-index: 9999;
   text-align: center;
   border-radius: 10px;
@@ -60,5 +60,12 @@
   to {
     opacity: 0;
     display: none;
+  }
+}
+
+@media screen and (min-width: map-get($responsive-table, "-lg")) {
+  .alert{
+    width: 40%;
+    left: 30%;
   }
 }

@@ -30,6 +30,9 @@ const CHEVRON_DOWN = '<svg width="16" height="11" viewBox="0 0 16 11" fill="none
     '<path d="M0.695896 1.80319L0.697792 1.80131L1.80131 0.697792C2.06608 0.433019 2.49021 0.435752 2.74759 0.695896L2.74758 0.695901L2.74947 0.697792L7.45651 5.40482L7.81006 5.75838L8.16361 5.40482L12.8706 0.697792C13.1354 0.433019 13.5595 0.435752 13.8169 0.695901L13.8188 0.697792L14.9223 1.80131C15.1871 2.06608 15.1844 2.49021 14.9242 2.74758L14.9223 2.74947L8.2817 9.3901L8.28168 9.39008L8.27792 9.39392C8.02688 9.65042 7.60427 9.65595 7.33842 9.3901L0.697792 2.74947C0.433019 2.4847 0.435752 2.06057 0.695896 1.80319Z" stroke="#594A4E"/>\n' +
     '</svg>\n';
 
+const LOGIN_LOGO = '<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
+    '<path d="M19.0312 7.03125C19.0312 10.6369 16.1057 13.5625 12.5 13.5625C8.89431 13.5625 5.96875 10.6369 5.96875 7.03125C5.96875 3.42556 8.89431 0.5 12.5 0.5C16.1057 0.5 19.0312 3.42556 19.0312 7.03125ZM12.5 16.9062C13.8052 16.9062 15.0468 16.6235 16.1673 16.125H18.75C21.926 16.125 24.5 18.699 24.5 21.875V22.6562C24.5 23.6741 23.6741 24.5 22.6562 24.5H2.34375C1.32595 24.5 0.5 23.6741 0.5 22.6562V21.875C0.5 18.699 3.07399 16.125 6.25 16.125H8.83307C9.95713 16.6232 11.1941 16.9062 12.5 16.9062Z" stroke="#33272A"/>\n' +
+    '</svg>';
 
 // * Open/close menu on click on hamburger icon * /
 const menu = document.querySelector('.menu');
@@ -148,33 +151,38 @@ loginBtn.addEventListener('click', (e) => {
             menu.classList.remove('active');
             searchMod.classList.remove('active');
             loginMod.classList.add('active');
-            openLogo.innerHTML = BACK_LOGO;
+            loginBtn.innerHTML = BACK_LOGO;
     } else if (!loginMod.classList.contains('active')) {
         loginMod.classList.add('active');
-        openLogo.innerHTML = BACK_LOGO;
+        loginBtn.innerHTML = BACK_LOGO;
     } else if (loginMod.classList.contains('active')) {
         loginMod.classList.remove('active');
-        openLogo.innerHTML = HAMBURGER_LOGO;
+        loginBtn.innerHTML = LOGIN_LOGO;
     }
 });
 
 // ** Register routing ** //
 const registerLink = document.querySelector('.registerLink');
 registerLink.addEventListener('click', (e) => {
-    displayRegistrationFormChoice(loginMod);
+    displayRegistrationFormChoices(loginMod);
 });
 
-const displayRegistrationFormChoice = (field) => {
-    loginMod.innerHTML = '';
+const displayRegistrationFormChoices = (field) => {
+    let title = document.querySelector('.loginMod h1');
+    let loginForm = document.querySelector('.loginForm');
+    let registerLink = document.querySelector('.register');
+    title.innerText = 'Inscrivez-vous';
+    loginForm = loginForm.remove();
+    registerLink = registerLink.remove();
 
+    createRegisterBtn('/register/customer', 'Je suis <br><strong>un particulier</strong><br>et je veux profiter des bons plans', field);
+
+    createRegisterBtn('/register/provider', 'Je suis <br><strong>un professionnel</strong><br>et je souhaite partager mes supperbes offres', field);
+}
+
+const createRegisterBtn = (link, htmlMessage, parentField) => {
     let btnCustomer = document.createElement('p');
     btnCustomer.className = 'cta';
-    btnCustomer.innerHTML = '<a href="/register/customer">Je suis <br>un particulier<br>et je veux profiter des bons plans</a>';
-    console.log(btnCustomer);
-    field.appendChild(btnCustomer);
-
-    let btnProvider = document.createElement('p');
-    btnProvider.className = 'cta';
-    btnProvider.innerHTML = '<a href="/register/provider">Je suis <br>un professionnel<br>et je souhaite partager mes supperbes offres</a>';
-    field.appendChild(btnProvider);
+    btnCustomer.innerHTML = `<a href="${link}">${htmlMessage}</a>`;
+    parentField.appendChild(btnCustomer);
 }

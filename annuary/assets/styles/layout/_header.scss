@@ -180,6 +180,26 @@ header {
       padding: 0 20px;
       transition: margin .5s;
     }
+
+    .registerLink {
+      line-height: .2rem;
+      cursor: pointer;
+      color: darken($color-emphasis, 20%);
+    }
+
+    .cta {
+      a {
+        font-size: .7rem;
+        color: $color-txt-normal;
+        line-height: 1.5rem;
+
+        strong {
+          font-size: .9rem;
+          color: darken($color-emphasis, 20%);
+          font-weight: normal;
+        }
+      }
+    }
   }
 
   // * Search & Login Buttons on Mobile * //
