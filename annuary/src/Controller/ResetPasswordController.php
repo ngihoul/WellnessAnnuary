@@ -98,7 +98,7 @@ class ResetPasswordController extends AbstractController
                 $e->getReason()
             ));
 
-            return $this->redirectToRoute('app_forgot_password_request');
+            return $this->redirectToRoute('forgot_password_request');
         }
 
         // The token is valid; allow the user to change their password.
@@ -116,6 +116,10 @@ class ResetPasswordController extends AbstractController
             );
 
             $user->setPassword($encodedPassword);
+
+            // Reinitialize unsuccessful attempts
+            $user->setUnsuccessfulAttempts(0);
+
             $this->entityManager->flush();
 
             // The session is cleaned up after the password has been changed.

@@ -63,10 +63,9 @@ class RegistrationController extends AbstractController
 
             // Redirect user to forgotten password page if email already exists in DB
             if($userExist) {
-                $this->addFlash('error', 'Il semble vous avez déjà un compte.');
+                $this->addFlash('error', 'Il semble que vous avez déjà un compte.');
 
-                // TODO : redirect to forgotten password page
-                return $this->render('registration/provider_register.html.twig', [
+                return $this->render('home/index.html.twig', [
                     'form' => $form->createView(),
                 ]);
             }
