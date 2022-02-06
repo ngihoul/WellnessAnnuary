@@ -65,9 +65,7 @@ class RegistrationController extends AbstractController
             if($userExist) {
                 $this->addFlash('error', 'Il semble que vous avez déjà un compte.');
 
-                return $this->render('home/index.html.twig', [
-                    'form' => $form->createView(),
-                ]);
+                return $this->redirectToRoute('home');
             }
 
             // Check if password confirmation is similar to password
