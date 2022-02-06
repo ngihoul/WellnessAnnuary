@@ -188,3 +188,4 @@ if(document.querySelector('.loginBtn')) {
         parentField.appendChild(btnCustomer);
     }
 }
+

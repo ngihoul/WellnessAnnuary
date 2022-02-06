@@ -13,6 +13,7 @@
     <div class="loginForm-password">
         <label for="inputPassword">Mot de passe</label>
         <input type="password" name="password" id="inputPassword" class="" autocomplete="current-password" required>
+        <a class="linkResetPassword info-message" href="{{ path('forgot_password_request') }}">Mot de passe oublié ?</a>
     </div>
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"

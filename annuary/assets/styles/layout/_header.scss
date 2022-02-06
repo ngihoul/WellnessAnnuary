@@ -201,6 +201,15 @@ header {
       }
     }
 
+    .loginForm-password {
+      margin-bottom: 1.5rem;
+      text-align: left;
+
+      input {
+        margin-bottom: 0;
+      }
+    }
+
     .loginForm-rememberMe {
       display: flex;
       justify-content: flex-start;
