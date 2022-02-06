@@ -4,6 +4,11 @@
 {{ parent() }} | Réinitialisation de votre mot de passe
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('requestResetPassword') }}
+{% endblock %}
+
 {% block body %}
     <section class="heading">
         <div class="wrapper">
@@ -20,7 +25,7 @@
                 </p>
             </div>
 
-            <button class="" type="submit">Nouveau mot de passe</button>
+            <button class="form-reset-password-btn" type="submit">Nouveau mot de passe</button>
             {{ form_end(requestForm) }}
         </div>
     </section>
