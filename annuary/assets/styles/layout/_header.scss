@@ -200,6 +200,24 @@ header {
         }
       }
     }
+
+    .loginForm-rememberMe {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 1.5rem;
+
+      label {
+        order: 2;
+      }
+
+      input {
+        order: 1;
+        width: 10%;
+        padding: 0;
+        margin: 0;
+      }
+    }
   }
 
   // * Search & Login Buttons on Mobile * //
@@ -365,6 +383,15 @@ header {
           width: 50%;
           max-width: 50%;
           padding: 0 10px;
+          }
+
+        .loginForm-rememberMe {
+          padding: 0 10px;
+          width: 100%;
+
+          label {
+            width: 90%;
+          }
 
           button {
             width: 100%;
