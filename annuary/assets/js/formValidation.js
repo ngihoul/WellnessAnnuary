@@ -17,6 +17,7 @@ const emailField = document.getElementById('provider_user_email') || document.ge
 const postCodeField = document.getElementById('provider_user_postCode') || document.getElementById('customer_user_postCode');
 const passwordField = document.getElementById('provider_user_password') || document.getElementById('customer_user_password');
 const passwordConfirmField = document.getElementById('provider_user_confirmPassword') || document.getElementById('customer_user_confirmPassword');
+const privacyPolicyField = document.getElementById('provider_user_privacyPolicy') || document.getElementById('customer_user_privacyPolicy')
 const submitBtn = document.getElementById('provider_user_submit') || document.getElementById('customer_user_submit');
 
 // * Constants * //
@@ -26,6 +27,8 @@ const HTML_CLASS_NOT_VALIDATED = 'notValidated';
 const HTML_CLASS_ERROR_MSG = 'error-message';
 const HTML_CLASS_INFO_MSG = 'info-message';
 const HTML_CLASS_LABEL_VALID = 'labelValidated';
+const HTML_CLASS_PRIVACY_VALIDATED = 'privacyValidated';
+const HTML_CLASS_PRIVACY_NOT_VALIDATED = 'privacyNotValidated';
 const PHONENUMBER_MIN_LENGTH = 12;
 const PHONENUMBER_MAX_LENGTH = 13;
 const VTANUMBER_MIN_LENGTH = 12;
@@ -200,6 +203,7 @@ if(document.forms['provider'] !== undefined) {
             input != passwordField &&
             input != passwordConfirmField &&
             input != newsletterField &&
+            input != privacyPolicyField &&
             input != submitBtn) {
 
             input.addEventListener('focusout', () => {
@@ -230,6 +234,27 @@ passwordConfirmField.addEventListener('focusout', () => {
         formatIfPasswordsNotSimilar(passwordConfirmField);
     }
 });
+
+// PrivacyPolicy validation
+const formatIfPrivacyPolicyNotChecked = field => {
+    if(field.checked) {
+        field.previousSibling.classList.add(HTML_CLASS_PRIVACY_VALIDATED);
+        field.previousSibling.classList.remove(HTML_CLASS_PRIVACY_NOT_VALIDATED);
+        console.log('prout');
+    } else {
+        field.previousSibling.classList.add(HTML_CLASS_PRIVACY_NOT_VALIDATED);
+        field.previousSibling.classList.remove(HTML_CLASS_PRIVACY_VALIDATED);
+    }
+}
+
+formatIfPrivacyPolicyNotChecked(privacyPolicyField);
+// On change
+privacyPolicyField.addEventListener('change', () => {
+    formatIfPrivacyPolicyNotChecked(privacyPolicyField);
+})
+
+
+
 
 
 
