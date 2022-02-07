@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,12 +13,14 @@ class DeleteUnverifiedUsersCommand extends Command
 {
     private UserRepository $userRepository;
     private EntityManagerInterface $entityManager;
+    private LoggerInterface $logger;
 
     protected static $defaultName = 'app:delete:unverified-users';
 
-    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManager) {
+    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManager, LoggerInterface $logger) {
         $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;
+        $this->logger = $logger;
         parent::__construct();
     }
 
@@ -29,6 +32,7 @@ class DeleteUnverifiedUsersCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $unverifiedUsers = $this->userRepository->getUnverified();
+        $this->logger->info('Unverified_users_deleted : ' . count($unverifiedUsers));
         if($unverifiedUsers) {
             foreach($unverifiedUsers as $user) {
                 if($user->getCustomer()) {
