@@ -119,9 +119,9 @@ class RegistrationController extends AbstractController
             // Generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('ngihoul@hotmail.com', 'Bien-Être'))
+                    ->from(new Address('no-reply@bien-etre.be', 'Bien-Être'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Confirmation d\'inscription')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
