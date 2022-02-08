@@ -115,67 +115,79 @@
                 </div>
             </div>
         </section>
-        {% if provider.internships|length > 0 or provider.promotions|length > 0 or provider.images|length > 0 %}
-        <nav class="navBar providerDetail">
-            <ul>
-                {% if provider.internships|length > 0 %}
-                    <li>
-                        <a href="#internship">Stages</a>
-                    </li>
-                {% endif %}
-                {% if provider.promotions|length > 0 %}
-                <li>
-                    <a href="#promotions">Promos</a>
-                </li>
-                {% endif %}
-                {% if provider.images|length > 0 %}
-                <li>
-                    <a href="#photos">Photos</a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
-        {% endif %}
-        {% if provider.internships|length > 0 %}
-            <section id="internship" class="internship providerDetail">
-                <div class="wrapper">
-                    <h2>Stages</h2>
-                    {% for internship in provider.internships %}
-                        <div class="bigCard internship">
-                            <div class="img-container">
-                                <img loading="lazy" src="{{ asset('/img/category.jpg') }}" alt="Image {{ internship.name }}" />
-                            </div>
-                            <div class="bigCard-content">
-                                <div class="bigCard-heading">
-                                    <h3>{{ internship.name }}</h3>
-                                    <p class="price">{{ internship.price }}€</p>
-                                    <p class="date">{{ internship.startAt|date('d/m/Y') }} au {{ internship.endAt|date('d/m/Y') }}</p>
-                                </div>
-                                <p class="description">{{ internship.description }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </section>
+    {# Only accessible if correctly logged to the website #}
+        {% if app.user %}
+            {% if provider.internships|length > 0 or provider.promotions|length > 0 or provider.images|length > 0 %}
+                <nav class="navBar providerDetail">
+                    <ul>
+                        {% if provider.internships|length > 0 %}
+                            <li>
+                                <a href="#internship">Stages</a>
+                            </li>
+                        {% endif %}
+                        {% if provider.promotions|length > 0 %}
+                            <li>
+                                <a href="#promotions">Promos</a>
+                            </li>
+                        {% endif %}
+                        {% if provider.images|length > 0 %}
+                            <li>
+                                <a href="#photos">Photos</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
             {% endif %}
-            {% if provider.promotions|length > 0 %}
-            <section id="promotions" class="promotions providerDetail">
-                <div class="wrapper">
-                    <h2>Promotions du moment</h2>
-                    <div class="smallCard-container">
-                        {% for promotion in provider.promotions %}
-                            <div class="smallCard">
-                                <img loading="lazy" src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="Image {{ provider.name }} stage" />
-                                <div class="smallCard-content">
-                                    <p class="name">{{ promotion.name }}</p>
-                                    <p class="category">{{ promotion.description }}</p>
+            {% if provider.internships|length > 0 %}
+                <section id="internship" class="internship providerDetail">
+                    <div class="wrapper">
+                        <h2>Stages</h2>
+                        {% for internship in provider.internships %}
+                            <div class="bigCard internship">
+                                <div class="img-container">
+                                    <img loading="lazy" src="{{ asset('/img/category.jpg') }}" alt="Image {{ internship.name }}" />
+                                </div>
+                                <div class="bigCard-content">
+                                    <div class="bigCard-heading">
+                                        <h3>{{ internship.name }}</h3>
+                                        <p class="price">{{ internship.price }}€</p>
+                                        <p class="date">{{ internship.startAt|date('d/m/Y') }} au {{ internship.endAt|date('d/m/Y') }}</p>
+                                    </div>
+                                    <p class="description">{{ internship.description }}</p>
                                 </div>
                             </div>
                         {% endfor %}
                     </div>
+                </section>
+            {% endif %}
+            {% if provider.promotions|length > 0 %}
+                <section id="promotions" class="promotions providerDetail">
+                    <div class="wrapper">
+                        <h2>Promotions du moment</h2>
+                        <div class="smallCard-container">
+                            {% for promotion in provider.promotions %}
+                                <div class="smallCard">
+                                    <img loading="lazy" src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="Image {{ provider.name }} stage" />
+                                    <div class="smallCard-content">
+                                        <p class="name">{{ promotion.name }}</p>
+                                        <p class="category">{{ promotion.description }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+        {% else %}
+        <section class="unauthorized">
+            <div class="wrapper">
+                <div class="disclamer">
+                    <p>Pour accéder aux promotions et aux stages des prestataires, <br><br> <strong>Connectez-vous</strong> ou <strong>Inscrivez-vous</strong> !</p>
                 </div>
-            </section>
+            </div>
+        </section>
         {% endif %}
+
         {% if provider.images|length > 0 %}
             <section id="photos" class="images providerDetail">
                 <div class="wrapper">
@@ -183,7 +195,7 @@
                     <div class="images-container">
                         {% for image in provider.images %}
                             <div class="image">
-                                <img loading="lazy" src="{{ images_directory ~ image.image }}" alt="Photo {{ provider.name }}" title="">
+                                <img loading="lazy" src="{{ images_directory ~ image.fileName }}" alt="Photo {{ provider.name }}" title="">
                             </div>
                         {% endfor %}
                     </div>

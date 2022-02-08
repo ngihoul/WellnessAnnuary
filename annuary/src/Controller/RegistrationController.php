@@ -43,11 +43,13 @@ class RegistrationController extends AbstractController
             $form = $this->createForm(ProviderType::class, $subUser);
             $formTemplate = 'registration/provider_register.html.twig';
             $typeOfImage = 'logo';
+            $role = 'USER_PROVIDER';
         } elseif ($typeOfUser == 'customer') {
             $subUser = new Customer();
             $form = $this->createForm(CustomerType::class, $subUser);
             $formTemplate = 'registration/customer_register.html.twig';
             $typeOfImage = 'avatar';
+            $role = 'USER_CUSTOMER';
         } else {
             $this->addFlash('error', 'Cette page n\'existe pas');
             return $this->redirectToRoute('home');
@@ -109,8 +111,10 @@ class RegistrationController extends AbstractController
             $image = New Image();
             $image->setType($typeOfImage);
             $image->setFileName($newFileName);
-
             $subUser->addImage($image);
+
+            // Adding roles to the user
+            $user->setRoles([$role]);
 
             // Save data in DB
             $entityManager->persist($subUser);

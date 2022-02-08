@@ -236,6 +236,21 @@ header {
     .searchBtn.hidden {
       display: none;
     }
+
+    .profileBtn {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        right: 8px;
+        bottom: 2px;
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 10px;
+        background-color: limegreen;
+      }
+    }
   }
 
   // * Language menu on Desktop * //
