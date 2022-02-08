@@ -58,6 +58,7 @@ class ProviderRepository extends ServiceEntityRepository
         }
 
         $queryBuilder
+            ->andWhere('u.isVerified = 1')
             ->orderBy('p.name', 'ASC')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
@@ -72,6 +73,7 @@ class ProviderRepository extends ServiceEntityRepository
             ->join('p.serviceCategories', 'c')
             ->join('p.user', 'u')
             ->andWhere('c.id = :id')
+            ->andWhere('u.isVerified = 1')
             ->setParameter(':id', $category)
             ->orderBy('u.registeredOn', 'DESC')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
@@ -85,6 +87,7 @@ class ProviderRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->select('p.id', 'p.name', 'p.description')
             ->andWhere('p.name LIKE :value OR p.description LIKE :value')
+            ->andWhere('u.isVerified = 1')
             ->setParameter(':value', '%'.$query.'%')
             ->orderBy('p.name', 'ASC')
             ->setMaxResults(10)
@@ -105,6 +108,7 @@ class ProviderRepository extends ServiceEntityRepository
     private function createQueryForLastSubscribers() {
         return $this->createQueryBuilder('p')
             ->join('p.user', 'u')
+            ->andWhere('u.isVerified = 1')
             ->orderBy('u.registeredOn', 'DESC')
             ->addOrderBy('p.name', 'ASC');
     }
@@ -122,6 +126,7 @@ class ProviderRepository extends ServiceEntityRepository
             ->setParameter(':id', $provider->getUser()->getId())
             // Category IS Provider.category (multiple categories)
             ->andWhere($this->createQueryBuilder('c')->expr()->in('c', ':c'))
+            ->andWhere('u.isVerified = 1')
             ->setParameter(':c', $provider->getServiceCategories())
             ->orderBy('p.name', 'ASC')
             ->getQuery()
