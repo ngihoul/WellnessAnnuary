@@ -40,9 +40,9 @@ services:
       - dev
 
   cron:
-    container_name: cron_annuaire
     build:
       context: ./cron
+    container_name: cron_annuaire
     depends_on:
       - www
     init: true
