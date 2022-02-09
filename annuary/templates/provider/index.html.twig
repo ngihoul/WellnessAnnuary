@@ -215,7 +215,7 @@
                         {% for similarProvider in similarProviders %}
                             <div class="smallCard">
                                 <a href="{{ path('provider_detail', { id : similarProvider.id } ) }}">
-                                    <img loading="lazy" src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="{{ similarProvider.name }}" />
+                                    <img loading="lazy" src="{{ logo_directory ~ similarProvider.logo }}" alt="{{ similarProvider.name }}" />
                                 </a>
                                 <a href="{{ path('provider_detail', { id : similarProvider.id } ) }}">
                                     <div class="smallCard-content">
