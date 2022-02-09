@@ -43,3 +43,24 @@ section.registration {
     font-weight: bold;
   }
 }
+.form-logo {
+  #previewLogo {
+    text-align: center;
+
+    img {
+      dosplay: block;
+      margin: 0 auto 1.5rem;
+      max-width: 300px;
+      max-height: 30vh;
+    }
+  }
+}
+
+@media screen and (min-width: map-get($responsive-table, "-lg")) {
+  .form-logo {
+    display: flex;
+    > div {
+      width: 50%;
+    }
+  }
+}

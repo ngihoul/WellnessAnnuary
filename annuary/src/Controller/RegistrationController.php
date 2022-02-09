@@ -34,6 +34,11 @@ class RegistrationController extends AbstractController
     #[Route('/register/{typeOfUser}', name: 'registration')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserRepository $userRepository, SluggerInterface $slugger, $typeOfUser): Response
     {
+        // Denied access if user already logged on.
+        if($this->getUser()) {
+            $this->addFlash('error', 'Vous êtes déjà connecté.');
+            return $this->redirectToRoute('home');
+        }
         // Check whether customer or provider form should be displayed.
         $typeOfUser = strtolower($typeOfUser);
 
