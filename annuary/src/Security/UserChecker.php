@@ -29,7 +29,7 @@ class UserChecker implements UserCheckerInterface
                 (new TemplatedEmail())
                     ->from(new Address('ngihoul@hotmail.com', 'Bien-Être'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Confirmation de votre compte')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             throw new CustomUserMessageAuthenticationException("Votre compte n'a pas été verifié. Un nouveau mail de confirmation vous a été envoyé");
