@@ -47,14 +47,12 @@ class RegistrationController extends AbstractController
             $subUser = new Provider();
             $form = $this->createForm(ProviderType::class, $subUser);
             $formTemplate = 'registration/provider_register.html.twig';
-            $typeOfImage = 'logo';
             $logoDirectory = 'logo_directory';
             $role = 'USER_PROVIDER';
         } elseif ($typeOfUser == 'customer') {
             $subUser = new Customer();
             $form = $this->createForm(CustomerType::class, $subUser);
             $formTemplate = 'registration/customer_register.html.twig';
-            $typeOfImage = 'avatar';
             $logoDirectory = 'avatar_directory';
             $role = 'USER_CUSTOMER';
         } else {
@@ -175,7 +173,6 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('registration', ['typeOfUser' => 'customer']);
         }
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Votre compte a été validé. Vous pouvez vous connecter.');
 
         return $this->redirectToRoute('home');
