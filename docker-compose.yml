@@ -9,7 +9,7 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     ports:
-      - 3306:3306
+      - "3306:3306"
     networks: 
       - dev
 
@@ -20,7 +20,7 @@ services:
     depends_on:
       - db
     ports:
-      - 8080:80
+      - "8080:80"
     environment:
       PMA_HOST: db
     networks:
@@ -38,7 +38,30 @@ services:
     restart: always
     networks:
       - dev
-   
+
+  cron:
+    build:
+      context: ./cron
+    container_name: cron_annuaire
+    depends_on:
+      - www
+    init: true
+    restart: always
+    volumes:
+      - ./cron/crontab:/etc/crontab
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - dev
+
+  maildev:
+    image: maildev/maildev
+    container_name: maildev_annuaire
+    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
+    ports:
+      - "8081:80"
+    restart: always
+    networks:
+      - dev
    
 networks:
   dev:

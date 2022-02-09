@@ -160,15 +160,95 @@ header {
     }
   }
 
+  .loginMod {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 100%;
+    width: 100vw;
+    margin-left: 100vw;
+    text-align: center;
+    color: $color-txt-normal;
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'loginModBackground.jpg') center no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+    transition: margin .5s;
+    @include box-shadow(true);
+
+    &.active {
+      margin-left: 0;
+      padding: 0 20px;
+      transition: margin .5s;
+    }
+
+    .registerLink {
+      line-height: .2rem;
+      cursor: pointer;
+      color: darken($color-emphasis, 20%);
+    }
+
+    .cta {
+      a {
+        font-size: .7rem;
+        color: $color-txt-normal;
+        line-height: 1.5rem;
+
+        strong {
+          font-size: .9rem;
+          color: darken($color-emphasis, 20%);
+          font-weight: normal;
+        }
+      }
+    }
+
+    .loginForm-password {
+      margin-bottom: 1.5rem;
+      text-align: left;
+
+      input {
+        margin-bottom: 0;
+      }
+    }
+
+    .loginForm-rememberMe {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 1.5rem;
+
+      label {
+        order: 2;
+      }
+
+      input {
+        order: 1;
+        width: 10%;
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+
   // * Search & Login Buttons on Mobile * //
   .navBtn {
     @include header-icon('right');
 
-    .searchBtn {
-      display: inline-block;
+    .searchBtn.hidden {
+      display: none;
+    }
 
-      &.hidden {
-        display: none;
+    .profileBtn {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        right: 8px;
+        bottom: 2px;
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 10px;
+        background-color: limegreen;
       }
     }
   }
@@ -266,7 +346,6 @@ header {
     }
 
     .navBtn {
-      display: block;
       min-width: 10%;
       width: 10%;
     }
@@ -303,6 +382,53 @@ header {
         margin-top: 5px;
         z-index: 999;
         padding: 20px 20px 0;
+      }
+    }
+
+    .loginMod {
+      height: auto;
+      width: 40%;
+      margin-left: 40%;
+      margin-right: 20%;
+      margin-top: -500px;
+      background: $white;
+      z-index: 99;
+      @include box-shadow(false);
+
+      h1 {
+        display: none;
+      }
+
+      form {
+        display: flex;
+        flex-wrap: wrap;
+
+        .loginForm-mail, .loginForm-password {
+          width: 50%;
+          max-width: 50%;
+          padding: 0 10px;
+          }
+
+        .loginForm-rememberMe {
+          padding: 0 10px;
+          width: 100%;
+
+          label {
+            width: 90%;
+          }
+
+          button {
+            width: 100%;
+            margin-top: 15px;
+          }
+        }
+      }
+
+      &.active {
+        margin-left: 40%;
+        margin-right: 20%;
+        margin-top: 5px;
+        padding: 20px;
       }
     }
   }

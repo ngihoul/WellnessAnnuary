@@ -83,6 +83,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $privacyPolicy;
+
     public function __construct()
     {
         $this->registeredOn = new \DateTime();
@@ -287,6 +292,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getPrivacyPolicy(): ?bool
+    {
+        return $this->privacyPolicy;
+    }
+
+    public function setPrivacyPolicy(bool $privacyPolicy): self
+    {
+        $this->privacyPolicy = $privacyPolicy;
 
         return $this;
     }

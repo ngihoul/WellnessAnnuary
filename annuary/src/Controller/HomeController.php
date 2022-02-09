@@ -61,7 +61,7 @@ class HomeController extends AbstractController
 
         // });
 
-        $images = $this->imageRepository->findAll();
+        $images = $this->imageRepository->getForSlider();
 
 
         return $this->render('home/index.html.twig', [

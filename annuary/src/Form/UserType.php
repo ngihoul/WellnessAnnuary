@@ -110,6 +110,13 @@ class UserType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('privacyPolicy', CheckboxType::class, [
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Veuillez accepter la politique de confidentialité',
+                    ]),
+                ],
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Direction le paradis !',
             ])

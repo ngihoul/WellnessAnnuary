@@ -14,9 +14,11 @@ if(document.forms['provider'] !== undefined) {
 }
 
 const emailField = document.getElementById('provider_user_email') || document.getElementById('customer_user_email');
+const logoField = document.getElementById('provider_logo') || document.getElementById('customer_logo');
 const postCodeField = document.getElementById('provider_user_postCode') || document.getElementById('customer_user_postCode');
 const passwordField = document.getElementById('provider_user_password') || document.getElementById('customer_user_password');
 const passwordConfirmField = document.getElementById('provider_user_confirmPassword') || document.getElementById('customer_user_confirmPassword');
+const privacyPolicyField = document.getElementById('provider_user_privacyPolicy') || document.getElementById('customer_user_privacyPolicy')
 const submitBtn = document.getElementById('provider_user_submit') || document.getElementById('customer_user_submit');
 
 // * Constants * //
@@ -26,6 +28,8 @@ const HTML_CLASS_NOT_VALIDATED = 'notValidated';
 const HTML_CLASS_ERROR_MSG = 'error-message';
 const HTML_CLASS_INFO_MSG = 'info-message';
 const HTML_CLASS_LABEL_VALID = 'labelValidated';
+const HTML_CLASS_PRIVACY_VALIDATED = 'privacyValidated';
+const HTML_CLASS_PRIVACY_NOT_VALIDATED = 'privacyNotValidated';
 const PHONENUMBER_MIN_LENGTH = 12;
 const PHONENUMBER_MAX_LENGTH = 13;
 const VTANUMBER_MIN_LENGTH = 12;
@@ -33,6 +37,7 @@ const VTANUMBER_MAX_LENGTH = 13;
 const POSTCODE_LENGTH = 4;
 const PASSWORD_MIN_LENGTH = 7;
 const PASSWORD_MAX_LENGTH = 255;
+const IMAGE_EXTENSIONS_ALLOWED = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
 
 // * Messages * //
 const MSG_BLANK = 'Veuillez compléter ce champ';
@@ -43,6 +48,7 @@ const MSG_NOT_EMAIL = 'Format attendu : exemple@exemple.be';
 const MSG_NOT_POSTCODE = 'Format attendu : XXXX';
 const MSG_NOT_PASSWORD = 'Le mot de passe doit être de minimum 7 caractères et doit contenir au moins : <br> - une lettre majuscule <br> - une lettre minuscule <br> - un chiffre <br> - un caractère spécial (? ou ! ou @)';
 const MSG_NOT_SIMILAR = 'Les mots de passe ne sont pas identiques';
+const MSG_NOT_IMAGE = 'L\'image doit être au format JPG, PNG ou GIF et ne pas dépasser 1Mo';
 
 // ** Functions ** //
 // * Add style if field is validated or not * //
@@ -161,6 +167,32 @@ const passwordIsSimilar = field => {
     return field.value == passwordField.value ? true : false;
 }
 
+// ** check if logo is valid ** //
+logoField.addEventListener('change', () => {
+   isValidImage(logoField) ? displayImage(logoField) : fieldNotValidated(logoField, MSG_NOT_IMAGE);
+});
+
+const displayImage = field => {
+    // Format validated field
+    fieldValidated(field);
+    // If user change of logo, delete the first choice.
+    if(document.getElementById('previewLogo')) {
+        document.getElementById('previewLogo').remove();
+    }
+    // Display the logo next to the field
+    let img = field.files[0];
+    let newDiv = document.createElement('div');
+    let imgContainer = document.createElement('img');
+    imgContainer.src = URL.createObjectURL(img);
+    newDiv.id = 'previewLogo';
+    newDiv.appendChild(imgContainer);
+    logoField.parentNode.parentNode.appendChild(newDiv);
+}
+
+const isValidImage = field => {
+    return IMAGE_EXTENSIONS_ALLOWED.exec(field.value) && field.files[0].size <= 1024000 ? true : false;
+}
+
 // ** Scripts ** //
 // Only for Provider Registration form
 if(document.forms['provider'] !== undefined) {
@@ -172,6 +204,7 @@ if(document.forms['provider'] !== undefined) {
             input != postCodeField &&
             input != passwordField &&
             input != passwordConfirmField &&
+            input != logoField &&
             input != submitBtn) {
 
             input.addEventListener('focusout', () => {
@@ -200,6 +233,8 @@ if(document.forms['provider'] !== undefined) {
             input != passwordField &&
             input != passwordConfirmField &&
             input != newsletterField &&
+            input != privacyPolicyField &&
+            input != logoField &&
             input != submitBtn) {
 
             input.addEventListener('focusout', () => {
@@ -230,6 +265,26 @@ passwordConfirmField.addEventListener('focusout', () => {
         formatIfPasswordsNotSimilar(passwordConfirmField);
     }
 });
+
+// PrivacyPolicy validation
+const formatIfPrivacyPolicyNotChecked = field => {
+    if(field.checked) {
+        field.previousSibling.classList.add(HTML_CLASS_PRIVACY_VALIDATED);
+        field.previousSibling.classList.remove(HTML_CLASS_PRIVACY_NOT_VALIDATED);
+    } else {
+        field.previousSibling.classList.add(HTML_CLASS_PRIVACY_NOT_VALIDATED);
+        field.previousSibling.classList.remove(HTML_CLASS_PRIVACY_VALIDATED);
+    }
+}
+
+formatIfPrivacyPolicyNotChecked(privacyPolicyField);
+// On change
+privacyPolicyField.addEventListener('change', () => {
+    formatIfPrivacyPolicyNotChecked(privacyPolicyField);
+})
+
+
+
 
 
 

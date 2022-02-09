@@ -34,6 +34,11 @@ class RegistrationController extends AbstractController
     #[Route('/register/{typeOfUser}', name: 'registration')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserRepository $userRepository, SluggerInterface $slugger, $typeOfUser): Response
     {
+        // Denied access if user already logged on.
+        if($this->getUser()) {
+            $this->addFlash('error', 'Vous êtes déjà connecté.');
+            return $this->redirectToRoute('home');
+        }
         // Check whether customer or provider form should be displayed.
         $typeOfUser = strtolower($typeOfUser);
 
@@ -42,12 +47,14 @@ class RegistrationController extends AbstractController
             $subUser = new Provider();
             $form = $this->createForm(ProviderType::class, $subUser);
             $formTemplate = 'registration/provider_register.html.twig';
-            $typeOfImage = 'logo';
+            $logoDirectory = 'logo_directory';
+            $role = 'USER_PROVIDER';
         } elseif ($typeOfUser == 'customer') {
             $subUser = new Customer();
             $form = $this->createForm(CustomerType::class, $subUser);
             $formTemplate = 'registration/customer_register.html.twig';
-            $typeOfImage = 'avatar';
+            $logoDirectory = 'avatar_directory';
+            $role = 'USER_CUSTOMER';
         } else {
             $this->addFlash('error', 'Cette page n\'existe pas');
             return $this->redirectToRoute('home');
@@ -63,12 +70,9 @@ class RegistrationController extends AbstractController
 
             // Redirect user to forgotten password page if email already exists in DB
             if($userExist) {
-                $this->addFlash('error', 'Il semble vous avez déjà un compte.');
+                $this->addFlash('error', 'Il semble que vous avez déjà un compte.');
 
-                // TODO : redirect to forgotten password page
-                return $this->render('registration/provider_register.html.twig', [
-                    'form' => $form->createView(),
-                ]);
+                return $this->redirectToRoute('home');
             }
 
             // Check if password confirmation is similar to password
@@ -93,27 +97,34 @@ class RegistrationController extends AbstractController
 
             // Save logo in DB
             $logo = $form->get('logo')->getData();
+            // logo chosen by user ? If yes, save it in DB
+            if($logo) {
+                $originalFileName = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);
 
-            $originalFileName = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName . '-' . uniqid() . '.' . $logo->guessExtension();
 
-            $safeFileName = $slugger->slug($originalFileName);
-            $newFileName = $safeFileName . '-' . uniqid() . '.' . $logo->guessExtension();
-
-            try {
-                $logo->move(
-                    $this->getParameter('images_directory'),
-                    $newFileName
-                );
-            } catch (FileException $e) {
-                // TODO: handle exception
+                try {
+                    $logo->move(
+                        $this->getParameter($logoDirectory),
+                        $newFileName
+                    );
+                } catch (FileException $e) {
+                    dd('Impossible de sauver image ' . $e);
+                }
+            // If logo not chosen, default logo.
+            } else {
+                $newFileName = 'default.png';
             }
 
-            // Create Image Object
-            $image = New Image();
-            $image->setType($typeOfImage);
-            $image->setFileName($newFileName);
+            if($typeOfUser == 'customer') {
+                $subUser->setAvatar($newFileName);
+            } else if ($typeOfUser == "provider") {
+                $subUser->setLogo($newFileName);
+            }
 
-            $subUser->addImage($image);
+            // Adding roles to the user
+            $user->setRoles([$role]);
 
             // Save data in DB
             $entityManager->persist($subUser);
@@ -122,9 +133,9 @@ class RegistrationController extends AbstractController
             // Generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('ngihoul@hotmail.com', 'Bien-Être'))
+                    ->from(new Address('no-reply@bien-etre.be', 'Bien-Être'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Confirmation d\'inscription')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
@@ -162,7 +173,6 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('registration', ['typeOfUser' => 'customer']);
         }
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Votre compte a été validé. Vous pouvez vous connecter.');
 
         return $this->redirectToRoute('home');

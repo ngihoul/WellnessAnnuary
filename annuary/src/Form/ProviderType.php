@@ -37,6 +37,7 @@ class ProviderType extends AbstractType
                 'label' => 'Logo',
                 'multiple' => false,
                 'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
