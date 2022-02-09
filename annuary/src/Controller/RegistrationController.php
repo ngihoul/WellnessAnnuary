@@ -48,12 +48,14 @@ class RegistrationController extends AbstractController
             $form = $this->createForm(ProviderType::class, $subUser);
             $formTemplate = 'registration/provider_register.html.twig';
             $typeOfImage = 'logo';
+            $logoDirectory = 'logo_directory';
             $role = 'USER_PROVIDER';
         } elseif ($typeOfUser == 'customer') {
             $subUser = new Customer();
             $form = $this->createForm(CustomerType::class, $subUser);
             $formTemplate = 'registration/customer_register.html.twig';
             $typeOfImage = 'avatar';
+            $logoDirectory = 'avatar_directory';
             $role = 'USER_CUSTOMER';
         } else {
             $this->addFlash('error', 'Cette page n\'existe pas');
@@ -97,26 +99,31 @@ class RegistrationController extends AbstractController
 
             // Save logo in DB
             $logo = $form->get('logo')->getData();
+            // logo chosen by user ? If yes, save it in DB
+            if($logo) {
+                $originalFileName = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);
 
-            $originalFileName = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName . '-' . uniqid() . '.' . $logo->guessExtension();
 
-            $safeFileName = $slugger->slug($originalFileName);
-            $newFileName = $safeFileName . '-' . uniqid() . '.' . $logo->guessExtension();
-
-            try {
-                $logo->move(
-                    $this->getParameter('images_directory'),
-                    $newFileName
-                );
-            } catch (FileException $e) {
-                dd('Impossible de sauver image ' . $e);
+                try {
+                    $logo->move(
+                        $this->getParameter($logoDirectory),
+                        $newFileName
+                    );
+                } catch (FileException $e) {
+                    dd('Impossible de sauver image ' . $e);
+                }
+            // If logo not chosen, default logo.
+            } else {
+                $newFileName = 'default.png';
             }
 
-            // Create Image Object
-            $image = New Image();
-            $image->setType($typeOfImage);
-            $image->setFileName($newFileName);
-            $subUser->addImage($image);
+            if($typeOfUser == 'customer') {
+                $subUser->setAvatar($newFileName);
+            } else if ($typeOfUser == "provider") {
+                $subUser->setLogo($newFileName);
+            }
 
             // Adding roles to the user
             $user->setRoles([$role]);

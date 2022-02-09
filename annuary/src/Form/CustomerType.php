@@ -49,6 +49,7 @@ class CustomerType extends AbstractType
                 'label' => 'Avatar',
                 'multiple' => false,
                 'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
