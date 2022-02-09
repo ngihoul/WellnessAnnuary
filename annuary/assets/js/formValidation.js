@@ -237,7 +237,7 @@ if(document.forms['provider'] !== undefined) {
             input != logoField &&
             input != submitBtn) {
 
-            input.addEventListener('input', () => {
+            input.addEventListener('focusout', () => {
                 formatIfNotBlank(input);
             });
         }
@@ -245,22 +245,22 @@ if(document.forms['provider'] !== undefined) {
 }
 
 // For all registration forms
-emailField.addEventListener('input', () => {
+emailField.addEventListener('focusout', () => {
     formatIfNotEmail(emailField);
 });
 
-postCodeField.addEventListener('input', () => {
+postCodeField.addEventListener('focusout', () => {
     formatIfNotPostCode(postCodeField);
 });
 
 // Add message to password
 addMessage(passwordField, MSG_NOT_PASSWORD, HTML_CLASS_INFO_MSG);
 
-passwordField.addEventListener('input', () => {
+passwordField.addEventListener('focusout', () => {
     formatIfNotPassword(passwordField);
 });
 
-passwordConfirmField.addEventListener('input', () => {
+passwordConfirmField.addEventListener('focusout', () => {
     if(!isBlank(passwordConfirmField)) {
         formatIfPasswordsNotSimilar(passwordConfirmField);
     }

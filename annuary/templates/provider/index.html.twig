@@ -4,6 +4,11 @@
     {{ parent() }} | {{ provider.name }}
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('providerPage') }}
+{% endblock %}
+
 {% block body %}
     <main>
         <section class="heading listing providerDetail">
@@ -182,7 +187,7 @@
         <section class="unauthorized">
             <div class="wrapper">
                 <div class="disclamer">
-                    <p>Pour accéder aux promotions et aux stages des prestataires, <br><br> <strong>Connectez-vous</strong> ou <strong>Inscrivez-vous</strong> !</p>
+                    <p>Pour accéder aux promotions et aux stages des prestataires, <br><br> <strong class="openLoginForm">Connectez-vous</strong><br> ou <br><strong class="openLoginForm">Inscrivez-vous</strong> !</p>
                 </div>
             </div>
         </section>
