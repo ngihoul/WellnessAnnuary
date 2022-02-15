@@ -25,28 +25,28 @@
             {{ form_start(form) }}
                 <div class="form-provider-identity">
                     <div class="form-name">
-                        {{ form_row(form.name) }}
+                        {{ form_row(form.name, { 'id': 'provider_name'}) }}
                     </div>
                     <div class="form-logo">
-                        {{ form_row(form.logo) }}
+                        {{ form_row(form.logo, { 'id': 'provider_logo'}) }}
                     </div>
                 </div>
                 <div class="form-provider-contact">
                     <div class="form-website">
-                        {{ form_row(form.website) }}
+                        {{ form_row(form.website, { 'id': 'provider_website'}) }}
                     </div>
                     <div class="form-phoneNumber">
-                        {{ form_row(form.phoneNumber) }}
+                        {{ form_row(form.phoneNumber, { 'id': 'provider_phoneNumber'}) }}
                     </div>
                     <div class="form-VTANumber">
-                        {{ form_row(form.VTANumber) }}
+                        {{ form_row(form.VTANumber, { 'id': 'provider_VTANumber'}) }}
                     </div>
                 </div>
                 <div class="form-description">
-                    {{ form_row(form.description) }}
+                    {{ form_row(form.description, { 'id': 'provider_description'}) }}
                 </div>
                 <h2>Vos données</h2>
-                {{ form_row(form.user.email) }}
+                {{ form_row(form.user.email, { 'id': 'provider_user_email'}) }}
                 <div class="form-address">
                     <div class="form-address-street">
                         {{ form_row(form.user.addressStreet) }}
@@ -55,13 +55,13 @@
                         {{ form_row(form.user.addressNumber) }}
                     </div>
                     <div class="form-address-postcode">
-                        {{ form_row(form.user.postCode) }}
+                        {{ form_row(form.user.postCode, { 'id': 'provider_user_postCode'}) }}
                     </div>
                     <div class="form-address-locality">
-                        {{ form_row(form.user.locality) }}
+                        {{ form_row(form.user.locality, { 'id': 'provider_user_locality'}) }}
                     </div>
                 </div>
-                {{ form_row(form.user.submit) }}
+                {{ form_row(form.user.submit, { 'id': 'provider_user_submit'}) }}
             {{ form_end(form) }}
         </div>
     </section>
