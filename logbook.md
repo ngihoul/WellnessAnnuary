@@ -99,8 +99,68 @@
 * Optimisation of category caching for the search form and menu
 * Mobile menu review
 
-## Next to-do
-* Improve messages management
+## 13th January 2022
+* First evaluation
+
+## 18th January 2022
+* Lazy loading on images
+* Adding alt attribute on image
+* Adding favicon
+* Refactoring HTML, SCSS & Controller
+
+## 20th January 2022
+* Installing Mailer & Google mailer
+* Creating Register forms
+
+## 23rd January 2022
+* Provider registration form - Front & Backend
+
+## 25th January 2022
+* Customer registration form - Front & Backend
+
+## 29th January 2022
+* Adding constraints on registration form - Frontend in JavaScript & Backend in FormType
+
+## 30th January 2022
+* Refactoring JavaScript
+
+## 1st February 2022
+* Modifying Image Entity :
+** Adding fileName & type fields
+
+## 3rd February 2022
+* Adding logo and avatar to registration forms
+* Creating Authentication - Backend & Frontend
+
+## 5th February 2022
+* Finishing of Authentication form - Backend & Frontend
+
+## 6th February 2022
+* Adding privacy policy to registration form
+* Adding Remember-me feature to Login form
+* Creating reset-password feature
+* Handling Exceptions on Login
+* Installing Cron container on Docker
+
+## 7th February 2022
+* Setting up cronjob to delete automatically unverified users
+* Adding logs when unverified users are deleted
+
+## 8th February 2022
+* Setting up Maildev container in Docker
+* Styling Emails
+* Restricting access to internships & promotions if not logged
+* Displaying only verified providers
+
+## 9th February 2022
+* Image validation in javaScript
+* Updating Slider backend
+* Adding logo field to Provider Entity & avatar field to Customer field
+* Modifying logo management for Provider
+* Fixing authentication
+
+## 10th February 2022
+* Second evaluation
 
 ### Remarks
 * Time constraints : tablet version webdesign will not be made
