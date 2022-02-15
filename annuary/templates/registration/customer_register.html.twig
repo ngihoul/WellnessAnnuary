@@ -63,6 +63,12 @@
                 <div class="form-newsletter">
                     {{ form_row(form.newsletter) }}
                 </div>
+                <div class="form-privacyPolicy">
+                    {{ form_row(form.user.privacyPolicy, {
+                        'label': 'J\'accepte <a href="/privacy-policy">la politique de confiendiatlité</a>',
+                        'label_html': true,
+                    }) }}
+                </div>
                 {{ form_row(form.user.submit) }}
             {{ form_end(form) }}
         </div>

@@ -3,6 +3,10 @@ twig:
     globals:
         site_name: "Bien-Être"
         images_directory: 'http://localhost:8000/uploads/'
+        logo_directory: 'http://localhost:8000/uploads/logo/'
+        avatar_directory: 'http://localhost:8000/uploads/avatar/'
+        ## logo_directory: '%kernel.project_dir%/public/uploads/logo/'
+        ## avatar_directory: '%kernel.project_dir%/public/uploads/avatar/'
         ## images_directory: '%kernel.project_dir%/public/uploads/' ##
 
 when@test:

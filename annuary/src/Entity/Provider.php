@@ -87,6 +87,11 @@ class Provider
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $logo;
+
     public function __construct()
     {
         $this->internships = new ArrayCollection();
@@ -338,6 +343,18 @@ class Provider
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(string $logo): self
+    {
+        $this->logo = $logo;
 
         return $this;
     }

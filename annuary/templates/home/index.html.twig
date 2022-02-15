@@ -65,7 +65,7 @@
                 {% for lastSubscriber in lastSubscribers %}
                     <div class="smallCard">
                         <a href="{{ path('provider_detail', { id : lastSubscriber.id } ) }}">
-                            <img loading="lazy" src="{{ asset('/img/thumbnail_provider.jpg') }}" alt="Image {{ lastSubscriber.name }}" />
+                            <img loading="lazy" src="{{ logo_directory ~ lastSubscriber.logo }}" alt="Image {{ lastSubscriber.name }}" />
                         </a>
                         <a href="{{ path('provider_detail', { id : lastSubscriber.id } ) }}">
                             <div class="smallCard-content">

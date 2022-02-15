@@ -7,7 +7,7 @@ section.registration {
   padding-bottom: 2.5rem;
 }
 
-.form-newsletter > div {
+.form-newsletter > div, .form-privacyPolicy > div {
   display: flex;
   align-items: center;
   margin-bottom: 1.5rem;
@@ -32,9 +32,35 @@ section.registration {
   border-radius: 10px;
   margin-bottom: 2.5rem;
   text-align: center;
-  padding: .5rem;
+  padding: .8rem;
+  p {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+  }
+
 
   a {
     font-weight: bold;
+  }
+}
+.form-logo {
+  #previewLogo {
+    text-align: center;
+
+    img {
+      dosplay: block;
+      margin: 0 auto 1.5rem;
+      max-width: 300px;
+      max-height: 30vh;
+    }
+  }
+}
+
+@media screen and (min-width: map-get($responsive-table, "-lg")) {
+  .form-logo {
+    display: flex;
+    > div {
+      width: 50%;
+    }
   }
 }
