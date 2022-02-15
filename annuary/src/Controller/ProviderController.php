@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProviderRepository;
+use App\Form\UpdateProviderType;
 
 #[Route('/provider')]
 class ProviderController extends AbstractController
@@ -36,6 +38,26 @@ class ProviderController extends AbstractController
         return $this->render('provider/index.html.twig', [
             'provider' => $provider,
             'similarProviders' => $similarProviders,
+        ]);
+    }
+
+    #[Route('/update/{id}', name: 'provider_update')]
+    public function update(Request $request, $id) {
+        // Fetch data of targeted provider
+        $provider = $this->providerRepository->find($id);
+
+        // Handling form
+        $form = $this->createForm(UpdateProviderType::class, $provider);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $provider = $form->getData();
+            dd($provider);
+        }
+
+        return $this->renderForm('provider/update_provider.html.twig', [
+            'form' => $form,
         ]);
     }
 }

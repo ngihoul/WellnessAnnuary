@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('registration') }}
+    {{ encore_entry_script_tags('formValidation') }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Modifier votre page
+{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+    <section class="heading registration">
+        <div class="wrapper">
+            <h1>Modifier votre page</h1>
+        </div>
+    </section>
+    <section class="form-registration">
+        <div class="wrapper">
+            <h2>Votre société</h2>
+            {{ form_start(form) }}
+                <div class="form-provider-identity">
+                    <div class="form-name">
+                        {{ form_row(form.name) }}
+                    </div>
+                    <div class="form-logo">
+                        {{ form_row(form.logo) }}
+                    </div>
+                </div>
+                <div class="form-provider-contact">
+                    <div class="form-website">
+                        {{ form_row(form.website) }}
+                    </div>
+                    <div class="form-phoneNumber">
+                        {{ form_row(form.phoneNumber) }}
+                    </div>
+                    <div class="form-VTANumber">
+                        {{ form_row(form.VTANumber) }}
+                    </div>
+                </div>
+                <div class="form-description">
+                    {{ form_row(form.description) }}
+                </div>
+                <h2>Vos données</h2>
+                {{ form_row(form.user.email) }}
+                <div class="form-address">
+                    <div class="form-address-street">
+                        {{ form_row(form.user.addressStreet) }}
+                    </div>
+                    <div class="form-address-number">
+                        {{ form_row(form.user.addressNumber) }}
+                    </div>
+                    <div class="form-address-postcode">
+                        {{ form_row(form.user.postCode) }}
+                    </div>
+                    <div class="form-address-locality">
+                        {{ form_row(form.user.locality) }}
+                    </div>
+                </div>
+                {{ form_row(form.user.submit) }}
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}
