@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Ajouter un stage
+{% endblock %}
+
+{% block body %}
+    <section class="heading addInternship">
+        <div class="wrapper">
+            <h1>Ajouter un stage</h1>
+        </div>
+    </section>
+    <section class="form-internship">
+        <div class="wrapper">
+            {{ form(form) }}
+        </div>
+    </section>
+{% endblock %}

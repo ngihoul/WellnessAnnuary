@@ -12,6 +12,8 @@ use App\Entity\Provider;
 use App\Repository\ProviderRepository;
 use App\Form\UpdateProviderType;
 use App\Service\ImageService;
+use App\Entity\Internship;
+use App\Form\InternshipType;
 
 #[Route('/provider')]
 class ProviderController extends AbstractController
@@ -84,6 +86,19 @@ class ProviderController extends AbstractController
         return $this->renderForm('provider/update_provider.html.twig', [
             'form' => $form,
             'image' => $provider->getLogo(),
+        ]);
+    }
+
+    #[Route('/{id}/internship/add', name: 'provider_internship_add')]
+    public function addInternship($id) {
+        // Fetch data of targeted provider
+        $provider = $this->providerRepository->find($id);
+        $internship = new Internship();
+
+        $form = $this->createForm(InternshipType::class, $internship);
+
+        return $this->renderForm('internship/add.html.twig', [
+            'form' => $form,
         ]);
     }
 }
