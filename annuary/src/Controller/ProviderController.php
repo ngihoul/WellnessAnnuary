@@ -83,6 +83,7 @@ class ProviderController extends AbstractController
 
         return $this->renderForm('provider/update_provider.html.twig', [
             'form' => $form,
+            'image' => $provider->getLogo(),
         ]);
     }
 }

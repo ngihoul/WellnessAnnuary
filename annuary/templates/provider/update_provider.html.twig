@@ -22,13 +22,16 @@
     <section class="form-registration">
         <div class="wrapper">
             <h2>Votre société</h2>
-            {{ form_start(form) }}
+            {{ form_start(form, { name: 'provider'}) }}
                 <div class="form-provider-identity">
                     <div class="form-name">
                         {{ form_row(form.name, { 'id': 'provider_name'}) }}
                     </div>
                     <div class="form-logo">
                         {{ form_row(form.logo, { 'id': 'provider_logo'}) }}
+                        <div id="previewLogo">
+                            <img src="{{ logo_directory ~ image }}">
+                        </div>
                     </div>
                 </div>
                 <div class="form-provider-contact">
