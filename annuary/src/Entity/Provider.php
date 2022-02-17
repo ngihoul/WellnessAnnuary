@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Provider
 {
+    const LOGO_DIRECTORY = 'logo_directory';
+    const LOGO_DEFAULT = 'default.png';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

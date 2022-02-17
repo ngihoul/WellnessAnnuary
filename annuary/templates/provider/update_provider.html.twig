@@ -49,10 +49,10 @@
                 {{ form_row(form.user.email, { 'id': 'provider_user_email'}) }}
                 <div class="form-address">
                     <div class="form-address-street">
-                        {{ form_row(form.user.addressStreet) }}
+                        {{ form_row(form.user.addressStreet, { 'id': 'provider_user_addressStreet'}) }}
                     </div>
                     <div class="form-address-number">
-                        {{ form_row(form.user.addressNumber) }}
+                        {{ form_row(form.user.addressNumber, { 'id': 'provider_user_addressNumber'}) }}
                     </div>
                     <div class="form-address-postcode">
                         {{ form_row(form.user.postCode, { 'id': 'provider_user_postCode'}) }}

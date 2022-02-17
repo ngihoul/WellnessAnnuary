@@ -98,7 +98,9 @@ class UpdateProviderType extends AbstractType
                 'label' => 'Description',
                 'required' => false,
             ])
-            ->add('user', UpdateUserType::class)
+            ->add('user', UpdateUserType::class, [
+                'postCode' => $options['postCode'],
+            ])
         ;
     }
 
@@ -106,6 +108,7 @@ class UpdateProviderType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Provider::class,
+            'postCode' => '',
         ]);
     }
 }

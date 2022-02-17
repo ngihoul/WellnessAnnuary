@@ -64,6 +64,7 @@ class UpdateUserType extends AbstractType
             ])
             ->add('postCode', TextType::class, [
                 'label' => 'Code postal',
+                'data' => $options['postCode'],
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
@@ -85,6 +86,7 @@ class UpdateUserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'postCode' => '',
         ]);
     }
 }

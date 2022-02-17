@@ -30,3 +30,4 @@ services:
     Symfony\Component\Cache\Adapter\TagAwareAdapterInterface:
         class: Symfony\Component\Cache\Adapter\TagAwareAdapter
         arguments: ['@cache.app']
+
