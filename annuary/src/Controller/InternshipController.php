@@ -12,7 +12,7 @@ use App\Entity\Internship;
 use App\Form\InternshipType;
 use App\Repository\InternshipRepository;
 
-#[Route('/internship', name: 'provider_internship_add')]
+#[Route('/internship')]
 class InternshipController extends AbstractController
 {
     private InternshipRepository $internshipRepository;
@@ -23,7 +23,7 @@ class InternshipController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/add', name: 'provider_internship_add')]
+    #[Route('/add', name: 'internship_add')]
     #[IsGranted('ROLE_PROVIDER')]
     public function add(Request $request): Response {
         $internship = new Internship();
@@ -42,12 +42,12 @@ class InternshipController extends AbstractController
             $this->entityManager->flush();
         }
 
-        return $this->renderForm('internship/add.html.twig', [
+        return $this->renderForm('internship/form.html.twig', [
             'form' => $form,
         ]);
     }
 
-    #[Route('/update/{id}', name: 'provider_internship_update')]
+    #[Route('/update/{id}', name: 'internship_update')]
     #[IsGranted('ROLE_PROVIDER')]
     public function update(Request $request, $id): Response {
         $internship = $this->internshipRepository->find($id);
@@ -70,7 +70,7 @@ class InternshipController extends AbstractController
                 $this->entityManager->flush();
             }
 
-            return $this->renderForm('internship/add.html.twig', [
+            return $this->renderForm('internship/form.html.twig', [
                 'form' => $form,
             ]);
         } else {
@@ -79,7 +79,7 @@ class InternshipController extends AbstractController
         }
     }
 
-    #[Route('/delete/{id}', name: 'provider_internship_delete')]
+    #[Route('/delete/{id}', name: 'internship_delete')]
     #[IsGranted('ROLE_PROVIDER')]
     public function delete(Request $request, $id): Response {
         $internship = $this->internshipRepository->find($id);

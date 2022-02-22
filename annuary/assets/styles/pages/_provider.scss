@@ -229,6 +229,43 @@ section.providerDetail.content {
   }
 }
 
+.internship .wrapper {
+  position: relative;
+
+  .addLink {
+    position: absolute;
+    top: -.65rem;
+    right: 20px;
+    color: $color-cta;
+    border: 2px solid $color-cta;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 2.5rem;
+    height: 2.5rem;
+    text-align: center;
+    line-height: 2.3rem;
+    cursor: pointer;
+  }
+
+  .actionsLink {
+    text-align: right;
+    padding-top: 1.5rem;
+
+    a {
+      font-size: .8rem;
+      color: $color-cta;
+      border: 2px solid $color-cta;
+      padding: .25rem 1rem;
+      border-radius: 50px;
+    }
+
+    .deleteLink {
+      margin-left: .5rem;
+    }
+  }
+}
+
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
   .providerDetail {
 

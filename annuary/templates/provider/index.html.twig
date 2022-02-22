@@ -26,7 +26,6 @@
                             </svg>
                             Modifier votre page
                         </a>
-
                     </div>
                     {% endif %}
                 </div>
@@ -160,6 +159,9 @@
                 <section id="internship" class="internship providerDetail">
                     <div class="wrapper">
                         <h2>Stages</h2>
+                        {% if app.user.id is defined and app.user.id == provider.user.id %}
+                            <a class="addLink" href="{{ path('internship_add') }}">+</a>
+                        {% endif %}
                         {% for internship in provider.internships %}
                             <div class="bigCard internship">
                                 <div class="img-container">
@@ -172,6 +174,14 @@
                                         <p class="date">{{ internship.startAt|date('d/m/Y') }} au {{ internship.endAt|date('d/m/Y') }}</p>
                                     </div>
                                     <p class="description">{{ internship.description }}</p>
+
+                                    {% if app.user.id is defined and app.user.id == provider.user.id %}
+                                    <div class="actionsLink">
+                                        <a class="updateLink" href="{{ path('internship_update', { id : internship.id }) }}">Modifier</a>
+                                        <a class="deleteLink" href="{{ path('internship_delete', { id : internship.id }) }}">Supprimer</a>
+                                    </div>
+                                    {% endif %}
+
                                 </div>
                             </div>
                         {% endfor %}
