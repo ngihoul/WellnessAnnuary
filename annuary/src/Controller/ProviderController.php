@@ -40,6 +40,11 @@ class ProviderController extends AbstractController
         // Fetch data of targeted provider
         $provider = $this->providerRepository->find($id);
 
+        if(!$provider) {
+            $this->addFlash('error', 'Cette page n\'existe pas');
+            return $this->redirectToRoute('home');
+        }
+
         // Find similar providers according categories & localization
         $similarProviders = $this->providerRepository->findSimilar($provider);
 
@@ -54,51 +59,52 @@ class ProviderController extends AbstractController
      * @throws \Doctrine\ORM\ORMException
      */
     #[Route('/update/{id}', name: 'provider_update')]
+    #[IsGranted('ROLE_PROVIDER')]
     public function update(ImageService $imageService, Request $request, $id) {
         // Fetch data of targeted provider
         $provider = $this->providerRepository->find($id);
 
-        // Handling form
-        $form = $this->createForm(UpdateProviderType::class, $provider, [
-            'postCode' => $provider->getUser()->getLocality()->getPostCode()->getPostCode(),
-        ]);
+        if($this->getUser() &&
+            $provider &&
+            $this->isOwner($provider)) {
 
-        $form->handleRequest($request);
+            // Handling form
+            $form = $this->createForm(UpdateProviderType::class, $provider, [
+                'postCode' => $provider->getUser()->getLocality()->getPostCode()->getPostCode(),
+            ]);
 
-        if($form->isSubmitted() && $form->isValid()) {
-            $provider = $form->getData();
+            $form->handleRequest($request);
 
-            $logo = $form->get('logo')->getData();
-            if($logo) {
-                try {
-                    $logoFileName = $imageService->save($logo, Provider::LOGO_DIRECTORY);
-                    $provider->setLogo($logoFileName);
-                } catch(FileException $e) {
-                    $this->addFlash('error', 'Le fichier n\'a pas pu être enregistré car ' . $e->getMessage());
+            if($form->isSubmitted() && $form->isValid()) {
+                $provider = $form->getData();
+
+                $logo = $form->get('logo')->getData();
+                if($logo) {
+                    try {
+                        $logoFileName = $imageService->save($logo, Provider::LOGO_DIRECTORY);
+                        $provider->setLogo($logoFileName);
+                    } catch(FileException $e) {
+                        $this->addFlash('error', 'Le fichier n\'a pas pu être enregistré car ' . $e->getMessage());
+                    }
                 }
-            }
-            $this->entityManager->persist($provider);
-            $this->entityManager->flush();
+                $this->entityManager->persist($provider);
+                $this->entityManager->flush();
 
-            return $this->redirectToRoute('provider_detail', ['id' => $provider->getId()]);
+                return $this->redirectToRoute('provider_detail', ['id' => $provider->getId()]);
+            }
+
+            return $this->renderForm('provider/update_provider.html.twig', [
+                'form' => $form,
+                'image' => $provider->getLogo(),
+            ]);
+        } else {
+            $this->addFlash('error', 'Cette page n\'existe pas');
+            return $this->redirectToRoute('home');
         }
 
-        return $this->renderForm('provider/update_provider.html.twig', [
-            'form' => $form,
-            'image' => $provider->getLogo(),
-        ]);
     }
 
-    #[Route('/{id}/internship/add', name: 'provider_internship_add')]
-    public function addInternship($id) {
-        // Fetch data of targeted provider
-        $provider = $this->providerRepository->find($id);
-        $internship = new Internship();
-
-        $form = $this->createForm(InternshipType::class, $internship);
-
-        return $this->renderForm('internship/add.html.twig', [
-            'form' => $form,
-        ]);
+    public function isOwner(Provider $provider) {
+        return $this->getUser()->getId() == $provider->getUser()->getId();
     }
 }

@@ -47,12 +47,12 @@ class Provider
     private $VTANumber;
 
     /**
-     * @ORM\OneToMany(targetEntity=Internship::class, mappedBy="provider", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Internship::class, mappedBy="provider", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $internships;
 
     /**
-     * @ORM\OneToMany(targetEntity=Promotion::class, mappedBy="provider", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Promotion::class, mappedBy="provider", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $promotions;
 
