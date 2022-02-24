@@ -26,6 +26,7 @@ class InternshipController extends AbstractController
     #[Route('/add', name: 'internship_add')]
     #[IsGranted('ROLE_PROVIDER')]
     public function add(Request $request): Response {
+        $title = 'Ajouter un stage';
         $internship = new Internship();
 
         $form = $this->createForm(InternshipType::class, $internship);
@@ -40,23 +41,32 @@ class InternshipController extends AbstractController
 
             $this->entityManager->persist($provider);
             $this->entityManager->flush();
+
+            $internshipName = $internship->getName();
+
+            $this->addFlash('success', "Le stage $internshipName a été ajouté");
+            return $this->redirect($this->generateUrl('provider_detail', ['id' => $provider->getId()]).'#internship' );
         }
 
         return $this->renderForm('internship/form.html.twig', [
             'form' => $form,
+            'title' => $title,
         ]);
     }
 
     #[Route('/update/{id}', name: 'internship_update')]
     #[IsGranted('ROLE_PROVIDER')]
     public function update(Request $request, $id): Response {
+        $title = 'Modifier ce stage';
         $internship = $this->internshipRepository->find($id);
 
         if($this->getUser() &&
             $internship &&
             $this->isOwner($internship)) {
 
-            $form = $this->createForm(InternshipType::class, $internship);
+            $form = $this->createForm(InternshipType::class, $internship, [
+                'submit_label' => $title,
+            ]);
 
             $form->handleRequest($request);
 
@@ -68,10 +78,16 @@ class InternshipController extends AbstractController
 
                 $this->entityManager->persist($provider);
                 $this->entityManager->flush();
+
+                $internshipName = $internship->getName();
+
+                $this->addFlash('success', "Le stage $internshipName a été modifié");
+                return $this->redirect($this->generateUrl('provider_detail', ['id' => $provider->getId()]).'#internship' );
             }
 
             return $this->renderForm('internship/form.html.twig', [
                 'form' => $form,
+                'title' => $title,
             ]);
         } else {
             $this->addFlash('error', 'Cette page n\'existe pas');
@@ -97,7 +113,7 @@ class InternshipController extends AbstractController
             $internshipName = $internship->getName();
 
             $this->addFlash('success', "Le stage $internshipName a été supprimé");
-            return $this->redirectToRoute('provider_detail', ['id' => $provider->getId()]);
+            return $this->redirect($this->generateUrl('provider_detail', ['id' => $provider->getId()]).'#internship' );
         } else {
             $this->addFlash('error', 'Cette page n\'existe pas');
             return $this->redirectToRoute('home');

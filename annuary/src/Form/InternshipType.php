@@ -68,7 +68,7 @@ class InternshipType extends AbstractType
             // $this->getUser()
             // ->add('provider')
             ->add('submit', SubmitType::class, [
-                'label' => 'Ajouter'
+                'label' => $options['submit_label']
             ])
         ;
     }
@@ -77,6 +77,7 @@ class InternshipType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Internship::class,
+            'submit_label' => 'Ajouter un stage',
         ]);
     }
 }
