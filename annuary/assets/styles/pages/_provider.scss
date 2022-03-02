@@ -146,7 +146,7 @@ section.providerDetail {
   }
 
   .smallCard-content {
-    padding-right: 0;
+    padding: 1rem;
   }
 
   .internship {
@@ -161,6 +161,36 @@ section.providerDetail {
   .image {
     border-radius: 10px;
     margin-bottom: 1rem;
+    position: relative;
+
+    .actionsLink {
+      position: absolute;
+      top: -.5rem;
+      right: 1rem;
+
+      .deleteLink a {
+        padding: .5rem;
+        border: none;
+
+        &:hover > svg {
+          transform: scale(1.2);
+        }
+
+        &:hover > svg path {
+          fill: darken($color-cta, 10%);
+        }
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+        margin-bottom: -5px;
+
+        path {
+          fill: $color-cta;
+        }
+      }
+    }
 
     img {
       width: 100%;
@@ -230,23 +260,37 @@ section.providerDetail.content {
   }
 }
 
-.internship .wrapper {
+.internship .wrapper, .promotions .wrapper, .images .wrapper  {
   position: relative;
 
   .addLink {
-    position: absolute;
-    top: -.65rem;
-    right: 20px;
-    color: $color-cta;
-    border: 2px solid $color-cta;
-    border-radius: 50px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 100%;
     text-align: center;
-    line-height: 2.3rem;
-    cursor: pointer;
+    border: 3px solid $color-cta;
+    color: $color-cta;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+
+    a {
+      display: block;
+      padding: .5rem .5rem;
+      font-weight: 500;
+
+      &:hover > svg path, &:hover > svg, &:hover {
+        color: darken($color-cta, 10%);
+        fill: darken($color-cta, 10%);
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+        margin-bottom: -5px;
+
+        path {
+          fill: $color-cta;
+        }
+      }
+    }
   }
 
   .actionsLink {
@@ -259,6 +303,10 @@ section.providerDetail.content {
       border: 2px solid $color-cta;
       padding: .25rem 1rem;
       border-radius: 50px;
+
+      &:hover, &:hover > .actionsLink {
+        color: darken($color-cta, 20%);
+      }
     }
 
     .deleteLink {
@@ -266,6 +314,20 @@ section.providerDetail.content {
     }
   }
 }
+
+.promotions {
+  .name {
+    margin-bottom: .5rem;
+  }
+
+  .smallPills-1 {
+    position: relative;
+    margin-top: .5rem;
+    margin-left: .25rem;
+  }
+}
+
+
 
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
   .providerDetail {
@@ -399,6 +461,12 @@ section.providerDetail.content {
         }
       }
     }
+  }
+
+  .internship .wrapper .addLink, .promotions .wrapper .addLink, .images .wrapper .addLink {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
