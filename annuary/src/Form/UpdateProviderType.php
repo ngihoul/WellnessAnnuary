@@ -30,6 +30,7 @@ class UpdateProviderType extends AbstractType
                         'min' => 1,
                         'minMessage' => 'Introduisez un nom de société avec au moins {{ limit }} caractères',
                         'max' => 255,
+                        'maxMessage' => 'Le nombre maximum de caractère est de {{ limit }}'
                     ]),
                 ],
             ])

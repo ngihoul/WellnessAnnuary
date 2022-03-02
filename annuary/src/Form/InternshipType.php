@@ -50,6 +50,7 @@ class InternshipType extends AbstractType
             ])
             ->add('additionalInformation', TextareaType::class, [
                 'label' => 'Information complémentaire',
+                'required' => false,
             ])
             ->add('startAt', DateType::class, [
                 'label' => 'Début du stage',

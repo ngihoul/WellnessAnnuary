@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | {{ title }}
+{% endblock %}
+
+{% block body %}
+    <section class="heading addInternship">
+        <div class="wrapper">
+            <h1>{{ title }}</h1>
+        </div>
+    </section>
+    <section class="form-internship">
+        <div class="wrapper">
+            {{ form(form) }}
+        </div>
+    </section>
+{% endblock %}

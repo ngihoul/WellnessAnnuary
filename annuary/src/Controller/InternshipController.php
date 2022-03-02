@@ -61,8 +61,8 @@ class InternshipController extends AbstractController
         $internship = $this->internshipRepository->find($id);
 
         if($this->getUser() &&
-            $internship &&
-            $this->isOwner($internship)) {
+        $internship &&
+        $this->isOwner($internship)) {
 
             $form = $this->createForm(InternshipType::class, $internship, [
                 'submit_label' => $title,
@@ -101,18 +101,16 @@ class InternshipController extends AbstractController
         $internship = $this->internshipRepository->find($id);
 
         if($this->getUser() &&
-            $internship &&
-            $this->isOwner($internship)) {
+        $internship &&
+        $this->isOwner($internship)) {
 
             $provider = $this->getUser()->getProvider();
-
             $provider->removeInternship($internship);
-
             $this->entityManager->flush();
 
             $internshipName = $internship->getName();
-
             $this->addFlash('success', "Le stage $internshipName a été supprimé");
+
             return $this->redirect($this->generateUrl('provider_detail', ['id' => $provider->getId()]).'#internship' );
         } else {
             $this->addFlash('error', 'Cette page n\'existe pas');
