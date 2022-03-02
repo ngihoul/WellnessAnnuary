@@ -57,7 +57,7 @@ class Provider
     private $promotions;
 
     /**
-     * @ORM\ManyToMany(targetEntity=ServiceCategory::class, inversedBy="providers")
+     * @ORM\ManyToMany(targetEntity=ServiceCategory::class, inversedBy="providers", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="provider_category")
      * @ORM\OrderBy({"name" = "ASC"})
      */

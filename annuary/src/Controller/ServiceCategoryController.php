@@ -8,6 +8,8 @@ use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\ServiceCategory;
+use App\Form\ServiceCategoryType;
 use App\Repository\ServiceCategoryRepository;
 use App\Repository\ProviderRepository;
 
@@ -36,7 +38,7 @@ class ServiceCategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{categoryName}', name: 'category_detail')]
+    #[Route('/{categoryName}', name: 'category_detail', priority: 0)]
     public function show(Request $request, $categoryName): Response
     {
         // Fetch data of selected category
@@ -57,6 +59,41 @@ class ServiceCategoryController extends AbstractController
             'providers' => $providers,
             'previous' => $offset - ProviderRepository::PAGINATOR_PER_PAGE,
             'next' => min(count($providers), $offset + ProviderRepository::PAGINATOR_PER_PAGE)
+        ]);
+    }
+
+    #[Route('/add', name: 'category_add', priority: 1)]
+    #[IsGranted('ROLE_PROVIDER')]
+    public function add(Request $request) {
+
+        $title = 'Ajouter une catégorie';
+        $serviceCategory = new ServiceCategory();
+
+        $form = $this->createForm(ServiceCategoryType::class, $serviceCategory, [
+            'provider' => $this->getUser()->getProvider()->getId(),
+        ]);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            // Fetch the category chosen & the provider
+            $serviceCategory = $this->serviceCategoryRepository->find($request->get('service_category')['name']);
+            $provider = $this->getUser()->getProvider();
+            // Add the category to the provider
+            $provider->addServiceCategory($serviceCategory);
+
+            $this->entityManager->persist($provider);
+            $this->entityManager->flush();
+
+            $serviceCategoryName = $serviceCategory->getName();
+
+            $this->addFlash('success', "La catégorie de service $serviceCategoryName a été ajoutée");
+            return $this->redirect($this->generateUrl('provider_detail', ['id' => $provider->getId()]));
+        }
+
+        return $this->renderForm('service_category/form.html.twig', [
+            'form' => $form,
+            'title' => $title,
         ]);
     }
 }

@@ -28,32 +28,17 @@ class ServiceCategoryRepository extends ServiceEntityRepository
         ;
     }
 
-    // /**
-    //  * @return ServiceCategory[] Returns an array of ServiceCategory objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getCategoriesNotChosenByProvider($id)
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?ServiceCategory
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $sql = "SELECT name FROM service_category WHERE id NOT IN (SELECT service_category_id FROM provider_category WHERE provider_id = :id);";
+
+        $catChosen = $this->createQueryBuilder('c1')
+            ->leftJoin('c1.providers', 'p')
+            ->where('p.id = :id');
+        return $this->createQueryBuilder('c')
+            ->where('c.id NOT IN (' . $catChosen->getDQL() . ')')
+            ->setParameter(':id', $id)
+            ->orderBy('c.name', 'ASC');
     }
-    */
 }
