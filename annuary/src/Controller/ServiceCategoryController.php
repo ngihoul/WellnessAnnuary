@@ -8,6 +8,7 @@ use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 use App\Entity\ServiceCategory;
 use App\Form\ServiceCategoryType;
 use App\Repository\ServiceCategoryRepository;
@@ -21,6 +22,13 @@ class ServiceCategoryController extends AbstractController
     private EntityManagerInterface $entityManager;
     private TagAwareAdapterInterface $cache;
 
+    /**
+     * Constructor
+     * @param ServiceCategoryRepository $serviceCategoryRepository
+     * @param ProviderRepository $providerRepository
+     * @param EntityManagerInterface $entityManager
+     * @param TagAwareAdapterInterface $cache
+     */
     public function __construct(ServiceCategoryRepository $serviceCategoryRepository, ProviderRepository $providerRepository, EntityManagerInterface $entityManager, TagAwareAdapterInterface $cache) {
         $this->serviceCategoryRepository = $serviceCategoryRepository;
         $this->providerRepository = $providerRepository;
@@ -28,6 +36,10 @@ class ServiceCategoryController extends AbstractController
         $this->cache = $cache;
     }
 
+    /**
+     * Renders the list of categories
+     * @return Response
+     */
     #[Route('/', name: 'category_index')]
     public function index(): Response
     {
@@ -38,19 +50,23 @@ class ServiceCategoryController extends AbstractController
         ]);
     }
 
+    /**
+     * Renders the list of provider for a chosen category
+     * @param Request $request
+     * @param $categoryName
+     * @return Response
+     */
     #[Route('/{categoryName}', name: 'category_detail', priority: 0)]
     public function show(Request $request, $categoryName): Response
     {
         // Fetch data of selected category
         $category = $this->serviceCategoryRepository->findOneBy(['name' => $categoryName]);
-
         // Paginator for providers in this category
         $offset = max(0, $request->query->getInt('offset', 0));
         $providers = $this->providerRepository->findByCategory($category, $offset);
 
         if(!$category) {
             $this->addFlash('error', "La catégorie <em>\"$categoryName\"</em> n'existe pas");
-
             return $this->redirectToRoute('home');
         }
 
@@ -62,17 +78,22 @@ class ServiceCategoryController extends AbstractController
         ]);
     }
 
+    /**
+     * Renders & handles form to add a category to a provider
+     * @param Request $request
+     * @return mixed
+     */
     #[Route('/add', name: 'category_add', priority: 1)]
     #[IsGranted('ROLE_PROVIDER')]
-    public function add(Request $request) {
-
+    public function add(Request $request)
+    {
         $title = 'Ajouter une catégorie';
         $serviceCategory = new ServiceCategory();
-
+        // Create form
         $form = $this->createForm(ServiceCategoryType::class, $serviceCategory, [
             'provider' => $this->getUser()->getProvider()->getId(),
         ]);
-
+        // Handle form
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -86,8 +107,8 @@ class ServiceCategoryController extends AbstractController
             $this->entityManager->flush();
 
             $serviceCategoryName = $serviceCategory->getName();
-
             $this->addFlash('success', "La catégorie de service $serviceCategoryName a été ajoutée");
+
             return $this->redirect($this->generateUrl('provider_detail', ['id' => $provider->getId()]));
         }
 

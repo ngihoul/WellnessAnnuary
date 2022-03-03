@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 use App\Entity\Provider;
 use App\Repository\ProviderRepository;
 use App\Form\UpdateProviderType;
@@ -27,25 +29,22 @@ class ProviderController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/', name: 'provider_home')]
-    public function index(): Response
-    {
-        return $this->render('provider/index.html.twig', [
-            'controller_name' => 'ProviderController',
-        ]);
-    }
-
+    /**
+     * Renders a provider's profile
+     * @param $providerId
+     * @return mixed
+     */
     #[Route('/{id}', name: 'provider_detail')]
-    public function show($id) {
+    public function show($providerId): mixed
+    {
         // Fetch data of targeted provider
-        $provider = $this->providerRepository->find($id);
-
+        $provider = $this->providerRepository->find($providerId);
+        // Back to homepage if provider doesn't exist
         if(!$provider) {
             $this->addFlash('error', 'Cette page n\'existe pas');
             return $this->redirectToRoute('home');
         }
-
-        // Find similar providers according categories & localization
+        // Find similar providers according to the categories & localization of the selected provider
         $similarProviders = $this->providerRepository->findSimilar($provider);
 
         return $this->render('provider/index.html.twig', [
@@ -55,29 +54,32 @@ class ProviderController extends AbstractController
     }
 
     /**
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Doctrine\ORM\ORMException
+     * Renders & handles form to update the provider's profile
+     * @throws OptimisticLockException
+     * @throws ORMException
      */
     #[Route('/update/{id}', name: 'provider_update')]
     #[IsGranted('ROLE_PROVIDER')]
-    public function update(ImageService $imageService, Request $request, $id) {
+    public function update(ImageService $imageService, Request $request, $providerId)
+    {
         // Fetch data of targeted provider
-        $provider = $this->providerRepository->find($id);
-
+        $provider = $this->providerRepository->find($providerId);
+        // Restrict access to the owner of the internship if it exists
         if($this->getUser() &&
             $provider &&
             $this->isOwner($provider)) {
 
-            // Handling form
+            // Create form
+            // Passing the provider id in the options to get only the category selected by the provider
             $form = $this->createForm(UpdateProviderType::class, $provider, [
                 'postCode' => $provider->getUser()->getLocality()->getPostCode()->getPostCode(),
             ]);
-
+            // Handle form
             $form->handleRequest($request);
 
             if($form->isSubmitted() && $form->isValid()) {
                 $provider = $form->getData();
-
+                // If logo exist, save it to the right directory
                 $logo = $form->get('logo')->getData();
                 if($logo) {
                     try {
@@ -104,6 +106,11 @@ class ProviderController extends AbstractController
 
     }
 
+    /**
+     * Checks if the current user is the owner of the selected provider
+     * @param Provider $provider
+     * @return bool
+     */
     public function isOwner(Provider $provider) {
         return $this->getUser()->getId() == $provider->getUser()->getId();
     }

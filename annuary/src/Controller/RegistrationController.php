@@ -2,14 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Entity\Provider;
-use App\Entity\Customer;
-use App\Entity\Image;
-use App\Form\ProviderType;
-use App\Form\CustomerType;
-use App\Repository\UserRepository;
-use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,6 +14,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+use App\Entity\User;
+use App\Entity\Provider;
+use App\Entity\Customer;
+use App\Entity\Image;
+use App\Form\ProviderType;
+use App\Form\CustomerType;
+use App\Repository\UserRepository;
+use App\Security\EmailVerifier;
+
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
@@ -31,17 +32,27 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
+    /**
+     * Registers a customer or a provider
+     * @param Request $request
+     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @param EntityManagerInterface $entityManager
+     * @param UserRepository $userRepository
+     * @param SluggerInterface $slugger
+     * @param $typeOfUser
+     * @return Response
+     */
     #[Route('/register/{typeOfUser}', name: 'registration')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserRepository $userRepository, SluggerInterface $slugger, $typeOfUser): Response
     {
-        // Denied access if user already logged on.
+        // Denied access if user is already logged on.
         if($this->getUser()) {
             $this->addFlash('error', 'Vous êtes déjà connecté.');
             return $this->redirectToRoute('home');
         }
+        // Define variables
         // Check whether customer or provider form should be displayed.
         $typeOfUser = strtolower($typeOfUser);
-
         // $subUser = Provider or Customer Object
         if($typeOfUser == 'provider') {
             $subUser = new Provider();
@@ -59,7 +70,7 @@ class RegistrationController extends AbstractController
             $this->addFlash('error', 'Cette page n\'existe pas');
             return $this->redirectToRoute('home');
         }
-
+        // Handle form
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,7 +82,6 @@ class RegistrationController extends AbstractController
             // Redirect user to forgotten password page if email already exists in DB
             if($userExist) {
                 $this->addFlash('error', 'Il semble que vous avez déjà un compte.');
-
                 return $this->redirectToRoute('home');
             }
 
@@ -81,7 +91,6 @@ class RegistrationController extends AbstractController
 
             if($password !== $confirmPassword) {
                 $this->addFlash('error', 'Les mots de passe doivent être identiques.');
-
                 return $this->render('registration/provider_register.html.twig', [
                     'form' => $form->createView(),
                 ]);
@@ -100,7 +109,6 @@ class RegistrationController extends AbstractController
             // logo chosen by user ? If yes, save it in DB
             if($logo) {
                 $originalFileName = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);
-
                 $safeFileName = $slugger->slug($originalFileName);
                 $newFileName = $safeFileName . '-' . uniqid() . '.' . $logo->guessExtension();
 
@@ -110,13 +118,13 @@ class RegistrationController extends AbstractController
                         $newFileName
                     );
                 } catch (FileException $e) {
-                    dd('Impossible de sauver image ' . $e);
+                    dd('Impossible de sauver image ' . $e->getMessage());
                 }
-            // If logo not chosen, default logo.
+            // If logo not chosen, default logo is assigned to the user.
             } else {
                 $newFileName = 'default.png';
             }
-
+            // Attach the logo to the object
             if($typeOfUser == 'customer') {
                 $subUser->setAvatar($newFileName);
             } else if ($typeOfUser == "provider") {
@@ -130,7 +138,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($subUser);
             $entityManager->flush();
 
-            // Generate a signed url and email it to the user
+            // Generate a signed url and mail it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('no-reply@bien-etre.be', 'Bien-Être'))
@@ -148,6 +156,12 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    /**
+     * Verifies user by email
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @return Response
+     */
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
     {

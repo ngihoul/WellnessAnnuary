@@ -7,22 +7,26 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 use App\Repository\ProviderRepository;
 use App\Repository\LocalityRepository;
 use App\Form\SearchType;
 
 class SearchController extends AbstractController
 {
+    /**
+     * Renders the search form
+     * @return mixed
+     */
     public function displayForm() {
         $form = $this->createForm(SearchType::class);
-
         return $this->renderForm('fragments/_searchForm.html.twig', [
             'form' => $form
         ]);
     }
 
     /**
-     * Display Search results
+     * Displays Search results
      * @param Request $request
      * @param ProviderRepository $providerRepository
      * @return Response
@@ -30,8 +34,9 @@ class SearchController extends AbstractController
     #[Route('/search', name: 'search', methods:["GET"])]
     public function search(Request $request, ProviderRepository $providerRepository): Response
     {
-
+        // Create form
         $form = $this->createForm(SearchType::class);
+        // Handle form
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -43,6 +48,7 @@ class SearchController extends AbstractController
                 $whichCategory = (int) $whichCategory->getId();
             }
 
+            // Configuration of the paginator
             $offset = max(0, $request->query->getInt('offset', 0));
             $providers = $providerRepository->findBySearch($what, $whichCategory, $where, $offset);
 
@@ -57,7 +63,6 @@ class SearchController extends AbstractController
         }
 
         $this->addFlash('error', 'Recherche incorrecte. Veuillez utiliser le formulaire.');
-
         return $this->redirectToRoute('home');
     }
 
@@ -68,10 +73,9 @@ class SearchController extends AbstractController
      * @return JsonResponse
      */
     #[Route('/search/what/', name: 'search_what')]
-    public function what(Request $request, ProviderRepository $providerRepository) {
-
+    public function what(Request $request, ProviderRepository $providerRepository)
+    {
         $what = trim($request->get('q'));
-
         $results = $providerRepository->findForAutoCompletion($what);
 
         return new JsonResponse($results);
@@ -84,10 +88,9 @@ class SearchController extends AbstractController
      * @return JsonResponse
      */
     #[Route('/search/where/', name: 'search_where')]
-    public function where(Request $request, LocalityRepository $localityRepository) {
-
+    public function where(Request $request, LocalityRepository $localityRepository)
+    {
         $where = trim($request->get('w'));
-
         $results = $localityRepository->findForAutoCompletion($where);
 
         return new JsonResponse($results);

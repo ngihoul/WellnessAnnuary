@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Comment
 {
     /**
+     * Comment ID
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -20,38 +21,45 @@ class Comment
     private $id;
 
     /**
+     * Comment title
      * @ORM\Column(type="string", length=120)
      */
     private $title;
 
     /**
+     * The text of the comment
      * @ORM\Column(type="string", length=255)
      */
     private $content;
 
     /**
+     * The rating given to the provider
      * @ORM\Column(type="integer")
      */
     private $rating;
 
     /**
+     * Date of publication
      * @ORM\Column(type="datetime")
      */
     private $publishedAt;
 
     /**
+     * To which provider the comment is given
      * @ORM\ManyToOne(targetEntity=Provider::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $provider;
 
     /**
+     * The customer who posted the comment
      * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $customer;
 
     /**
+     * Reports of this comment
      * @ORM\OneToMany(targetEntity=Report::class, mappedBy="comment", orphanRemoval=true)
      */
     private $reports;

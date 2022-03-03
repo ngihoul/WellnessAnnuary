@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Customer
 {
     /**
+     * Customer's ID
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -20,47 +21,56 @@ class Customer
     private $id;
 
     /**
+     * Customer's lastname
      * @ORM\Column(type="string", length=50)
      */
     private $lastName;
 
     /**
+     * Customer's firstname
      * @ORM\Column(type="string", length=50)
      */
     private $firstName;
 
     /**
+     * Is he subscribed to the newsletter ?
      * @ORM\Column(type="boolean")
      */
     private $newsletter;
 
     /**
+     * User linked to this customer
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="customer", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
+     * All the comments posted by this customer
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="customer", orphanRemoval=true)
      */
     private $comments;
 
     /**
+     * All reports made by this customer
      * @ORM\OneToMany(targetEntity=Report::class, mappedBy="Customer", orphanRemoval=true)
      */
     private $reports;
 
     /**
+     * All images linked to this customers
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="customer", cascade={"persist", "remove"})
      */
     private $images;
 
     /**
+     * Customer's favourite providers
      * @ORM\ManyToMany(targetEntity=Provider::class, mappedBy="favorite")
      */
     private $favorites;
 
     /**
+     * Customer's avatar
      * @ORM\Column(type="string", length=255)
      */
     private $avatar;
