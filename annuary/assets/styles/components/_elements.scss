@@ -243,3 +243,29 @@
     }
   }
 }
+
+// Like Btn
+.likeBtn {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+
+  a {
+    padding: .5rem;
+    width: 36px;
+    height: 36px;
+  }
+
+  svg {
+    width: 36px;
+    height: 36px;
+
+  }
+  .like svg {
+    fill: green;
+  }
+
+  .dislike svg {
+    fill: red;
+  }
+}

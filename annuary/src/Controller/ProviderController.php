@@ -50,9 +50,18 @@ class ProviderController extends AbstractController
         // Find similar providers according to the categories & localization of the selected provider
         $similarProviders = $this->providerRepository->findSimilar($provider);
 
+        // If customer : Is this provider a favorite ?
+        $favorite = false;
+
+        if($this->getUser()->getCustomer()) {
+            $customer = $this->getUser()->getCustomer();
+            $favorite = $customer->getFavorites()->contains($provider);
+        }
+
         return $this->render('provider/index.html.twig', [
             'provider' => $provider,
             'similarProviders' => $similarProviders,
+            'favorite' => $favorite,
         ]);
     }
 

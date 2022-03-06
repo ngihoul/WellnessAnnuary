@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('registration') }}
+    {{ encore_entry_script_tags('formValidation') }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Modifier votre profil
+{% endblock %}
+
+{% block body %}
+    <section class="heading registration">
+        <div class="wrapper">
+            <h1>Modifier votre profil</h1>
+        </div>
+    </section>
+    <section class="form-registration">
+        <div class="wrapper">
+            <h2>Vos données</h2>
+            {{ form_start(form, { 'id': 'customer'}) }}
+            <div class="form-customer">
+                <div class="form-customer-lastName">
+                    {{ form_row(form.lastName, { 'id': 'customer_lastName'}) }}
+                </div>
+                <div class="form-customer-firstName">
+                    {{ form_row(form.firstName, { 'id': 'customer_firstName'}) }}
+                </div>
+            </div>
+            <div class="form-mail">
+                {{ form_row(form.user.email, { 'id': 'customer_user_email', 'type': 'hidden', 'label': ' '}) }}
+            </div>
+            <div class="form-logo">
+                {{ form_row(form.logo, { 'id': 'customer_logo'}) }}
+                <div id="previewLogo">
+                    <img src="{{ avatar_directory ~ image }}">
+                </div>
+            </div>
+            <div class="form-address">
+                <div class="form-address-street">
+                    {{ form_row(form.user.addressStreet, { 'id': 'customer_user_addressStreet'}) }}
+                </div>
+                <div class="form-address-number">
+                    {{ form_row(form.user.addressNumber, { 'id': 'customer_user_addressNumber'}) }}
+                </div>
+                <div class="form-address-postcode">
+                    {{ form_row(form.user.postCode, { 'id': 'customer_user_postCode'}) }}
+                </div>
+                <div class="form-address-locality">
+                    {{ form_row(form.user.locality, { 'id': 'customer_user_locality'}) }}
+                </div>
+            </div>
+            <div class="form-newsletter">
+                {{ form_row(form.newsletter, { 'id': 'customer_newsletter'}) }}
+            </div>
+            {{ form_row(form.user.submit, { 'label': 'Modifier votre profil'}) }}
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

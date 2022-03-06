@@ -3,15 +3,17 @@
 // *********************** //
 
 // * Variables * //
-if(document.forms['provider'] !== undefined) {
+if(document.forms['provider'] != undefined) {
     var formInputs = document.forms['provider'];
     var websiteField = document.getElementById('provider_website');
     var phoneNumberField = document.getElementById('provider_phoneNumber');
     var VTANumberField = document.getElementById('provider_VTANumber');
-} else if (document.forms['customer'] !== undefined) {
+} else if (document.forms['customer'] != undefined) {
     var formInputs = document.forms['customer'];
     var newsletterField = document.getElementById('customer_newsletter');
 }
+
+console.log(formInputs);
 
 const emailField = document.getElementById('provider_user_email') || document.getElementById('customer_user_email');
 const logoField = document.getElementById('provider_logo') || document.getElementById('customer_logo');

@@ -1,0 +1,12 @@
+section.customerDetail {
+  &.content {
+    padding-bottom: 2.5rem;
+  }
+  .logoContainer::before {
+    content: none;
+  }
+  .favourites-content {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+}
