@@ -362,7 +362,7 @@ class Provider
 
     public function getDescription(): ?string
     {
-        return $this->description;
+        return nl2br($this->description);
     }
 
     public function setDescription(string $description): self

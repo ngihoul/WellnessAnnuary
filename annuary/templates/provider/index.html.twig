@@ -37,7 +37,7 @@
                     <img loading="lazy" class="logo" src="{{ logo_directory ~ provider.logo }}" alt="Image {{ provider.name }}" title="" />
                 </div>
                 <div class="description">
-                    <p>{{ provider.description }}</p>
+                    <p>{{ provider.description|raw }}</p>
                 </div>
                 <div class="categories">
                     <h2>Catégories</h2>
