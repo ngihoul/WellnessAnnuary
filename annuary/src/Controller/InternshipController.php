@@ -37,8 +37,14 @@ class InternshipController extends AbstractController
      * @return Response
      */
     #[Route('/add', name: 'internship_add')]
-    #[IsGranted('ROLE_PROVIDER')]
-    public function add(Request $request): Response {
+    public function add(Request $request): Response
+    {
+        // Restrict access to providers only
+        if(!$this->isGranted('ROLE_PROVIDER')) {
+            $this->addFlash('error', Self::MSG_PAGE_NOT_EXIST);
+            return $this->redirectToRoute('home');
+        }
+
         $title = 'Ajouter un stage';
         $internship = new Internship();
         // Create form
@@ -71,17 +77,18 @@ class InternshipController extends AbstractController
     /**
      * Renders & handles form to update an internship
      * @param Request $request
-     * @param $internshipId
+     * @param $id
      * @return Response
      */
     #[Route('/update/{id}', name: 'internship_update')]
-    #[IsGranted('ROLE_PROVIDER')]
-    public function update(Request $request, $internshipId): Response {
+    public function update(Request $request, $id): Response
+    {
         $title = 'Modifier ce stage';
         // Get the internship
-        $internship = $this->internshipRepository->find($internshipId);
+        $internship = $this->internshipRepository->find($id);
         // Restrict access to the owner of the internship if it exists
         if($this->getUser() &&
+        $this->isGranted('ROLE_PROVIDER') &&
         $internship &&
         $this->isOwner($internship)) {
             // Create form
@@ -118,16 +125,17 @@ class InternshipController extends AbstractController
 
     /**
      * Deletes an internship
-     * @param $internshipId
+     * @param $id
      * @return Response
      */
     #[Route('/delete/{id}', name: 'internship_delete')]
-    #[IsGranted('ROLE_PROVIDER')]
-    public function delete($internshipId): Response {
+    public function delete($id): Response
+    {
         // Get the internship
-        $internship = $this->internshipRepository->find($internshipId);
+        $internship = $this->internshipRepository->find($id);
         // Restrict access to the owner of the internship if it exists
         if($this->getUser() &&
+        $this->isGranted('ROLE_PROVIDER') &&
         $internship &&
         $this->isOwner($internship)) {
 

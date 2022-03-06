@@ -17,6 +17,8 @@ use App\Repository\ProviderRepository;
 #[Route('/category')]
 class ServiceCategoryController extends AbstractController
 {
+    const MSG_PAGE_NOT_EXIST = 'Cette page n\'existe pas';
+
     private ServiceCategoryRepository $serviceCategoryRepository;
     private ProviderRepository $providerRepository;
     private EntityManagerInterface $entityManager;
@@ -85,8 +87,14 @@ class ServiceCategoryController extends AbstractController
      */
     #[Route('/add', name: 'category_add', priority: 1)]
     #[IsGranted('ROLE_PROVIDER')]
-    public function add(Request $request)
+    public function add(Request $request): mixed
     {
+        // Restrict access to providers only
+        if(!$this->isGranted('ROLE_PROVIDER')) {
+            $this->addFlash('error', Self::MSG_PAGE_NOT_EXIST);
+            return $this->redirectToRoute('home');
+        }
+
         $title = 'Ajouter une catégorie';
         $serviceCategory = new ServiceCategory();
         // Create form
@@ -116,5 +124,25 @@ class ServiceCategoryController extends AbstractController
             'form' => $form,
             'title' => $title,
         ]);
+    }
+
+    #[Route('/delete/{id}', name: 'category_delete', priority: 1)]
+    public function delete(ServiceCategory $id) {
+        if($this->getUser() && $this->isGranted('ROLE_PROVIDER')) {
+            $provider = $this->getUser()->getProvider();
+            $serviceCategory = $this->serviceCategoryRepository->find($id);
+            $provider->removeServiceCategory($serviceCategory);
+
+            $this->entityManager->persist($provider);
+            $this->entityManager->flush();
+
+            $serviceCategoryName = $serviceCategory->getName();
+            $this->addFlash('success', "La catégorie de service $serviceCategoryName a été supprimée");
+
+            return $this->redirect($this->generateUrl('provider_detail', ['id' => $provider->getId()]));
+        } else {
+            $this->addFlash('error', Self::MSG_PAGE_NOT_EXIST);
+            return $this->redirectToRoute('home');
+        }
     }
 }

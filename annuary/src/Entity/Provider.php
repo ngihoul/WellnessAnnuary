@@ -176,6 +176,17 @@ class Provider
         return $this;
     }
 
+    public function getUnexpiredInternships() {
+        $today = new \DateTime();
+        $internships = [];
+        foreach($this->getInternships() as $internship) {
+            if($internship->getEndAt() > $today) {
+                $internships[] = $internship;
+            }
+        }
+        return $internships;
+    }
+
     public function removeInternship(Internship $internship): self
     {
         if ($this->internships->removeElement($internship)) {
@@ -204,6 +215,17 @@ class Provider
         }
 
         return $this;
+    }
+
+    public function getUnexpiredPromotions() {
+        $today = new \DateTime();
+        $promotions = [];
+        foreach($this->getPromotions() as $promotion) {
+            if($promotion->getEndAt() > $today) {
+                $promotions[] = $promotion;
+            }
+        }
+        return $promotions;
     }
 
     public function removePromotion(Promotion $promotion): self

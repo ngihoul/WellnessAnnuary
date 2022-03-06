@@ -15,7 +15,9 @@ use App\Repository\PromotionRepository;
 #[Route('/promotion')]
 class PromotionController extends AbstractController
 {
+    const MSG_PAGE_NOT_EXIST = 'Cette page n\'existe pas';
     const MSG_WRONG_DATES = 'Veuillez corriger les dates. Il doit y avoir au moins 24h entre les dates.';
+
     private PromotionRepository $promotionRepository;
     private EntityManagerInterface $entityManager;
 
@@ -31,9 +33,14 @@ class PromotionController extends AbstractController
      * @return Response
      */
     #[Route('/add', name: 'promotion_add')]
-    #[IsGranted('ROLE_PROVIDER')]
     public function add(Request $request): Response
     {
+        // Restrict access to providers only
+        if(!$this->isGranted('ROLE_PROVIDER')) {
+            $this->addFlash('error', Self::MSG_PAGE_NOT_EXIST);
+            return $this->redirectToRoute('home');
+        }
+
         $title = 'Ajouter une promotion';
         $promotion = new Promotion();
         // Create form
@@ -76,13 +83,13 @@ class PromotionController extends AbstractController
      * @return Response
      */
     #[Route('/update/{id}', name: 'promotion_update')]
-    #[IsGranted('ROLE_PROVIDER')]
-    public function update(Request $request, $promotionId): Response
+    public function update(Request $request, $id): Response
     {
         $title = 'Modifier cette promotion';
-        $promotion = $this->promotionRepository->find($promotionId);
+        $promotion = $this->promotionRepository->find($id);
         // Restrict access to the owner of the internship if it exists
         if($this->getUser() &&
+            $this->isGranted('ROLE_PROVIDER') &&
             $promotion &&
             $this->isOwner($promotion)) {
             // Create form
@@ -129,12 +136,12 @@ class PromotionController extends AbstractController
      * @return Response
      */
     #[Route('/delete/{id}', name: 'promotion_delete')]
-    #[IsGranted('ROLE_PROVIDER')]
-    public function delete(Request $request, $internShipId): Response
+    public function delete(Request $request, $id): Response
     {
-        $promotion = $this->promotionRepository->find($internShipId);
+        $promotion = $this->promotionRepository->find($id);
         // Restrict access to the owner of the internship if it exists
         if($this->getUser() &&
+            $this->isGranted('ROLE_PROVIDER') &&
             $promotion &&
             $this->isOwner($promotion)) {
 

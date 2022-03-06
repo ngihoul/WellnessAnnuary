@@ -15,7 +15,9 @@ use App\Repository\ProviderRepository;
 use App\Form\UpdateProviderType;
 use App\Service\ImageService;
 use App\Entity\Internship;
+use App\Repository\InternshipRepository;
 use App\Form\InternshipType;
+use Symfony\Component\Validator\Constraints\Date;
 
 #[Route('/provider')]
 class ProviderController extends AbstractController
@@ -31,14 +33,15 @@ class ProviderController extends AbstractController
 
     /**
      * Renders a provider's profile
-     * @param $providerId
+     * @param $id int Provider ID
+     * @param InternshipRepository $internshipRepository
      * @return mixed
      */
     #[Route('/{id}', name: 'provider_detail')]
-    public function show($providerId): mixed
+    public function show(int $id, InternshipRepository $internshipRepository): mixed
     {
         // Fetch data of targeted provider
-        $provider = $this->providerRepository->find($providerId);
+        $provider = $this->providerRepository->find($id);
         // Back to homepage if provider doesn't exist
         if(!$provider) {
             $this->addFlash('error', 'Cette page n\'existe pas');
@@ -60,10 +63,10 @@ class ProviderController extends AbstractController
      */
     #[Route('/update/{id}', name: 'provider_update')]
     #[IsGranted('ROLE_PROVIDER')]
-    public function update(ImageService $imageService, Request $request, $providerId)
+    public function update(ImageService $imageService, Request $request, int $id)
     {
         // Fetch data of targeted provider
-        $provider = $this->providerRepository->find($providerId);
+        $provider = $this->providerRepository->find($id);
         // Restrict access to the owner of the internship if it exists
         if($this->getUser() &&
             $provider &&
