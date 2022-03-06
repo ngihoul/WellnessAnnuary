@@ -22,6 +22,7 @@ use App\Form\ProviderType;
 use App\Form\CustomerType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
+use App\Service\FileService;
 
 class RegistrationController extends AbstractController
 {
@@ -43,7 +44,7 @@ class RegistrationController extends AbstractController
      * @return Response
      */
     #[Route('/register/{typeOfUser}', name: 'registration')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserRepository $userRepository, SluggerInterface $slugger, $typeOfUser): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserRepository $userRepository, SluggerInterface $slugger, FileService $fileService, $typeOfUser): Response
     {
         // Denied access if user is already logged on.
         if($this->getUser()) {
@@ -107,23 +108,15 @@ class RegistrationController extends AbstractController
             // Save logo in DB
             $logo = $form->get('logo')->getData();
             // logo chosen by user ? If yes, save it in DB
+            $newFileName = 'default.png';
             if($logo) {
-                $originalFileName = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFileName = $slugger->slug($originalFileName);
-                $newFileName = $safeFileName . '-' . uniqid() . '.' . $logo->guessExtension();
-
                 try {
-                    $logo->move(
-                        $this->getParameter($logoDirectory),
-                        $newFileName
-                    );
-                } catch (FileException $e) {
-                    dd('Impossible de sauver image ' . $e->getMessage());
+                    $newFileName = $fileService->save($logo, $logoDirectory);
+                } catch(FileException $e) {
+                    $this->addFlash('error', 'Le fichier n\'a pas pu être enregistré car ' . $e->getMessage());
                 }
-            // If logo not chosen, default logo is assigned to the user.
-            } else {
-                $newFileName = 'default.png';
             }
+
             // Attach the logo to the object
             if($typeOfUser == 'customer') {
                 $subUser->setAvatar($newFileName);
