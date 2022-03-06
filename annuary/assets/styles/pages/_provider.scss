@@ -325,6 +325,19 @@ section.providerDetail.content {
     margin-top: .5rem;
     margin-left: .25rem;
   }
+
+  .folderLink {
+    text-align: left;
+
+    a {
+      font-size: .8rem;
+      color: darken($color-cta, 20%);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 

@@ -226,6 +226,11 @@
                                         <p class="name">{{ promotion.name }}</p>
                                         <span class="smallPills-1 promotion">{{ promotion.serviceCategory.name }}</span>
                                         <p class="category">{{ promotion.description }}</p>
+                                        {% if promotion.PDFDocument is not null %}
+                                        <p class="folderLink">
+                                            <a href="{{ promotion_directory ~ promotion.PDFDocument }}">Voir la brochure</a>
+                                        </p>
+                                        {% endif %}
                                         {% if app.user.id is defined and app.user.id == provider.user.id %}
                                             <div class="actionsLink">
                                                 <a class="updateLink" title="Modifier la promotion {{ promotion.name }}" href="{{ path('promotion_update', { id: promotion.id }) }}">Modifier</a>

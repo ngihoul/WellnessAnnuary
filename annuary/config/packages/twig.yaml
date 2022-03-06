@@ -5,6 +5,8 @@ twig:
         images_directory: 'http://localhost:8000/uploads/'
         logo_directory: 'http://localhost:8000/uploads/logo/'
         avatar_directory: 'http://localhost:8000/uploads/avatar/'
+        promotion_directory: 'http://localhost:8000/uploads/promotions/'
+        ## promotion_directory: '%kernel.project_dir%/public/uploads/promotions/'
         ## logo_directory: '%kernel.project_dir%/public/uploads/logo/'
         ## avatar_directory: '%kernel.project_dir%/public/uploads/avatar/'
         ## images_directory: '%kernel.project_dir%/public/uploads/' ##

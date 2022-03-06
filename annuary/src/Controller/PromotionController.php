@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,10 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Promotion;
 use App\Form\PromotionType;
 use App\Repository\PromotionRepository;
+use App\Service\ImageService;
 
 #[Route('/promotion')]
 class PromotionController extends AbstractController
 {
+    const PDF_DIRECTORY = 'promotion_directory';
     const MSG_PAGE_NOT_EXIST = 'Cette page n\'existe pas';
     const MSG_WRONG_DATES = 'Veuillez corriger les dates. Il doit y avoir au moins 24h entre les dates.';
 
@@ -33,7 +36,7 @@ class PromotionController extends AbstractController
      * @return Response
      */
     #[Route('/add', name: 'promotion_add')]
-    public function add(Request $request): Response
+    public function add(Request $request, ImageService $imageService): Response
     {
         // Restrict access to providers only
         if(!$this->isGranted('ROLE_PROVIDER')) {
@@ -56,6 +59,18 @@ class PromotionController extends AbstractController
             if(($promotion->getStartAt() < $promotion->getEndAt()) && $promotion->getDisplayedFrom() < $promotion->getDisplayedUntil()) {
 
                 $provider = $this->getUser()->getProvider();
+
+                // PDF Management
+                $pdf = $form->get('PDFDocument')->getData();
+                if($pdf) {
+                    try {
+                        $pdfFileName = $imageService->save($pdf, Self::PDF_DIRECTORY);
+                        $promotion->setPDFDocument($pdfFileName);
+                    } catch(FileException $e) {
+                        $this->addFlash('error', 'Le fichier n\'a pas pu être enregistré car ' . $e->getMessage());
+                    }
+                }
+
                 $provider->addPromotion($promotion);
 
                 $this->entityManager->persist($provider);
@@ -83,7 +98,7 @@ class PromotionController extends AbstractController
      * @return Response
      */
     #[Route('/update/{id}', name: 'promotion_update')]
-    public function update(Request $request, $id): Response
+    public function update(Request $request, ImageService $imageService, $id): Response
     {
         $title = 'Modifier cette promotion';
         $promotion = $this->promotionRepository->find($id);
@@ -105,6 +120,18 @@ class PromotionController extends AbstractController
                 // Check if the dates follow each other
                 if(($promotion->getStartAt() < $promotion->getEndAt()) && $promotion->getDisplayedFrom() < $promotion->getDisplayedUntil()) {
                     $provider = $this->getUser()->getProvider();
+
+                    // PDF Management
+                    $pdf = $form->get('PDFDocument')->getData();
+                    if($pdf) {
+                        try {
+                            $pdfFileName = $imageService->save($pdf, Self::PDF_DIRECTORY);
+                            $promotion->setPDFDocument($pdfFileName);
+                        } catch(FileException $e) {
+                            $this->addFlash('error', 'Le fichier n\'a pas pu être enregistré car ' . $e->getMessage());
+                        }
+                    }
+
                     $provider->addPromotion($promotion);
 
                     $this->entityManager->persist($provider);

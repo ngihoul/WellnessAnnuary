@@ -8,6 +8,7 @@ parameters:
     images_directory: '%kernel.project_dir%/public/uploads/'
     logo_directory: '%kernel.project_dir%/public/uploads/logo/'
     avatar_directory: '%kernel.project_dir%/public/uploads/avatar/'
+    promotion_directory: '%kernel.project_dir%/public/uploads/promotions/'
 
 services:
     # default configuration for services in *this* file
