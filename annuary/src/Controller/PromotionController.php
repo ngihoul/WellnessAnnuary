@@ -149,6 +149,7 @@ class PromotionController extends AbstractController
             return $this->renderForm('promotion/form.html.twig', [
                 'form' => $form,
                 'title' => $title,
+                'promotion' => $promotion
             ]);
         } else {
             $this->addFlash('error', 'Cette page n\'existe pas');

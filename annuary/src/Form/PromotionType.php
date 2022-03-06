@@ -76,7 +76,7 @@ class PromotionType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('serviceCategory', EntityType::class, [
-                'label' => 'A quelle catégorie est lié ce stage ?',
+                'label' => 'A quelle catégorie est liée ce stage ?',
                 'class' => ServiceCategory::class,
                 'choice_label' => 'name',
                 'query_builder' => function (ServiceCategoryRepository $repo) use($providerId) {

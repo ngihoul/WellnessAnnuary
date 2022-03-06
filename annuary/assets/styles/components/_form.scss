@@ -136,6 +136,65 @@ fieldset {
       padding-left: .5rem;
     }
   }
+  // Internship form
+  .form-internship {
+    .form-section {
+      display: flex;
+
+      .form-name {
+        padding-right: .5rem;
+      }
+
+      .form-name, .form-price {
+        width: 50%;
+      }
+
+      .form-start-at, .form-end-at {
+        padding-right: .5rem;
+      }
+
+      .form-start-at, .form-end-at, .form-published-at {
+        width: 33.33%;
+      }
+    }
+  }
+
+  // Promotion form
+  .form-promotion {
+    .form-section {
+      display: flex;
+
+      .form-name, .form-start-at, .form-published-at {
+        padding-right: .5rem;
+      }
+
+      .form-name, .form-pdf, .form-start-at, .form-end-at, .form-published-at, .form-published-until  {
+        width: 50%;
+      }
+    }
+
+    .form-pdf input {
+      margin-bottom: .25rem;
+
+    }
+    .pdf-link {
+      margin-bottom: 1.5rem;
+      padding-left: .2rem;
+
+      a {
+        display: flex;
+        align-items: center;
+        color: $color-txt-price;
+        font-size: .8rem;
+      }
+
+      svg {
+        width: 18px;
+        fill: $color-txt-price;
+        margin-right: .5rem;
+      }
+    }
+  }
 }
 
 // Validation

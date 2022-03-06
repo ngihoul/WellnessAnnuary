@@ -21,7 +21,29 @@
     </section>
     <section class="form-internship">
         <div class="wrapper">
-            {{ form(form) }}
+            {{ form_start(form) }}
+            <div class="form-section">
+                <div class="form-name">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="form-price">
+                    {{ form_row(form.price) }}
+                </div>
+            </div>
+            {{ form_row(form.description) }}
+            {{ form_row(form.additionalInformation) }}
+            <div class="form-section">
+                <div class="form-start-at">
+                    {{ form_row(form.startAt) }}
+                </div>
+                <div class="form-end-at">
+                    {{ form_row(form.endAt) }}
+                </div>
+                <div class="form-published-at">
+                    {{ form_row(form.displayedFrom) }}
+                </div>
         </div>
+            {{ form_row(form.submit) }}
+            {{ form_end(form) }}
     </section>
 {% endblock %}
