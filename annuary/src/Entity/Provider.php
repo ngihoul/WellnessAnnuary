@@ -337,7 +337,7 @@ class Provider
     }
 
     /**
-     * @return Collection|Customer[]
+     * @return Collection
      */
     public function getFavorite(): Collection
     {
@@ -362,12 +362,12 @@ class Provider
 
     public function getDescription(): ?string
     {
-        return nl2br($this->description);
+        return $this->description;
     }
 
     public function setDescription(string $description): self
     {
-        $this->description = $description;
+        $this->description = nl2br($description);
 
         return $this;
     }
