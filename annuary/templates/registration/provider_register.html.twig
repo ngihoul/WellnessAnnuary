@@ -6,7 +6,9 @@
     {{ encore_entry_script_tags('formValidation') }}
 {% endblock %}
 
-{% block title %}Register{% endblock %}
+{% block title %}
+{{ parent() }} | S'enregistrer
+{% endblock %}
 
 {% block body %}
     {% for flashError in app.flashes('verify_email_error') %}
