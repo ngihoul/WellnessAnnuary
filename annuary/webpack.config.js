@@ -28,6 +28,8 @@ Encore
     .addEntry('requestResetPassword', './assets/js/requestResetPassword.js')
     .addEntry('resetPassword', './assets/js/resetPassword.js')
     .addEntry('providerPage', './assets/js/providerPage.js')
+    .addEntry('internshipValidation', './assets/js/internshipValidation.js')
+    .addEntry('promotionValidation', './assets/js/promotionValidation.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
