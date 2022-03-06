@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Provider;
 use App\Repository\ProviderRepository;
 use App\Form\UpdateProviderType;
-use App\Service\ImageService;
+use App\Service\FileService;
 use App\Entity\Internship;
 use App\Repository\InternshipRepository;
 use App\Form\InternshipType;
@@ -63,7 +63,7 @@ class ProviderController extends AbstractController
      */
     #[Route('/update/{id}', name: 'provider_update')]
     #[IsGranted('ROLE_PROVIDER')]
-    public function update(ImageService $imageService, Request $request, int $id)
+    public function update(FileService $fileService, Request $request, int $id)
     {
         // Fetch data of targeted provider
         $provider = $this->providerRepository->find($id);
@@ -86,7 +86,7 @@ class ProviderController extends AbstractController
                 $logo = $form->get('logo')->getData();
                 if($logo) {
                     try {
-                        $logoFileName = $imageService->save($logo, Provider::LOGO_DIRECTORY);
+                        $logoFileName = $fileService->save($logo, Provider::LOGO_DIRECTORY);
                         $provider->setLogo($logoFileName);
                     } catch(FileException $e) {
                         $this->addFlash('error', 'Le fichier n\'a pas pu être enregistré car ' . $e->getMessage());

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Promotion;
 use App\Form\PromotionType;
 use App\Repository\PromotionRepository;
-use App\Service\ImageService;
+use App\Service\FileService;
 
 #[Route('/promotion')]
 class PromotionController extends AbstractController
@@ -36,7 +36,7 @@ class PromotionController extends AbstractController
      * @return Response
      */
     #[Route('/add', name: 'promotion_add')]
-    public function add(Request $request, ImageService $imageService): Response
+    public function add(Request $request, FileService $fileService): Response
     {
         // Restrict access to providers only
         if(!$this->isGranted('ROLE_PROVIDER')) {
@@ -64,7 +64,7 @@ class PromotionController extends AbstractController
                 $pdf = $form->get('PDFDocument')->getData();
                 if($pdf) {
                     try {
-                        $pdfFileName = $imageService->save($pdf, Self::PDF_DIRECTORY);
+                        $pdfFileName = $fileService->save($pdf, Self::PDF_DIRECTORY);
                         $promotion->setPDFDocument($pdfFileName);
                     } catch(FileException $e) {
                         $this->addFlash('error', 'Le fichier n\'a pas pu être enregistré car ' . $e->getMessage());
@@ -98,7 +98,7 @@ class PromotionController extends AbstractController
      * @return Response
      */
     #[Route('/update/{id}', name: 'promotion_update')]
-    public function update(Request $request, ImageService $imageService, $id): Response
+    public function update(Request $request, FileService $fileService, $id): Response
     {
         $title = 'Modifier cette promotion';
         $promotion = $this->promotionRepository->find($id);
@@ -125,7 +125,7 @@ class PromotionController extends AbstractController
                     $pdf = $form->get('PDFDocument')->getData();
                     if($pdf) {
                         try {
-                            $pdfFileName = $imageService->save($pdf, Self::PDF_DIRECTORY);
+                            $pdfFileName = $fileService->save($pdf, Self::PDF_DIRECTORY);
                             $promotion->setPDFDocument($pdfFileName);
                         } catch(FileException $e) {
                             $this->addFlash('error', 'Le fichier n\'a pas pu être enregistré car ' . $e->getMessage());
