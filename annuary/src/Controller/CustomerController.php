@@ -27,7 +27,7 @@ class CustomerController extends AbstractController
     #[Route('/profile', name: 'customer_profile')]
     public function index(): Response
     {
-        if(!$this->getUser() && $this->isGranted('ROLE_CUSTOMER')) {
+        if(!$this->getUser() || !$this->isGranted('ROLE_CUSTOMER')) {
             $this->addFlash('error', 'Cette page n\'existe pas');
             return $this->redirectToRoute('home');
         }
@@ -99,7 +99,7 @@ class CustomerController extends AbstractController
     }
 
     #[Route('/delete_favorite/{id}', name: 'customer_delete_favorite')]
-    public function delete(ProviderRepository $providerRepository, $id)
+    public function delete(Request $request, ProviderRepository $providerRepository, $id)
     {
         if(!$this->getUser() && $this->isGranted('ROLE_CUSTOMER')) {
             $this->addFlash('error', 'Cette page n\'existe pas');
@@ -113,6 +113,7 @@ class CustomerController extends AbstractController
         $this->entityManager->persist($customer);
         $this->entityManager->flush();
 
-        return $this->redirectToRoute('provider_detail', ['id' => $provider->getId()]);
+        $route = $request->headers->get('referer');
+        return $this->redirect($route);
     }
 }

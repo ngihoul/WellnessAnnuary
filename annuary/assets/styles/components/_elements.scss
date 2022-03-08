@@ -248,9 +248,10 @@
 .likeBtn {
   position: fixed;
   top: 80px;
-  right: 20px;
+  right: 40px;
 
   a {
+    display: inline-block;
     padding: .5rem;
     width: 36px;
     height: 36px;
@@ -259,8 +260,8 @@
   svg {
     width: 36px;
     height: 36px;
-
   }
+
   .like svg {
     fill: green;
   }
