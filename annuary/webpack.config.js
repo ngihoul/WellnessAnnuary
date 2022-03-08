@@ -20,10 +20,10 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
+    .addEntry('functions', './assets/js/functions.js')
     .addEntry('app', './assets/app.js')
     .addEntry('home', './assets/js/home.js')
     .addEntry('alert', './assets/js/alert.js')
-    .addEntry('registration', './assets/js/registration.js')
     .addEntry('formValidation', './assets/js/formValidation.js')
     .addEntry('requestResetPassword', './assets/js/requestResetPassword.js')
     .addEntry('resetPassword', './assets/js/resetPassword.js')

@@ -53,7 +53,7 @@ class ProviderController extends AbstractController
         // If customer : Is this provider a favorite ?
         $favorite = false;
 
-        if($this->getUser()->getCustomer()) {
+        if($this->getUser() && $this->getUser()->getCustomer()) {
             $customer = $this->getUser()->getCustomer();
             $favorite = $customer->getFavorites()->contains($provider);
         }

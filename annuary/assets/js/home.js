@@ -1,3 +1,9 @@
+
+// Annuary Bien-Être - JS - Homepage
+// Author : Nicolas Gihoul
+// Date : March 2022
+
+
 // ** Displaying/hiding search button on homepage ** //
 const searchBtn = document.querySelector('.searchBtn');
 const screenHeight = window.screen.height;
@@ -5,7 +11,6 @@ const screenWidth = window.screen.width;
 const url = window.location.href;
 
 let BREAKING_POINT_RESPONSIVE = (screenHeight/3)*2;
-
 BREAKING_POINT_RESPONSIVE = (screenWidth >= 1140) ? (screenHeight/5) : (screenHeight/3*2);
 
 // * Display/hide searchBtn after scrolling on Mobile * //

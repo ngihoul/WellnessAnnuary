@@ -1,28 +1,14 @@
-// Close alert with close button
-let alertCloseBtn = document.querySelectorAll('.alert-closeBtn');
-alertCloseBtn.forEach((element) => {
-    element.addEventListener('click', (e) => {
-        e.target.parentElement.style.display = 'none';
-    })
-})
 
+// Annuary Bien-Être - JS - Alerts Management
+// Author : Nicolas Gihoul
+// Date : March 2022
 
-// FadeOut & undisplay alert boxes
-const closeAlert = () => {
-    let alerts = document.querySelectorAll('.alert');
-    alerts.forEach((element) => {
-        element.classList.add('closed');
-        setTimeout(hideAlert, 3000);
-    });
-}
+import { Alert } from './functions';
 
-const hideAlert = () => {
-    let alerts = document.querySelectorAll('.alert');
-    alerts.forEach((element) => {
-        element.style.display = 'none';
-    });
-}
+// * Close alerts with close button * //
+Alert.closeOnClick();
 
-setTimeout(closeAlert, 5000);
+// * Close automatically alerts after 3 sec * //
+setTimeout(Alert.automaticClose, 3000);
 
 
