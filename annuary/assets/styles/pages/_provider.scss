@@ -105,12 +105,9 @@ section.providerDetail {
 
   .map {
     margin: 2.5rem 0 0;
-
-    iframe {
-      width: 100%;
-      height: 300px;
-      border: none;
-    }
+    width: 100%;
+    height: 300px;
+    border: none;
   }
 
   &.navBar {
