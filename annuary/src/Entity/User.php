@@ -95,6 +95,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->banned = 0;
         $this->registrationConfirmed = 0;
     }
+    public function __toString() {
+        return $this->email;
+    }
 
     public function getId(): ?int
     {

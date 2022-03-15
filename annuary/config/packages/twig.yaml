@@ -9,7 +9,8 @@ twig:
         ## promotion_directory: '%kernel.project_dir%/public/uploads/promotions/'
         ## logo_directory: '%kernel.project_dir%/public/uploads/logo/'
         ## avatar_directory: '%kernel.project_dir%/public/uploads/avatar/'
-        ## images_directory: '%kernel.project_dir%/public/uploads/' ##
+        ## images_directory: '%kernel.project_dir%/public/uploads/'
+        ## promotion_directory : '%kernel.project_dir%/public/uploads/promotions/'
 
 when@test:
     twig:
