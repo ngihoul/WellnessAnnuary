@@ -16,6 +16,8 @@ use App\Controller\Admin\ServiceCategoryCrudController;
 use App\Entity\ServiceCategory;
 use App\Entity\Customer;
 use App\Entity\User;
+use App\Entity\Provider;
+use App\Entity\Image;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -36,10 +38,11 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         return [
-            MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
             MenuItem::linkToCrud('Catégories', 'fas fa-list', ServiceCategory::class),
-            MenuItem::linkToCrud('Internautes', 'fas fa-list', Customer::class),
-            MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class),
+            MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class),
+            MenuItem::linkToCrud('Internautes', 'fas fa-user-secret', Customer::class),
+            MenuItem::linkToCrud('Prestataires', 'fas fa-user-tie', Provider::class),
+            MenuItem::linkToCrud('Slider', 'fas fa-skiing', Image::class),
             MenuItem::linkToRoute('Retour vers le site', 'fas fa-sign-out-alt', 'home'),
         ];
     }

@@ -39,6 +39,9 @@ class Locality
     {
         $this->users = new ArrayCollection();
     }
+    public function __toString() {
+        return $this->getPostCode()->getPostCode() . ' ' . $this->getName();
+    }
 
     public function getId(): ?int
     {
