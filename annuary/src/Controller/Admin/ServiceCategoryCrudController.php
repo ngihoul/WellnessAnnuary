@@ -35,8 +35,8 @@ class ServiceCategoryCrudController extends AbstractCrudController
                 ->setBasePath($this->getParameter('category_directory'))
                 ->setUploadDir('/public/uploads/category/')
                 ->setUploadedFileNamePattern(
-                    fn (UploadedFile $file): string => sprintf('%s.%s', $file->getFilename(), uniqid())
-),
+                    fn (UploadedFile $file): string => sprintf('%d_%s.%s', $file->getFilename(), uniqid(), $file->guessExtension())
+            ),
         ];
     }
 }
