@@ -34,7 +34,7 @@ class CustomerCrudController extends AbstractCrudController
             BooleanField::new('newsletter', 'Inscrit à newsletter ?'),
             ImageField::new('avatar')
                 ->setBasePath($this->getParameter('avatar_directory'))
-                ->setUploadDir('/public/uploads/avatar/'),
+                ->setUploadDir('/public/uploads/category/'),
         ];
     }
 }

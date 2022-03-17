@@ -8,10 +8,12 @@ parameters:
     logo_directory: 'http://localhost:8000/uploads/logo/'
     avatar_directory: 'http://localhost:8000/uploads/avatar/'
     promotion_directory: 'http://localhost:8000/uploads/promotions/'
+    category_directory: 'http://localhost:8000/uploads/category/'
     ## images_directory: '%kernel.project_dir%/public/uploads/'
     ## logo_directory: '%kernel.project_dir%/public/uploads/logo/'
     ## avatar_directory: '%kernel.project_dir%/public/uploads/avatar/'
     ## promotion_directory: '%kernel.project_dir%/public/uploads/promotions/'
+    ## category_directory: '%kernel.project_dir%/public/uploads/promotions/'
 
 services:
     # default configuration for services in *this* file
