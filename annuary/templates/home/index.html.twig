@@ -30,7 +30,7 @@
             <h2>Catégorie du moment</h2>
             <div class="bigCard">
                 <div class="img-container">
-                    <img loading="lazy" src="{{ asset('/img/category.jpg') }}" alt="Image {{ highlightedCategory.name }}" />
+                    <img loading="lazy" src="{{ category_directory ~ highlightedCategory.image }}" alt="Image {{ highlightedCategory.name }}" />
                 </div>
                 <div class="bigCard-content">
                     <h3>{{ highlightedCategory.name }}</h3>

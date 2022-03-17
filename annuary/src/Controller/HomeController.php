@@ -49,23 +49,16 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(): Response
     {
-        // Get highlighted Category from cache or DB
-        $highlightedCategory = $this->cache->get('categoryOfTheMonth', function(ItemInterface $item) {
-            // Adding "category" tag to the cache object
-            $item->tag(['category']);
-            //
-            $highlightedCategory = $this->serviceCategoryRepository->getHighlighted();
-            // If no category has been highlighted : take first validated category
-            if(!$highlightedCategory) {
-                $highlightedCategory = $this->serviceCategoryRepository->findOneBy(['validated' => 1]);
-            }
-            // If more than one category have been highlighted : take the first highlighted category
-            if(is_array($highlightedCategory)) {
-                $highlightedCategory = $highlightedCategory[0];
-            }
-
-            return $highlightedCategory;
-        });
+        // Get highlighted Category
+        $highlightedCategory = $this->serviceCategoryRepository->getHighlighted();
+        // If no category has been highlighted : take first validated category
+        if(!$highlightedCategory) {
+            $highlightedCategory = $this->serviceCategoryRepository->findOneBy(['validated' => 1]);
+        }
+        // If more than one category have been highlighted : take the first highlighted category
+        if(is_array($highlightedCategory)) {
+            $highlightedCategory = $highlightedCategory[0];
+        }
 
         // Get four last subscribers
         $lastSubscribers = $this->providerRepository->getLastSubscribers(0,4);
