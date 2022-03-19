@@ -3,6 +3,8 @@
 // Author : Nicolas Gihoul
 // Date : March 2022
 
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
 
 // ** Displaying/hiding search button on homepage ** //
 const searchBtn = document.querySelector('.searchBtn');
@@ -28,7 +30,7 @@ window.addEventListener('scroll', () => {
 const swiper = new Swiper(".swiper", {
     loop: true,
     autoplay: {
-        delay: 3000,
+        delay: 2000,
     },
     effect: 'fade',
     fadeEffect: {
