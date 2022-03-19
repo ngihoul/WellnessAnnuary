@@ -1,5 +1,5 @@
 .loginMod {
-  height: 100vh;
+  height: 90vh;
   width: 100vw;
   text-align: center;
   color: $color-txt-normal;
@@ -61,27 +61,20 @@
 }
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
   .loginMod {
-    height: auto;
-    width: 40%;
-    margin-left: 40%;
-    margin-right: 20%;
-    margin-top: -500px;
-    background: $white;
+    height: 70vh;
     z-index: 99;
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'loginBackgroundDesktop.jpg') center no-repeat;
     @include box-shadow(false);
 
-    h1 {
-      display: none;
-    }
-
     form {
-      display: flex;
-      flex-wrap: wrap;
+      // display: flex;
+      // flex-wrap: wrap;
+      text-align: center;
+      width: 50%;
+      margin: 0 auto;
 
       .loginForm-mail, .loginForm-password {
-        width: 50%;
-        max-width: 50%;
-        padding: 0 10px;
+        padding: 0;
       }
 
       .loginForm-rememberMe {
@@ -99,11 +92,9 @@
       }
     }
 
-    &.active {
-      margin-left: 40%;
-      margin-right: 20%;
-      margin-top: 5px;
-      padding: 20px;
+    .cta {
+      width: 50%;
+      margin: 0 auto 1.5rem;
     }
   }
 }
