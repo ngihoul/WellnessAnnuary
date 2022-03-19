@@ -5,6 +5,9 @@ namespace App\Twig;
 use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -32,26 +35,13 @@ class TwigExtension extends AbstractExtension
     }
 
     /**
-     * Get categories SubMenu for navBar from cache if exists
-     * @return string
-     * @throws \Psr\Cache\CacheException
-     * @throws \Psr\Cache\InvalidArgumentException
-     */
-    public function getSubMenuCategory(): string {
-        return $this->cache->get('subMenuCategory', function(ItemInterface $item) {
-            $item->tag(['category']);
-            return $this->renderSubMenuCategory();
-        });
-    }
-
-    /**
      * Get categories SubMenu for navBar
      * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
-    private function renderSubMenuCategory(): string {
+    public function getSubMenuCategory(): string {
         $categories = $this->serviceCategoryRepository->findBy([], ['name' => 'ASC']);
 
         $arraySize = count($categories);
