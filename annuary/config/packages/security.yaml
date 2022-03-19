@@ -22,9 +22,9 @@ security:
             provider: app_user_provider
             custom_authenticator: App\Security\CustomAuthenticator
             logout:
-                path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
+                path: logout
+                target: home
+                invalidate_session: false
             remember_me:
                 secret: '%kernel.secret%'
                 # Remember during 1 month

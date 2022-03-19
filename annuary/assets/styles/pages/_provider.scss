@@ -37,12 +37,23 @@ section.providerDetail {
           fill: $color-cta;
         }
       }
+
+      &.logoutLink {
+        top: -85px;
+        color: darken($color-cta, 20%);
+        border: 3px solid darken($color-cta, 20%);
+
+        svg path {
+          fill: darken($color-cta, 20%);
+        }
+      }
     }
   }
 
   &.heading {
     padding-left: 10%;
     padding-right: 10%;
+    padding-top: 6.5rem;
   }
 
   .address {
@@ -342,6 +353,10 @@ section.providerDetail.content {
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
   .providerDetail {
 
+    &.heading {
+      padding-top: 4.5rem;
+    }
+
     h1 {
       line-height: 2rem;
     }
@@ -379,6 +394,16 @@ section.providerDetail.content {
           width: 250px;
           transition: all 2s;
           text-align: center;
+        }
+
+        &.logoutLink {
+          top: -55px;
+          color: darken($color-cta, 20%);
+          border: 3px solid darken($color-cta, 20%);
+
+          svg path {
+            fill: darken($color-cta, 20%);
+          }
         }
       }
     }

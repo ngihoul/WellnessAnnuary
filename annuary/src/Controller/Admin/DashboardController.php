@@ -50,16 +50,7 @@ class DashboardController extends AbstractDashboardController
     public function configureUserMenu(UserInterface $user): UserMenu
     {
         return parent::configureUserMenu($user)
-            ->setName($user->getEmail())
-            ->setGravatarEmail($user->getEmail())
-
-            // TODO : customize user menu
-            ->addMenuItems([
-                MenuItem::linkToRoute('My Profile', 'fa fa-id-card', '...', ['...' => '...']),
-                MenuItem::linkToRoute('Settings', 'fa fa-user-cog', '...', ['...' => '...']),
-                MenuItem::section(),
-                MenuItem::linkToLogout('Logout', 'fa fa-sign-out'),
-            ]);
+            ->setName($user->getEmail());
     }
 
     public function configureCrud(): Crud

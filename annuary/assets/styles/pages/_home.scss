@@ -4,7 +4,7 @@
   padding: 0 20px;
   height: 100vh;
   text-align: center;
-  background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'heroBackground_full.jpg') center no-repeat;
+  background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'homePageHero_360p.jpg') center no-repeat;
   background-size: cover;
 
   .wrapper {
@@ -39,7 +39,7 @@
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
   // * Hero * //
   .hero {
-    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'heroBackground_full.jpg') center no-repeat;
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'homePageHero_1920p.jpg') center no-repeat;
     background-size: cover;
     height: 50vh;
     min-height: 420px;
