@@ -1,5 +1,5 @@
 section.registration {
-  background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'registrationBackground.jpg') center no-repeat;
+  background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'registrationBackground_360p.jpg') center no-repeat;
   text-align: center;
 }
 
@@ -58,6 +58,10 @@ section.registration {
 }
 
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
+  section.registration {
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url($imageDir + 'registrationBackground_1920p.jpg') center no-repeat;
+  }
+
   .form-logo {
     display: flex;
     > div {

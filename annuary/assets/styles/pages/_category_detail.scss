@@ -1,7 +1,7 @@
 // ** Category detail ** //
 // * Hero * /
 .heading.listing {
-  @include bg-gradient-white('heroHammam.jpg');
+  @include bg-gradient-white('headingBackground_360p.jpg');
   text-align: center;
 
   h1 {
@@ -19,6 +19,8 @@ section.categoryDetail.content{
 
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
   .heading.listing {
+    @include bg-gradient-white('headingBackground.jpg');
+
     p {
       padding-bottom: 3.5rem;
     }
