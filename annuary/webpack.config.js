@@ -22,6 +22,7 @@ Encore
      */
     .addEntry('functions', './assets/js/functions.js')
     .addEntry('app', './assets/app.js')
+    .addEntry('login', './assets/js/login.js')
     .addEntry('home', './assets/js/home.js')
     .addEntry('alert', './assets/js/alert.js')
     .addEntry('formValidation', './assets/js/formValidation.js')
