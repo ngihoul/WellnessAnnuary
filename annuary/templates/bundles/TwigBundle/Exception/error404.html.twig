@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Erreur 404
+{% endblock %}
+
+{% block body %}
+    <main class="error">
+        <section class="hero">
+            <div class="wrapper">
+                <h1>Erreur 404<br>Page non trouvée</h1>
+            </div>
+        </section>
+    </main>
+{% endblock %}
