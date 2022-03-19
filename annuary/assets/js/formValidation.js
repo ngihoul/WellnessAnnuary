@@ -6,9 +6,6 @@
 import { Validator, Format, Locality, HTML_CLASS, MSG } from './functions';
 
 
-// * Constants * /
-
-
 // * Variables * //
 if(document.forms['provider'] != undefined) {
     var formInputs = document.forms['provider'];
@@ -113,29 +110,35 @@ postCodeField.addEventListener('focusout', () => {
 });
 
 // * Add message to password * //
-Format.addMessage(passwordField, MSG.NOT_PASSWORD, HTML_CLASS.INFO_MSG);
+if(passwordField) {
+    Format.addMessage(passwordField, MSG.NOT_PASSWORD, HTML_CLASS.INFO_MSG);
 
 // * Paswword checks * //
-passwordField.addEventListener('focusout', () => {
-    Format.notPassword(passwordField);
-});
+    passwordField.addEventListener('focusout', () => {
+        Format.notPassword(passwordField);
+    });
+}
 
-passwordConfirmField.addEventListener('focusout', () => {
-    if(!Validator.isBlank(passwordConfirmField)) {
-        Format.passwordsNotSimilar(passwordConfirmField, passwordField);
-    }
-});
+if(passwordConfirmField) {
+    passwordConfirmField.addEventListener('focusout', () => {
+        if(!Validator.isBlank(passwordConfirmField)) {
+            Format.passwordsNotSimilar(passwordConfirmField, passwordField);
+        }
+    });
+}
 
 // * Logo check * //
 logoField.addEventListener('change', () => {
     Validator.isValidImage(logoField) ? displayImage(logoField) : Format.fieldNotValidated(logoField, MSG.NOT_IMAGE);
 });
 
-// * Privacy Policy check * //
-Format.privacyPolicyNotChecked(privacyPolicyField);
-privacyPolicyField.addEventListener('change', () => {
+if(privacyPolicyField) {
+    // * Privacy Policy check * //
     Format.privacyPolicyNotChecked(privacyPolicyField);
-})
+    privacyPolicyField.addEventListener('change', () => {
+        Format.privacyPolicyNotChecked(privacyPolicyField);
+    })
+}
 
 // * Locality checks * //
 // Delete all options in Locality <select>
@@ -143,4 +146,4 @@ localityField.innerHTML = "";
 
 // Display Locality in relation with the postCode typed by the user
 Locality.displayOnInputEvent(postCodeField, localityField);
-Locality.displayIfFieldValueEqualsFour(postCodeField);
+Locality.displayIfFieldValueEqualsFour(postCodeField, localityField);

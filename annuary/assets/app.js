@@ -45,6 +45,13 @@ openSearch.addEventListener('click', (e) => {
     if(menu.classList.contains('active')) {
         menu.classList.remove('active');
         searchMod.classList.add('active');
+    } else if (searchMod.classList.contains('active')) {
+        searchMod.classList.remove('active');
+        openLogo.innerHTML = LOGO.HAMBURGER;
+    } else if(dropDown.classList.contains('active')) {
+        dropDown.classList.remove('active');
+        searchMod.classList.add('active');
+        switchChevron();
     } else {
         searchMod.classList.add('active');
         openLogo.innerHTML = LOGO.BACK;
@@ -74,8 +81,12 @@ const switchChevron = () => {
 }
 
 categoryLink.addEventListener('click', (e) => {
+    if(searchMod.classList.contains('active')) {
+        searchMod.classList.remove('active');
+    }
     dropDown.classList.toggle('active');
     e.stopPropagation();
+    e.preventDefault();
     // Modify chevron icons
     switchChevron()
 });
