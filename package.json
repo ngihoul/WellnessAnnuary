@@ -2,6 +2,6 @@
   "name": "annuaireBienEtre",
   "version": "1.0.0",
   "dependencies": {
-    
+    "swiper": "^8.0.7"
   }
 }
