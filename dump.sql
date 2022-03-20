@@ -4897,7 +4897,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `locality_id`, `email`, `roles`, `password`, `address_number`, `address_street`, `registered_on`, `unsuccessful_attempts`, `banned`, `is_verified`, `privacy_policy`) VALUES
-(3, 1391, 'braun.natacha@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$s83BCNXfXjGQTBMnYmNhdOksopDwIMMTH89lASwmrua6uYHnZxxuW', '21', 'Rue du test', '2022-03-20 16:13:46', 0, 0, 1, 1);
+(3, 1391, 'admin@admin.com', '[\"ROLE_ADMIN\"]', '$2y$13$s83BCNXfXjGQTBMnYmNhdOksopDwIMMTH89lASwmrua6uYHnZxxuW', '21', 'Rue du test', '2022-03-20 16:13:46', 0, 0, 1, 1);
 
 --
 -- Contraintes pour les tables déchargées
