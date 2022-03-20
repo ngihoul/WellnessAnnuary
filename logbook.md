@@ -166,5 +166,49 @@
 ## 10th February 2022
 * Second evaluation
 
+## 15th February 2022
+* Updating a provider - Frontend
+
+## 17th February
+* Creating FileService
+* Finalizing updating of a provider
+* Adding internship to a provider - Frontend
+
+## 22nd February 2022
+* Managing internships - Backend
+
+## 24th February
+* Fixing frontend
+
+## 2nd March 2022
+* Managing promotions - Backend
+* Managing categories - Backend
+
+## 3th March
+* Adding comments
+
+## 6th March 2022
+* Don't allow to modify email
+* Adding PDF Management in Promotion form
+* Frontend validation for Internship & Promotion forms
+* Adding providers to favorites
+
+## 8th March 2022
+* Refactoring JS files
+* Various fixes on Frontend
+
+## 15th March 2022
+* Dynamic map on provider's profile
+
+## 17th March
+* Admin panel
+  * Slider Management
+
+## 19th March 2022
+* Finalizing Admin panel
+
+## 20th March 2022
+* Last code fine-tuning
+
 ### Remarks
 * Time constraints : tablet version webdesign will not be made
