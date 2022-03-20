@@ -23,6 +23,7 @@
 
   &-content {
     padding: 20px;
+    overflow-wrap: break-word;
   }
 }
 
@@ -33,6 +34,7 @@
 
     .img-container {
       width: 20%;
+      min-width: 20%;
       height: auto;
       overflow: hidden;
     }
@@ -44,7 +46,7 @@
 
     &-content {
       align-self: center;
-      width: 100%;
+      width: 80%;
 
       .description {
         padding: 1rem 0;
@@ -135,7 +137,11 @@
   &-content {
     padding-left: 5px;
     padding-right: 80px;
-    width: 100%;
+    width: 70%;
+
+    p {
+      padding: .25rem 0;
+    }
   }
 
   .name {
@@ -155,11 +161,19 @@
     @include box-shadow-hover();
   }
 
+  .image-container {
+    width: 30%;
+    min-height: 80px;
+    border-radius: 10px 0 0 10px;
+    overflow: hidden;
+  }
+
   img {
     display: block;
-    width: 80px;
-    height: 80px;
+    min-width: 150%;
+    height: 150px;
     border-radius: 10px 0 0 10px;
+    margin-left: -25%;
   }
 
   .reviews {
@@ -176,8 +190,30 @@
 }
 
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
-  .smallCard-container {
-    margin: 0 auto;
+  .smallCard {
+    &-container {
+      margin: 0 auto;
+    }
+
+    &-content {
+      width: 80%;
+    }
+
+    .image-container {
+      width: 20%;
+
+      img {
+        height: 120px;
+      }
+    }
+  }
+
+  #results, .similarProviders {
+    .smallCard {
+      .image-container {
+        width: 10%;
+      }
+    }
   }
 }
 

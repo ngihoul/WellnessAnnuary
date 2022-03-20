@@ -22,7 +22,9 @@
                         {% for provider in providers %}
                             <a href="{{ path('provider_detail', { id : provider.id } ) }}">
                                 <div class="smallCard">
-                                    <img loading="lazy" src="{{ logo_directory ~ provider.logo }}" alt="Image {{ provider.name }}" />
+                                    <div class="image-container">
+                                        <img loading="lazy" src="{{ logo_directory ~ provider.logo }}" alt="Image {{ provider.name }}" />
+                                    </div>
                                     <div class="smallCard-content">
                                         <p class="name">{{ provider.name }}</p>
                                         <p class="category">

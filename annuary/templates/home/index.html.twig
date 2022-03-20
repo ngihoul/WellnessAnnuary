@@ -64,19 +64,17 @@
             <div class="smallCard-container">
                 {% for lastSubscriber in lastSubscribers %}
                     <div class="smallCard">
-                        <a href="{{ path('provider_detail', { id : lastSubscriber.id } ) }}">
+                        <a class="image-container" href="{{ path('provider_detail', { id : lastSubscriber.id } ) }}">
                             <img loading="lazy" src="{{ logo_directory ~ lastSubscriber.logo }}" alt="Image {{ lastSubscriber.name }}" />
                         </a>
-                        <a href="{{ path('provider_detail', { id : lastSubscriber.id } ) }}">
-                            <div class="smallCard-content">
-                                <p class="name">{{ lastSubscriber.name }}</p>
-                                <p class="category">
-                                    {% for serviceCategory in lastSubscriber.serviceCategories %}
-                                        {{ serviceCategory.name }}{{ loop.index != loop.last ? ', ' : '' }}
-                                    {% endfor %}
-                                </p>
-                                <p class="place">{{ lastSubscriber.user.locality.postCode.postCode ~ ' ' ~ lastSubscriber.user.locality.name|capitalize }}</p>
-                            </div>
+                        <a class="smallCard-content" href="{{ path('provider_detail', { id : lastSubscriber.id } ) }}">
+                            <p class="name">{{ lastSubscriber.name }}</p>
+                            <p class="category">
+                                {% for serviceCategory in lastSubscriber.serviceCategories %}
+                                    {{ serviceCategory.name }}{{ loop.index != loop.last ? ', ' : '' }}
+                                {% endfor %}
+                            </p>
+                            <p class="place">{{ lastSubscriber.user.locality.postCode.postCode ~ ' ' ~ lastSubscriber.user.locality.name|capitalize }}</p>
                         </a>
                         <span class="reviews">8<i class="fas fa-star"></i></span>
                         {% if lastSubscriber.getUnexpiredPromotions|length > 0 and lastSubscriber.getUnexpiredInternships|length > 0 %}
