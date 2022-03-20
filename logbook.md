@@ -50,6 +50,10 @@
 ## 23rd December 2021
 * Creating Hero
   * Front (mobile & desktop)
+* Happy Birthday to me :)
+
+## 25th December 2021
+* Merry Christmas !
 
 ## 27th December 2021
 * Importing localities, postcodes & municipalities into the DB

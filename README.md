@@ -40,3 +40,5 @@ Navigate to http://localhost:8000/
 * PHPMyAdmin 5.1.1
 * MySQL 8.0.27
 * SaSS
+* Maildev
+* Cron jobs
