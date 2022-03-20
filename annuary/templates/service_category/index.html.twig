@@ -16,7 +16,7 @@
                 {% for category in categories %}
                     <div class="bigCard">
                         <div class="img-container">
-                            <img loading="lazy" src="{{ asset('/img/category.jpg') }}" alt="Image {{ category.name }}" />
+                            <img loading="lazy" src="{% if category.image is null %}{{ asset('/img/category.jpg') }}{% else %}{{ category_directory ~ category.image }}{% endif %}" alt="Image {{ category.name }}" />
                         </div>
                         <div class="bigCard-content">
                             <h3>{{ category.name }}</h3>

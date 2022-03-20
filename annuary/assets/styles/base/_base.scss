@@ -47,11 +47,11 @@ section {
   padding: 2.5rem 0;
 
   &:nth-child(odd) {
-    background-color: $color-bg-light;
+    background-color: $color-bg-dark;
   }
 
   &:nth-child(even) {
-    background-color: $color-bg-dark;
+    background-color: $color-bg-light;
   }
 
   h1 {

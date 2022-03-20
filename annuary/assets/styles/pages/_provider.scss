@@ -41,7 +41,7 @@ section.providerDetail {
       &.logoutLink {
         top: -85px;
         color: darken($color-cta, 20%);
-        border: 3px solid darken($color-cta, 20%);
+        border: 4px solid darken($color-cta, 20%);
 
         svg path {
           fill: darken($color-cta, 20%);
@@ -399,7 +399,7 @@ section.providerDetail.content {
         &.logoutLink {
           top: -55px;
           color: darken($color-cta, 20%);
-          border: 3px solid darken($color-cta, 20%);
+          border: 4px solid darken($color-cta, 20%);
 
           svg path {
             fill: darken($color-cta, 20%);

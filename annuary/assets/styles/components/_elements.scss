@@ -189,6 +189,12 @@
   }
 }
 
+#promotions {
+  .smallCard-content {
+    width: 100%;
+  }
+}
+
 @media screen and (min-width: map-get($responsive-table, "-lg")) {
   .smallCard {
     &-container {
@@ -203,7 +209,7 @@
       width: 20%;
 
       img {
-        height: 120px;
+        height: 135px;
       }
     }
   }

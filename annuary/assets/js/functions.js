@@ -199,6 +199,10 @@ const Format = {
         Validator.isBlank(field) ? Format.fieldNotValidated(field, MSG.BLANK) : Format.fieldValidated(field);
     },
 
+    escapeSpaces: string => {
+        return string.replace(/\s/g, '');
+    },
+
     notPhoneNumber: field => {
         // Delete whitespaces
         field.value = Format.escapeSpaces(field.value);
@@ -208,10 +212,6 @@ const Format = {
 
         // If not correspond to a belgian phonenumber, format field
         Validator.isBelgianPhoneNumber(field) ? Format.fieldValidated(field) : Format.fieldNotValidated(field, MSG.NOT_PHONENUMBER);
-    },
-
-    escapeSpaces: string => {
-        string.replace(/\s/g, '');
     },
 
     notWebsite: field => {

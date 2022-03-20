@@ -312,27 +312,27 @@
                     <h2>Prestataires similaires</h2>
                     <div class="smallCard-container">
                         {% for similarProvider in similarProviders %}
-                            <a href="{{ path('provider_detail', { id : provider.id } ) }}">
+                            <a href="{{ path('provider_detail', { id : similarProvider.id } ) }}">
                                 <div class="smallCard">
                                     <div class="image-container">
-                                        <img loading="lazy" src="{{ logo_directory ~ provider.logo }}" alt="Image {{ provider.name }}" />
+                                        <img loading="lazy" src="{{ logo_directory ~ similarProvider.logo }}" alt="Image {{ similarProvider.name }}" />
                                     </div>
                                     <div class="smallCard-content">
-                                        <p class="name">{{ provider.name }}</p>
+                                        <p class="name">{{ similarProvider.name }}</p>
                                         <p class="category">
-                                            {% for serviceCategory in provider.serviceCategories %}
+                                            {% for serviceCategory in similarProvider.serviceCategories %}
                                                 {{ serviceCategory.name }}{{ loop.index != loop.last ? ', ' : '' }}
                                             {% endfor %}
                                         </p>
-                                        <p class="place">{{ provider.user.locality.postCode.postCode ~ ' ' ~ provider.user.locality.name|capitalize }}</p>
+                                        <p class="place">{{ similarProvider.user.locality.postCode.postCode ~ ' ' ~ similarProvider.user.locality.name|capitalize }}</p>
                                     </div>
                                     <span class="reviews">8<i class="fas fa-star"></i></span>
-                                    {% if provider.getUnexpiredPromotions|length > 0 and provider.getUnexpiredInternships|length > 0 %}
+                                    {% if similarProvider.getUnexpiredPromotions|length > 0 and similarProvider.getUnexpiredInternships|length > 0 %}
                                         <span class="smallPills-1 promos">Promos</span>
                                         <span class="smallPills-2 internships">Stages</span>
-                                    {% elseif provider.getUnexpiredPromotions|length > 0 %}
+                                    {% elseif similarProvider.getUnexpiredPromotions|length > 0 %}
                                         <span class="smallPills-1 promos">Promos</span>
-                                    {% elseif provider.getUnexpiredInternships|length > 0 %}
+                                    {% elseif similarProvider.getUnexpiredInternships|length > 0 %}
                                         <span class="smallPills-1 internships">Stages</span>
                                     {% endif %}
                                 </div>

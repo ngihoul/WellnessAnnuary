@@ -45,7 +45,6 @@ const displayImage = field => {
     logoField.parentNode.parentNode.appendChild(newDiv);
 }
 
-
 // ** Scripts ** //
 // * Inputs check * //
 // Only for Provider Registration form
